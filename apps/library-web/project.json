@@ -1,11 +1,13 @@
 {
   "projectType": "application",
   "sourceRoot": "apps/library-web/src",
-  "prefix": "monorepo",
+  "prefix": "library",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/library-web",
         "index": "apps/library-web/src/index.html",
@@ -17,7 +19,10 @@
           "apps/library-web/src/favicon.ico",
           "apps/library-web/src/assets"
         ],
-        "styles": ["apps/library-web/src/styles.scss"],
+        "styles": [
+          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "apps/library-web/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -63,7 +68,10 @@
           "browserTarget": "library-web:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/library-web/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -82,7 +90,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/library-web"],
+      "outputs": [
+        "coverage/apps/library-web"
+      ],
       "options": {
         "jestConfig": "apps/library-web/jest.config.ts",
         "passWithNoTests": true
