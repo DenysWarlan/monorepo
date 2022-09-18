@@ -7,10 +7,10 @@
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
-    "build:library-web": "npm --prefix library-web run build",
-    "build:apoi": "npm --prefix api run build",
+    "build:api": "nx build api",
+    "build:library-web": "npm run config && nx build library-web",
     "test": "nx test",
-    "start-web-dev": "npm run config && nx serve library-web",
+    "start-web-dev": "npm run config && nx serve library-webó",
     "start-api": "nx serve api",
     "reset": "nx reset"
   },
