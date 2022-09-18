@@ -8,7 +8,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(payload: any) {
-    const url = `login`;
+    const url = `api`;
     return this.http.post(url, payload.data);
   }
 
