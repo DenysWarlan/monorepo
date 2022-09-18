@@ -10,7 +10,7 @@
     "build:api": "nx build api",
     "build:library-web": "npm run config && nx build library-web",
     "test": "nx test",
-    "start-web-dev": "npm run config && nx serve library-webó",
+    "start-web-dev": "npm run config && nx serve library-web",
     "start-api": "nx serve api",
     "reset": "nx reset"
   },
