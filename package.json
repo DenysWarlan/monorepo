@@ -7,7 +7,9 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
     "build": "nx build library-web && ng build nest-library",
-    "test": "nx test"
+    "test": "nx test",
+    "start-web": "nx serve library-web",
+    "start-api": "nx serve nest-library"
   },
   "engines": {
     "node": "16.14.0"
