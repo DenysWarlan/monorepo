@@ -8,12 +8,12 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(payload: any) {
-    const url = `api/login`;
+    const url = `login`;
     return this.http.post(url, payload.data);
   }
 
   register(payload: any) {
-    const url = `api/register`;
+    const url = `register`;
     return this.http.post(url, payload.data);
   }
 

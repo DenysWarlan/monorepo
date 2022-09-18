@@ -4,8 +4,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Login, LoginFailure, LoginSuccess, Logout } from './actions/login.actions';
-import { Register, RegisterFailure, RegisterSuccess } from './actions/register.actions';
+import {
+  Login,
+  LoginFailure,
+  LoginSuccess,
+  Logout,
+} from './actions/login.actions';
+import {
+  Register,
+  RegisterFailure,
+  RegisterSuccess,
+} from './actions/register.actions';
 import { ClearToken, SetToken } from './actions/setToken.actions';
 
 export interface Auth {
@@ -47,13 +56,16 @@ export class AuthState {
     });
 
     return this.authService.login(data).pipe(
-      map(data => dispatch(new LoginSuccess(data))),
-      catchError(error => dispatch(new LoginFailure(error)))
+      map((data) => dispatch(new LoginSuccess(data))),
+      catchError((error) => dispatch(new LoginFailure(error)))
     );
   }
 
   @Action(LoginSuccess)
-  public loginSuccess({ patchState, dispatch }: StateContext<Auth>, { data }: LoginSuccess): void {
+  public loginSuccess(
+    { patchState, dispatch }: StateContext<Auth>,
+    { data }: LoginSuccess
+  ): void {
     patchState({
       isAuthLoading: false,
       isAuth: true,
@@ -65,7 +77,10 @@ export class AuthState {
     }
   }
   @Action(LoginFailure)
-  public loginFailure({ patchState }: StateContext<Auth>, { error }: LoginFailure): void {
+  public loginFailure(
+    { patchState }: StateContext<Auth>,
+    { error }: LoginFailure
+  ): void {
     patchState({
       isAuthLoading: false,
       isAuth: false,
@@ -83,8 +98,8 @@ export class AuthState {
     });
 
     return this.authService.register(data).pipe(
-      map(invitations => dispatch(new RegisterSuccess(invitations))),
-      catchError(error => dispatch(new RegisterFailure(error)))
+      map((invitations) => dispatch(new RegisterSuccess(invitations))),
+      catchError((error) => dispatch(new RegisterFailure(error)))
     );
   }
   @Action(RegisterSuccess)
@@ -95,7 +110,10 @@ export class AuthState {
     });
   }
   @Action(RegisterFailure)
-  public registerFailure({ patchState }: StateContext<Auth>, { error }: LoginFailure): void {
+  public registerFailure(
+    { patchState }: StateContext<Auth>,
+    { error }: LoginFailure
+  ): void {
     patchState({
       isAuthLoading: false,
       isAuth: false,
@@ -121,6 +139,7 @@ export class AuthState {
     return this.authService.setToken(data);
   }
 
+  // disable @typescript-eslint/member-ordering
   @Selector()
   public static isAuthSuccess({ isAuth }: Auth): boolean {
     return isAuth;
@@ -134,5 +153,10 @@ export class AuthState {
   @Selector()
   public static authErrors({ error }: Auth): HttpErrorResponse | null {
     return error;
+  }
+
+  @Selector()
+  public static token({ token }: Auth): string | null {
+    return token;
   }
 }
