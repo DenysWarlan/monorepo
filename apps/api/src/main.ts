@@ -8,11 +8,8 @@ import { login, register } from './app/routes/auth.route';
 import { DBHelper } from './app/helper/db.helper';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
-import * as functions from 'firebase-functions';
-import * as admin  from 'firebase-admin';
 
 const app = express();
-admin.initializeApp();
 
 app.use(cors());
 
@@ -31,7 +28,5 @@ const server = app.listen(port, () => {
 });
 
 server.on('error', console.error);
-
-exports.app = functions.https.onRequest(app);
 
 DBHelper.init();
