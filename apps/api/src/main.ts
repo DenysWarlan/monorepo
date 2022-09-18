@@ -20,7 +20,8 @@ app.use((req, res, next) => {
 });
 
 router.get('/api', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  const origin = req.headers.origin;
+  res.setHeader('Access-Control-Allow-Origin', origin);
   res.send({ message: 'Welcome to api!' });
 });
 
