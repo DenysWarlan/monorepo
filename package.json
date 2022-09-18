@@ -9,7 +9,7 @@
     "build": "nx build library-web && ng build nest-library",
     "test": "nx test",
     "start-web": "nx serve library-web",
-    "start-api": "nx serve nest-library"
+    "reset": "nx reset"
   },
   "engines": {
     "node": "16.14.0"
