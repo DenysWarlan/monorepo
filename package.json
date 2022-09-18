@@ -26,7 +26,6 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@ngxs/devtools-plugin": "^3.7.4",
     "@ngxs/store": "^3.7.4",
     "@nrwl/angular": "^14.7.5",
