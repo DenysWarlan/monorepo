@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://localhost:3333",
+    "target": "https://app-node-6dd59.web.app",
     "secure": false
   },
   "/apiBook": {

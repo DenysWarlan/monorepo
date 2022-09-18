@@ -4,12 +4,15 @@
  */
 
 import * as express from 'express';
-import { login, register} from './app/routes/auth.route';
+import { login, register } from './app/routes/auth.route';
 import { DBHelper } from './app/helper/db.helper';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import * as functions from 'firebase-functions';
+import * as admin  from 'firebase-admin';
 
 const app = express();
+admin.initializeApp();
 
 app.use(cors());
 
@@ -26,5 +29,9 @@ const port = process.env.port || 3333;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}/api`);
 });
+
 server.on('error', console.error);
+
+exports.app = functions.https.onRequest(app);
+
 DBHelper.init();
