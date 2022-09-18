@@ -12,5 +12,5 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const environment: any = {
   production: false,
-  apiUrl: 'https://library-app-api.netlify.app',
+  apiUrl: 'https://63277c5c748e5601e918cf8d--library-app-api.netlify.app',
 };

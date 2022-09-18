@@ -19,6 +19,7 @@ app.use((req, res, next) => {
 });
 
 router.get('/api', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
   res.send({ message: 'Welcome to api!' });
 });
 

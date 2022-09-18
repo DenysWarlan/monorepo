@@ -31,6 +31,7 @@ export function login(app: Express) {
         }
 
         const token = jwt.sign({ userId: user.id }, 'secret', { expiresIn: '1h' });
+        res.header('Access-Control-Allow-Origin', '*');
         res.json({ token, userId: user.id });
       } catch (e) {
         res.status(500).json({ message: 'Server Error' });
