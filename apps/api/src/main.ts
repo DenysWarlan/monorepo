@@ -7,13 +7,9 @@ import * as express from 'express';
 import { login, register } from './app/routes/auth.route';
 import { DBHelper } from './app/helper/db.helper';
 import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
 import * as serverless from 'serverless-http';
 
 const app = express();
-const router = express.Router();
-
-app.use(cors());
 
 app.use(bodyParser.json());
 
