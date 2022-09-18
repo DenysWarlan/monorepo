@@ -6,7 +6,7 @@
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
-    "build": "nx build library-web && ng build nest-library",
+    "build": "nx build library-web",
     "test": "nx test",
     "start-web": "nx serve library-web",
     "reset": "nx reset"
