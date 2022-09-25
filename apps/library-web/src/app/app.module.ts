@@ -22,7 +22,6 @@ import { CoreModule } from './core/core.module';
     RouterModule,
     AuthModule,
     AppMaterialModule,
-    CoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

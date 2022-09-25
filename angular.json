@@ -2,7 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "api": "apps/api",
+    "library-api": "apps/library-api",
     "library-web": "apps/library-web",
     "library-web-e2e": "apps/library-web-e2e"
   }

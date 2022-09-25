@@ -38,7 +38,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
     clone = request.clone({
       url: `${this.apiUrl}/${request.url}`,
-      headers: this.getHeaders(request, { shouldAddToken: true }),
+      headers: this.getHeaders(request, { shouldAddToken: true,  }),
     });
 
     return clone;

@@ -1,4 +1,10 @@
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanActivateChild,
+  Router,
+  RouterStateSnapshot,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
@@ -12,7 +18,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('access_token');
+    console.log(token);
     const tokenParse = token ? JSON.parse(token) : false;
     const helper = new JwtHelperService();
     const isExpired = helper.isTokenExpired(tokenParse);

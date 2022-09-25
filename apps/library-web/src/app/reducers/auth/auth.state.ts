@@ -21,7 +21,7 @@ export interface Auth {
   isAuth: boolean;
   isAuthLoading: boolean;
   error: HttpErrorResponse | null;
-  token: string | null;
+  access_token: string | null;
 }
 
 @State<Auth>({
@@ -30,7 +30,7 @@ export interface Auth {
     isAuth: false,
     isAuthLoading: false,
     error: null,
-    token: null,
+    access_token: null,
   },
 })
 @Injectable()
@@ -43,7 +43,7 @@ export class AuthState {
       isAuth: false,
       isAuthLoading: false,
       error: null,
-      token: null,
+      access_token: null,
     });
 
     dispatch(new ClearToken({ data: { token: '', userId: '' } }));
@@ -106,7 +106,7 @@ export class AuthState {
   public registerSuccess({ patchState }: StateContext<Auth>): void {
     patchState({
       isAuthLoading: false,
-      isAuth: true,
+      isAuth: false,
     });
   }
   @Action(RegisterFailure)
@@ -123,18 +123,16 @@ export class AuthState {
 
   @Action(SetToken)
   public setToken({ patchState }: StateContext<Auth>, { data }: SetToken) {
-    console.log(data);
     patchState({
-      token: data.token,
+      access_token: data.access_token,
     });
     return this.authService.setToken(data);
   }
 
   @Action(ClearToken)
   public clearToken({ patchState }: StateContext<Auth>, { data }: SetToken) {
-    console.log(data);
     patchState({
-      token: data.token,
+      access_token: data.access_token,
     });
     return this.authService.setToken(data);
   }
@@ -156,7 +154,7 @@ export class AuthState {
   }
 
   @Selector()
-  public static token({ token }: Auth): string | null {
-    return token;
+  public static token({ access_token }: Auth): string | null {
+    return access_token;
   }
 }

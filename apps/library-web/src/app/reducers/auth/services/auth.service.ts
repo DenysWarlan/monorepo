@@ -8,17 +8,17 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(payload: any) {
-    const url = `api`;
+    const url = `api/auth/login`;
     return this.http.post(url, payload.data);
   }
 
   register(payload: any) {
-    const url = `register`;
+    const url = `api/auth/register`;
     return this.http.post(url, payload.data);
   }
 
   setToken(res: any) {
-    localStorage.setItem('token', JSON.stringify(res.token));
+    localStorage.setItem('access_token', JSON.stringify(res.access_token));
     localStorage.setItem('userId', JSON.stringify(res.userId));
   }
 }
