@@ -8,7 +8,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthState } from '../../reducers/auth.state';
 import { Login } from '../../reducers/actions/login.actions';
 import { SetToken } from '../../reducers/actions/setToken.actions';
-import { Destroy } from '@monorepo/destroy';
+import { Destroy } from '../../../../../destroy/src/lib/destroy';
 
 @Component({
   selector: 'monorepo-login',

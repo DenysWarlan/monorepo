@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ClearToken } from '@monorepo/auth/lib/reducers/actions/setToken.actions';
+import { ClearToken } from '../../../../../../libs/auth/src/lib/reducers/actions/setToken.actions';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
