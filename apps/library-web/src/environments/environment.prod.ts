@@ -1,4 +1,3 @@
-
 /**
  * DO NOT MODIFY THIS FILE!
  *
@@ -11,7 +10,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const environment: any = {
-  production: false,
-  apiUrl: 'http://localhost:3000',
+  production: true,
+  apiUrl: 'https://library-api-m5dh.onrender.com',
   bookUrL: 'https://www.googleapis.com/books/v1/volumes',
 };

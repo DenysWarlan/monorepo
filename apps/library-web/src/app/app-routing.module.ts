@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './reducers/auth/guards/auth.guard';
 import { HomeComponent } from './authorized/home/home.component';
-import { LoginPageComponent } from './auth/login-page/login-page.component';
-import { RegisterComponent } from './auth/register/register.component';
 import { PageNotFoundComponent } from './authorized/page-not-found/page-not-found.component';
 import { CreatePageComponent } from './authorized/create-page/create-page.component';
 import { LinksComponent } from './authorized/links/links.component';
+import { authRoutes } from '../../../../libs/auth/src';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginPageComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'home', canActivate: [AuthGuard], component: HomeComponent },
-  { path: 'create', canActivate: [AuthGuard], component: CreatePageComponent },
-  { path: 'links', canActivate: [AuthGuard], component: LinksComponent },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: 'auth', children: authRoutes },
+  { path: 'home', component: HomeComponent },
+  { path: 'create', component: CreatePageComponent },
+  { path: 'links', component: LinksComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

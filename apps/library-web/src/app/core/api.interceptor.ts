@@ -1,4 +1,5 @@
 import {
+  HttpContextToken,
   HttpEvent,
   HttpHandler,
   HttpHeaders,
@@ -8,17 +9,21 @@ import {
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import {AuthState} from "../reducers/auth/auth.state";
+import { AuthState } from '../../../../../libs/auth/src/lib/reducers/auth.state';
 
 type GetHeadersOptions = {
   shouldAddToken: boolean;
 };
+
+export const API_CONTEXT_TOKEN: HttpContextToken<string> =
+  new HttpContextToken<string>(() => 'apiUrl');
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   constructor(
     @Inject('PRODUCTION') private production: boolean,
     @Inject('API_URL') private apiUrl: string,
+    @Inject('BOOK_URL') private bookUrl: string,
     public store: Store
   ) {}
 
@@ -26,7 +31,18 @@ export class ApiInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const clone: HttpRequest<unknown> = this.addDefaultRequest(request);
+    const context: string = request.context.get(API_CONTEXT_TOKEN);
+    let clone: HttpRequest<unknown> = request;
+    console.log(context);
+
+    switch (context) {
+      case 'apiUrl':
+        clone = this.addDefaultRequest(request);
+        break;
+      case 'bookUrl':
+        clone = this.addBookRequest(request);
+        break;
+    }
 
     return next.handle(clone);
   }
@@ -38,7 +54,22 @@ export class ApiInterceptor implements HttpInterceptor {
 
     clone = request.clone({
       url: `${this.apiUrl}/${request.url}`,
-      headers: this.getHeaders(request, { shouldAddToken: true,  }),
+      headers: this.getHeaders(request, { shouldAddToken: true }),
+    });
+
+    return clone;
+  }
+
+  private addBookRequest(request: HttpRequest<unknown>): HttpRequest<unknown> {
+    let clone: HttpRequest<unknown> = request;
+    const key: string = 'AIzaSyBGyulc704srlyU5tSP4zHdSX9tUw379OM';
+    const url: string = request.url.includes('?')
+      ? `${this.bookUrl}${request.url}&&key=${key}`
+      : `${this.bookUrl}${request.url}?key=${key}`;
+
+    clone = request.clone({
+      url,
+      headers: this.getHeaders(request, { shouldAddToken: true }),
     });
 
     return clone;

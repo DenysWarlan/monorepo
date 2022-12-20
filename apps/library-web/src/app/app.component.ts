@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthState } from './reducers/auth/auth.state';
 import { Select } from '@ngxs/store';
+import { AuthState } from '../../../../libs/auth/src/lib/reducers/auth.state';
 
 @Component({
   selector: 'library-root',

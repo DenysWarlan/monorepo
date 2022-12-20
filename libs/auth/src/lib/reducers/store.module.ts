@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { BooksService } from './library/services/library.service';
-import { environment } from '../../environments/environment';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { CommonModule } from '@angular/common';
+import { AuthState } from './auth.state';
+import { AuthService } from './services/auth.service';
 
-export const GLOBAL_STATES: any[] = [];
+export const GLOBAL_STATES: any[] = [AuthState];
 
 @NgModule({
   declarations: [],
@@ -15,12 +15,10 @@ export const GLOBAL_STATES: any[] = [];
     CommonModule,
     BrowserModule,
     HttpClientModule,
-    NgxsModule.forRoot(GLOBAL_STATES, {
-      developmentMode: !environment.production,
-    }),
-    NgxsReduxDevtoolsPluginModule.forRoot({ disabled: environment.production }),
+    NgxsModule.forRoot(GLOBAL_STATES),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
   ],
-  providers: [BooksService],
+  providers: [AuthService],
   bootstrap: [],
 })
 export class StoreModule {}

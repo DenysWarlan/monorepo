@@ -8,12 +8,16 @@ import { AuthorizedModule } from './authorized/authorized.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppMaterialModule } from './material.module';
-import { AuthModule } from './auth/auth.module';
+import { CommonModule } from '@angular/common';
+import { AuthModule } from '../../../../libs/auth/src';
+import { AuthGuard } from './core/guards/auth.guard';
 import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    CommonModule,
+    RouterModule,
     BrowserModule,
     BrowserAnimationsModule,
     StoreModule,
@@ -21,9 +25,10 @@ import { CoreModule } from './core/core.module';
     AppRoutingModule,
     RouterModule,
     AuthModule,
+    CoreModule,
     AppMaterialModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

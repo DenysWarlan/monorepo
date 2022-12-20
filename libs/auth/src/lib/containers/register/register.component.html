@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <h1 class="white-text text-center">CREATE NEW ACCOUNT</h1>
+    <h5 class="white-text text-center">If no barcode has been assigned for your account, please contact the library.</h5>
+  </div>
+  <div class="col-xs-12 col-md-6 col-lg-6">
+    <form [formGroup]="form" (submit)="form && form.valid && submitForm()" class="white-text">
+      <div class="form-group">
+        <mat-form-field class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="Ex. pat@example.com" />
+          <mat-error *ngIf="form.get('email')?.hasError('email')"> Please enter a valid email address </mat-error>
+          <mat-error *ngIf="form.get('email')?.hasError('required')"> Email is <strong>required</strong> </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="w-100">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" class="form-control" formControlName="password" />
+          <mat-error *ngIf="form.get('password')?.hasError('required')">Password requaired</mat-error>
+          <mat-error *ngIf="form.get('password')?.hasError('minlength')">Error min length</mat-error>
+        </mat-form-field>
+      </div>
+      <button [disabled]="form.invalid" class="btn btn-success" type="submit">Register</button>
+      or you can
+      <span class="text-primary" (click)="login()">login</span>
+    </form>
+  </div>
+</div>

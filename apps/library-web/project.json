@@ -5,9 +5,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/library-web",
         "index": "apps/library-web/src/index.html",
@@ -81,9 +79,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/library-web"
-      ],
+      "outputs": ["coverage/apps/library-web"],
       "options": {
         "jestConfig": "apps/library-web/jest.config.ts",
         "passWithNoTests": true
