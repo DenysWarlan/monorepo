@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx --no-install npx branch-name-lint branchnamelint.config.json --edit "$1"
