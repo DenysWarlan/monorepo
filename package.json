@@ -12,13 +12,7 @@
     "start-web-dev": "nx serve library-web -- --proxy-config ./proxy.conf.json",
     "start-api": "nx serve library-api",
     "reset": "nx reset",
-    "husky-check": "lint-staged --relative --allow-empty"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npx branch-name-lint branchnamelint.config.json"
-
-    }
+    "husky-check": "lint-staged --relative --allow-empty npx branch-name-lint branchnamelint.config.json"
   },
   "engines": {
     "node": "16.14.0"
@@ -133,7 +127,6 @@
   "lint-staged": {
     "src/**/*.{js,ts}": [
       "npx eslint",
-      "npm run test-staged",
       "prettier --write --end-of-line=lf"
     ],
     "src/**/*.scss": [
