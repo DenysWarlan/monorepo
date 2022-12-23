@@ -14,6 +14,12 @@
     "reset": "nx reset",
     "husky-check": "lint-staged --relative --allow-empty"
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "branch-name-lint branchnamelint.config.json"
+
+    }
+  },
   "engines": {
     "node": "16.14.0"
   },
