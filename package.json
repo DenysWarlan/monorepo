@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "branch-name-lint branchnamelint.config.json"
+      "pre-push": "npx branch-name-lint branchnamelint.config.json"
 
     }
   },
