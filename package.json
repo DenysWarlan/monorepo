@@ -12,7 +12,7 @@
     "start-web-dev": "nx serve library-web -- --proxy-config ./proxy.conf.json",
     "start-api": "nx serve library-api",
     "reset": "nx reset",
-    "husky-check": "lint-staged --relative --allow-empty npx branch-name-lint branchnamelint.config.json"
+    "husky-check": "lint-staged --relative --allow-empty && npx branch-name-lint barnchnamelint.config.json"
   },
   "engines": {
     "node": "16.14.0"
@@ -105,7 +105,6 @@
     "assert": "^2.0.0",
     "buffer": "^6.0.3",
     "crypto-browserify": "^3.12.0",
-    "cypress": "^9.1.0",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",

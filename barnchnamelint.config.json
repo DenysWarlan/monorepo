@@ -15,7 +15,13 @@
       "wip"
     ],
     "skip": [
-      "skip-ci"
+      "main"
+    ],
+    "disallowed": [
+      "main",
+      "master",
+      "develop",
+      "staging"
     ],
     "separator": "/",
     "msgBranchBanned": "Branches with the name \"%s\" are not allowed.",
