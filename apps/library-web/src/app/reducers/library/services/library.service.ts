@@ -5,10 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class BooksService {
   constructor(public http: HttpClient) { }
+
   getBooks(query: any): Observable<any[]> {
     const url = `apiBoo;/volumes?q=${query.query}&key=AIzaSyB6hiZBAGaa0Kj946BgGl_DFUwFiLWJhCE`;
     return this.http.get<any[]>(url);
   }
+
   getBook(selfLink: string) {
     return this.http.get(selfLink);
   }

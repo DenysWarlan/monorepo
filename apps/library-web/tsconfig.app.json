@@ -6,7 +6,9 @@
     "paths": {
       "@monorepo/auth": ["libs/auth/src"],
       "@library-web/*": ["apps/library-web/src"]
-    }
+    },
+    "target": "ES2022",
+    "useDefineForClassFields": false
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
   "include": ["src/**/*.d.ts"],

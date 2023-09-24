@@ -1,18 +1,12 @@
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { ClearToken } from '../../../../../../libs/auth/src/lib/reducers/actions/setToken.actions';
+import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Store} from '@ngxs/store';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {ClearToken} from '../../../../../../libs/auth/src/lib/reducers/actions/setToken.actions';
 
 @Injectable()
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard  {
   constructor(private store: Store, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,

@@ -1,4 +1,6 @@
 {
+  "name": "library-web",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/library-web/src",
   "prefix": "library",
@@ -69,7 +71,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "options": {
         "lintFilePatterns": [
           "apps/library-web/**/*.ts",
@@ -78,8 +80,8 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/library-web"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/library-web"],
       "options": {
         "jestConfig": "apps/library-web/jest.config.ts",
         "passWithNoTests": true

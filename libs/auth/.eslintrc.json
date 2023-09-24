@@ -13,7 +13,7 @@
         "project": ["libs/auth/tsconfig.*?.json"]
       },
       "extends": [
-        "plugin:@nrwl/nx/angular",
+        "plugin:@nx/angular",
         "plugin:@angular-eslint/template/process-inline-templates",
         "../../eslint-rules"
       ],
@@ -38,7 +38,7 @@
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@nrwl/nx/angular-template", "../../eslint-rules"],
+      "extends": ["plugin:@nx/angular-template", "../../eslint-rules"],
       "rules": {}
     }
   ]

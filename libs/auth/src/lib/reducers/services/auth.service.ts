@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Login} from '../../models/login.model';
+import {Token} from '../../models/token.model';
 
 @Injectable({
   providedIn: 'root',
@@ -7,20 +9,20 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  login(payload: any) {
+  public login(data: Login): any {
     const url: string = `api/auth/login`;
 
-    return this.http.post(url, payload.data);
+    return this.http.post(url, data);
   }
 
-  register(payload: any) {
+  public register(data: Login): any {
     const url: string = `api/auth/register`;
 
-    return this.http.post(url, payload.data);
+    return this.http.post(url, data);
   }
 
-  setToken(res: any) {
-    localStorage.setItem('access_token', JSON.stringify(res.access_token));
+  public setToken(res: Token): void {
+    localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
     localStorage.setItem('userId', JSON.stringify(res.userId));
   }
 }

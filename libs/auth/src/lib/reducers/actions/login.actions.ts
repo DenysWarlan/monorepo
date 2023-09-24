@@ -1,10 +1,11 @@
 import {HttpErrorResponse} from "@angular/common/http";
+import {Login} from '../../models/login.model';
 
 
-export class Login {
+export class AuthLogin {
   public static readonly type: string = '[Login] Load Logins';
 
-  constructor(public data: any) {}
+  constructor(public data: Login) {}
 }
 
 export class LoginSuccess {
@@ -17,6 +18,7 @@ export class LoginFailure {
   public static readonly type: string = '[Login] Load Logins Failure';
   constructor(public error: HttpErrorResponse) {}
 }
+
 export class Logout {
   public static readonly type: string = '[Logout] Logout Logins';
 }

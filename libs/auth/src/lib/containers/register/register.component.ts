@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Register } from '../../reducers/actions/register.actions';
 import { AuthState } from '../../reducers/auth.state';
 import { filter, Observable, tap } from 'rxjs';
+import {Login} from '../../models/login.model';
 
 @Component({
   selector: 'monorepo-register',
@@ -40,8 +41,8 @@ export class RegisterComponent implements OnInit {
   }
 
   public submitForm(): void {
-    const params: any = this.form.value;
-    this.store.dispatch(new Register({ data: params }));
+    const data: Login = this.form.value;
+    this.store.dispatch(new Register(data));
   }
 
   public login(): void  {

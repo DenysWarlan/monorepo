@@ -21,7 +21,7 @@ export class NavigationComponent {
     this.router.navigate(['/auth/login']);
   }
 
-  logOut() {
+  public logOut(): void {
     localStorage.clear();
     this.store.dispatch(new Logout());
     this.router.navigate(['login']);

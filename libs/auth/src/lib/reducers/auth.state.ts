@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
-  Login,
+  AuthLogin,
   LoginFailure,
   LoginSuccess,
   Logout,
@@ -22,7 +22,7 @@ export interface Auth {
   isAuthLoading: boolean;
   isRegister: boolean;
   error: HttpErrorResponse | null;
-  access_token: string | null;
+  accessToken: string | null;
 }
 
 @State<Auth>({
@@ -32,7 +32,7 @@ export interface Auth {
     isAuthLoading: false,
     isRegister: false,
     error: null,
-    access_token: null,
+    accessToken: null,
   },
 })
 @Injectable()
@@ -45,14 +45,14 @@ export class AuthState {
       isAuth: false,
       isAuthLoading: false,
       error: null,
-      access_token: null,
+      accessToken: null,
     });
 
     dispatch(new ClearToken({ data: { token: '', userId: '' } }));
   }
 
-  @Action(Login)
-  public login({ dispatch, patchState }: StateContext<Auth>, { data }: Login) {
+  @Action(AuthLogin)
+  public login({ dispatch, patchState }: StateContext<Auth>, { data }: AuthLogin): Observable<void | Observable<void>> {
     patchState({
       isAuthLoading: true,
     });
@@ -72,9 +72,8 @@ export class AuthState {
       isAuthLoading: false,
       isAuth: true,
     });
-    console.log(data);
 
-    if (!!data) {
+    if (data) {
       dispatch(new SetToken(data));
     }
   }
@@ -104,6 +103,7 @@ export class AuthState {
       catchError((error) => dispatch(new RegisterFailure(error)))
     );
   }
+
   @Action(RegisterSuccess)
   public registerSuccess({ patchState }: StateContext<Auth>): void {
     patchState({
@@ -111,6 +111,7 @@ export class AuthState {
       isAuth: false,
     });
   }
+
   @Action(RegisterFailure)
   public registerFailure(
     { patchState }: StateContext<Auth>,
@@ -124,24 +125,23 @@ export class AuthState {
   }
 
   @Action(SetToken)
-  public setToken({ patchState }: StateContext<Auth>, { data }: SetToken) {
+  public setToken({ patchState }: StateContext<Auth>, { data }: SetToken): void  {
     patchState({
-      access_token: data.access_token,
+      accessToken: data.accessToken,
     });
 
     return this.authService.setToken(data);
   }
 
   @Action(ClearToken)
-  public clearToken({ patchState }: StateContext<Auth>, { data }: SetToken) {
+  public clearToken({ patchState }: StateContext<Auth>, { data }: SetToken): void {
     patchState({
-      access_token: data.access_token,
+      accessToken: data.accessToken,
     });
 
     return this.authService.setToken(data);
   }
 
-  // eslint-disable @typescript-eslint/member-ordering
   @Selector()
   public static isAuthSuccess({ isAuth }: Auth): boolean {
     return isAuth;
@@ -162,7 +162,7 @@ export class AuthState {
   }
 
   @Selector()
-  public static token({ access_token }: Auth): string | null {
-    return access_token;
+  public static token({ accessToken }: Auth): string | null {
+    return accessToken;
   }
 }

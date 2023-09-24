@@ -1,10 +1,11 @@
 import {HttpErrorResponse} from "@angular/common/http";
+import {Login} from '../../models/login.model';
 
 
 export class Register {
   public static readonly type: string =  '[Register] Load Registers';
 
-  constructor(public data: any) {}
+  constructor(public data: Login) {}
 }
 
 export class RegisterSuccess {

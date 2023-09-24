@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from './user.models';
+import {RegisterDto} from '../auth/register.dto';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +17,7 @@ export class UsersService {
     return result;
   }
 
-  async addUser(user: User): Promise<number> {
+  async addUser(user: RegisterDto): Promise<number> {
     const newUser = new this.userModel({
       email: user.email,
       password: user.password,
