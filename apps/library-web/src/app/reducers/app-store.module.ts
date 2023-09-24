@@ -5,10 +5,10 @@ import {BooksService} from './library/services/library.service';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {CommonModule} from '@angular/common';
-import {authStates} from '../../../../../libs/auth/src';
+import {AuthState} from '../../../../../libs/auth/data-access/src';
 
 
-export const GLOBAL_STATES: any[] = [...authStates];
+export const GLOBAL_STATES: any[] = [AuthState];
 
 @NgModule({
   declarations: [],

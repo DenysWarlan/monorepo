@@ -22,10 +22,12 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": [
-                  "*"
-                ]
+                "sourceTag": "frontend",
+                "bannedExternalImports": ["@nestjs/common"]
+              },
+              {
+                "sourceTag": "backend",
+                "bannedExternalImports": ["@angular/core"]
               }
             ]
           }

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
-import { Logout } from '../../../../../../libs/auth/src/lib/reducers/actions/login.actions';
 import { Observable } from 'rxjs';
-import { AuthState } from '../../../../../../libs/auth/src/lib/reducers/auth.state';
+import {AuthState, Logout} from '../../../../../../libs/auth/data-access/src';
+
 
 @Component({
   selector: 'app-navigation',

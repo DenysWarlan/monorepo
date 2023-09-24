@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
-import { AuthState } from '../../../../libs/auth/src/lib/reducers/auth.state';
+import {AuthState} from '../../../../libs/auth/data-access/src';
 
 @Component({
   selector: 'library-root',
@@ -11,5 +11,5 @@ import { AuthState } from '../../../../libs/auth/src/lib/reducers/auth.state';
 export class AppComponent {
   title = 'library';
 
-  @Select(AuthState.isAuthSuccess) public isAuth$!: Observable<any>;
+  @Select(AuthState.isAuthSuccess) public isAuth$!: Observable<boolean>;
 }

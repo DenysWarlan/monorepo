@@ -11,7 +11,6 @@ import {AppMaterialModule} from './material.module';
 import {CommonModule} from '@angular/common';
 import {AuthGuard} from './core/guards/auth.guard';
 import {CoreModule} from './core/core.module';
-import {AuthModule} from '../../../../libs/auth/src';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +23,6 @@ import {AuthModule} from '../../../../libs/auth/src';
     AuthorizedModule,
     AppRoutingModule,
     RouterModule,
-    AuthModule,
     CoreModule,
     AppMaterialModule,
   ],

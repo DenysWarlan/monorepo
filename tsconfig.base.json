@@ -1,24 +1,39 @@
 {
+  "ts-node": {
+    "compilerOptions": {
+      "module": "esnext"
+    }
+  },
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
+    "strict": true,
+    "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "experimentalDecorators": true,
+    "target": "ES2022",
+    "useDefineForClassFields": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "resolveJsonModule": true,
+    "lib": [
+      "es2018",
+      "dom"
+    ],
     "paths": {
+      "@library-api/*": ["apps/library-api/src"],
       "@library-web/*": ["apps/library-web/src"],
-      "@monorepo/auth": ["libs/auth/src/index.ts"],
-      "@monorepo/destroy": ["libs/destroy/src/destroy.ts"]
+      "@monorepo/auth/data-access": ["libs/auth/data-access/src/index.ts"],
+      "@monorepo/auth/login": ["libs/login/src/index.ts"],
+      "@monorepo/auth/register": ["libs/auth/register/src/index.ts"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "rootDir": "."
 }

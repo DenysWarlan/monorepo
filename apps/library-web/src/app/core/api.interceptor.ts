@@ -9,7 +9,7 @@ import {
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { AuthState } from '../../../../../libs/auth/src/lib/reducers/auth.state';
+import {AuthState} from '../../../../../libs/auth/data-access/src';
 
 type GetHeadersOptions = {
   shouldAddToken: boolean;
