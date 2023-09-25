@@ -30,7 +30,7 @@
       "@library-api/*": ["apps/library-api/src"],
       "@library-web/*": ["apps/library-web/src"],
       "@monorepo/auth/data-access": ["libs/auth/data-access/src/index.ts"],
-      "@monorepo/auth/login": ["libs/login/src/index.ts"],
+      "@monorepo/auth/login": ["libs/auth/login/src/index.ts"],
       "@monorepo/auth/register": ["libs/auth/register/src/index.ts"]
     }
   },

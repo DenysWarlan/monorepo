@@ -9,7 +9,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {Store} from '@ngxs/store';
-import {AuthLogin, AuthState, Login, LoginForm, SetToken} from '../../data-access/src/index';
+import {AuthLogin, AuthState, Login, LoginForm, SetToken} from '@monorepo/auth/data-access';
 
 
 @Component({
@@ -31,13 +31,13 @@ export class LoginComponent implements OnInit {
   private charsCount = 6;
 
 
-    public isAuthSuccess$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
+  public isAuthSuccess$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
 
 
-    public isAuthLoading$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
+  public isAuthLoading$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
 
 
-    public authErrors: Observable<HttpErrorResponse | null> = this.store.select(AuthState.authErrors);
+  public authErrors: Observable<HttpErrorResponse | null> = this.store.select(AuthState.authErrors);
 
   public form: FormGroup<LoginForm> = this.fb.group({
     email: this.fb.control('', [Validators.required, Validators.email]),
@@ -74,4 +74,5 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       });
   }
+
 }

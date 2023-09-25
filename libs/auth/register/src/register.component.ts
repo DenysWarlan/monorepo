@@ -6,7 +6,7 @@ import {filter, Observable, tap} from 'rxjs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CommonModule} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
-import {AuthState, Login, LoginForm, Register} from '../../data-access/src/index';
+import {AuthState, Login, LoginForm, Register} from '@monorepo/auth/data-access';
 
 @Component({
   standalone: true,

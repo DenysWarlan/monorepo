@@ -4,8 +4,9 @@ import {HomeComponent} from './authorized/home/home.component';
 import {PageNotFoundComponent} from './authorized/page-not-found/page-not-found.component';
 import {CreatePageComponent} from './authorized/create-page/create-page.component';
 import {LinksComponent} from './authorized/links/links.component';
-import {LoginComponent} from '../../../../libs/auth/login/src';
-import {RegisterComponent} from '../../../../libs/auth/register/src';
+import {LoginComponent} from '@monorepo/auth/login';
+import {RegisterComponent} from '@monorepo/auth/register';
+import {AuthGuard} from './core/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
@@ -13,9 +14,9 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent }
     ] },
-  { path: 'home', component: HomeComponent },
-  { path: 'create', component: CreatePageComponent },
-  { path: 'links', component: LinksComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'create', component: CreatePageComponent, canActivate: [AuthGuard] },
+  { path: 'links', component: LinksComponent, canActivate: [AuthGuard] },
   { path: '**', component: PageNotFoundComponent },
 ];
 

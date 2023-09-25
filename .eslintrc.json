@@ -27,7 +27,7 @@
               },
               {
                 "sourceTag": "backend",
-                "bannedExternalImports": ["@angular/core"]
+                "bannedExternalImports": ["@angular/core", "@monorepo/auth"]
               }
             ]
           }
