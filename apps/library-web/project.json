@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/library-web",
         "index": "apps/library-web/src/index.html",
@@ -81,12 +83,56 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/library-web"],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/library-web"
+      ],
       "options": {
         "jestConfig": "apps/library-web/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "cypress-run": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "library-web:serve",
+        "configFile": "apps/library-web/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-web:serve:production"
+        }
+      }
+    },
+    "cypress-open": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "library-web:serve",
+        "watch": true,
+        "headless": false,
+        "configFile": "apps/library-web/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-web:serve:production"
+        }
+      }
+    },
+    "e2e": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "library-web:serve",
+        "watch": true,
+        "headless": false,
+        "configFile": "apps/library-web/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-web:serve:production"
+        }
+      }
     }
   },
-  "tags": ["frontend"]
+  "tags": [
+    "frontend"
+  ]
 }

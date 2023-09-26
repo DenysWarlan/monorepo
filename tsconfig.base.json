@@ -18,17 +18,13 @@
     "experimentalDecorators": true,
     "target": "ES2022",
     "useDefineForClassFields": false,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
+    "typeRoots": ["node_modules/@types"],
     "resolveJsonModule": true,
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
       "@library-api/*": ["apps/library-api/src"],
       "@library-web/*": ["apps/library-web/src"],
+      "@monorepo/auth": ["auth/src/index.ts"],
       "@monorepo/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@monorepo/auth/login": ["libs/auth/login/src/index.ts"],
       "@monorepo/auth/register": ["libs/auth/register/src/index.ts"]

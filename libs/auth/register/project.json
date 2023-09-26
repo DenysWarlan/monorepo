@@ -3,12 +3,16 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/auth/register/src",
   "prefix": "mnp",
-  "tags": ["frontend"],
+  "tags": [
+    "frontend"
+  ],
   "projectType": "library",
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "libs/auth/register/jest.config.ts",
         "passWithNoTests": true
@@ -22,12 +26,54 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
         "lintFilePatterns": [
           "libs/auth/register/**/*.ts",
           "libs/auth/register/**/*.html"
         ]
+      }
+    },
+    "cypress-run": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "auth-register:serve",
+        "configFile": "libs/auth/register/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "auth-register:serve:production"
+        }
+      }
+    },
+    "cypress-open": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "auth-register:serve",
+        "watch": true,
+        "headless": false,
+        "configFile": "libs/auth/register/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "auth-register:serve:production"
+        }
+      }
+    },
+    "e2e": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "auth-register:serve",
+        "watch": true,
+        "headless": false,
+        "configFile": "libs/auth/register/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "auth-register:serve:production"
+        }
       }
     }
   }

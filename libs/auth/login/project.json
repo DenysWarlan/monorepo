@@ -17,6 +17,11 @@
         "ci": {
           "ci": true,
           "codeCoverage": true
+        },
+        "watch": {
+          "codeCoverage": true,
+          "coverage": true,
+          "watch": true
         }
       }
     },
@@ -24,7 +29,26 @@
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/auth/login/**/*.ts", "libs/auth/login/**/*.html"]
+        "lintFilePatterns": [
+          "libs/auth/login/**/*.ts",
+          "libs/auth/login/**/*.html"
+        ]
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/auth/login/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "library-web:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-web:serve:production"
+        },
+        "watch": {
+          "watch": true
+        }
       }
     }
   }

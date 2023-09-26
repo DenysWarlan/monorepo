@@ -6,12 +6,16 @@
   "targets": {
     "build": {
       "executor": "@nrwl/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/library-api",
         "main": "apps/library-api/src/main.ts",
         "tsConfig": "apps/library-api/tsconfig.app.json",
-        "assets": ["apps/library-api/src/assets"],
+        "assets": [
+          "apps/library-api/src/assets"
+        ],
         "compiler": "tsc",
         "target": "node"
       },
@@ -42,19 +46,67 @@
     },
     "lint": {
       "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/library-api/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/library-api/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/library-api"],
+      "outputs": [
+        "{workspaceRoot}/coverage/apps/library-api"
+      ],
       "options": {
         "jestConfig": "apps/library-api/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "cypress-run": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "library-api:serve",
+        "configFile": "apps/library-api/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-api:serve:production"
+        }
+      }
+    },
+    "cypress-open": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "library-api:serve",
+        "watch": true,
+        "headless": false,
+        "configFile": "apps/library-api/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-api:serve:production"
+        }
+      }
+    },
+    "e2e": {
+      "executor": "@briebug/cypress-schematic:cypress",
+      "options": {
+        "devServerTarget": "library-api:serve",
+        "watch": true,
+        "headless": false,
+        "configFile": "apps/library-api/cypress.json"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-api:serve:production"
+        }
+      }
     }
   },
-  "tags": ["backend"]
+  "tags": [
+    "backend"
+  ]
 }

@@ -1,9 +1,9 @@
 import {ActivatedRouteSnapshot, Router, RouterStateSnapshot} from '@angular/router';
-import {Observable, take, tap} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Store} from '@ngxs/store';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {AuthState, ClearToken, Logout} from '@monorepo/auth/data-access';
+import {AuthState, ClearToken} from '@monorepo/auth/data-access';
 
 @Injectable()
 export class AuthGuard  {
@@ -19,9 +19,9 @@ export class AuthGuard  {
 
     const tokenParse = token ? JSON.parse(token) : false;
 
-    const helper = new JwtHelperService();
+    const helper: JwtHelperService = new JwtHelperService();
 
-    const isExpired = helper.isTokenExpired(tokenParse);
+    const isExpired: boolean | Promise<boolean> = helper.isTokenExpired(tokenParse);
 
     const isAuth = this.store.selectSnapshot(AuthState.isAuthSuccess);
 

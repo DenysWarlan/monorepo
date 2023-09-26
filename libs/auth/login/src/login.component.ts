@@ -59,6 +59,11 @@ export class LoginComponent implements OnInit {
   }
 
   public loginUser(): void {
+
+    if(this.form.invalid) {
+        return;
+    }
+
     const data: Login = this.form.value as Login;
 
     this.store.dispatch(new AuthLogin(data));
@@ -68,10 +73,13 @@ export class LoginComponent implements OnInit {
     this.isAuthSuccess$
       .pipe(filter(Boolean), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-        this.store.dispatch(
-          new SetToken({ data: localStorage.getItem('token') })
-        );
-        this.router.navigate(['home']);
+          console.log('test');
+
+          this.store.dispatch(
+            new SetToken(localStorage.getItem('token'))
+          );
+
+          this.router.navigate(['home']);
       });
   }
 

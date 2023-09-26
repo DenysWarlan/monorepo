@@ -136,7 +136,7 @@ export class AuthState {
   @Action(ClearToken)
   public clearToken({ patchState }: StateContext<Auth>, { data }: SetToken): void {
     patchState({
-      accessToken: data.accessToken,
+      accessToken: data,
     });
 
     return this.authService.setToken(data);
