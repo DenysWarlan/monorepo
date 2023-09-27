@@ -81,13 +81,13 @@ export class ApiInterceptor implements HttpInterceptor {
   ): HttpHeaders {
     let headers: HttpHeaders = request.headers;
 
-    if (options.shouldAddToken) {
-      const token: string | null = this.store.selectSnapshot(AuthState.token);
-
-      if (token) {
-        headers = headers.set('php-auth-digest', token);
-      }
-    }
+    // if (options.shouldAddToken) {
+    //   const token: string | null = this.store.selectSnapshot(AuthState.token);
+    //
+    //   if (!!token) {
+    //     headers = headers.set('php-auth-digest', token);
+    //   }
+    // }
 
     return headers;
   }
