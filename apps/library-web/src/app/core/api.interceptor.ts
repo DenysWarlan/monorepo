@@ -33,7 +33,6 @@ export class ApiInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     const context: string = request.context.get(API_CONTEXT_TOKEN);
     let clone: HttpRequest<unknown> = request;
-    console.log(context);
 
     switch (context) {
       case 'apiUrl':
