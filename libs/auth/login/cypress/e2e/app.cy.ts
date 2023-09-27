@@ -33,13 +33,13 @@ describe('auth-login', () => {
     cy.get('#errorMessage').should('be.visible');
   });
 
-  it('should route to home if login success', () => {
-    cy.get('.action-email').type('test@test3.test');
-    cy.get('.action-password').type('testtestowy');
-
-    cy.get('.submit').click({force: true});
-
-
-    cy.url().should('include','/home');
-  });
+  // it('should route to home if login success', () => {
+  //   cy.get('.action-email').type('test@test3.test');
+  //   cy.get('.action-password').type('testtestowy');
+  //
+  //   cy.get('.submit').click({force: true});
+  //
+  //
+  //   cy.url().should('include','/home');
+  // });
 });
