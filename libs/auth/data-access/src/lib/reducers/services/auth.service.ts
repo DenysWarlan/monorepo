@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   public setToken(res: Token): void {
-    localStorage.setItem('accessToken', JSON.stringify(res.accessToken));
-    localStorage.setItem('userId', JSON.stringify(res.userId));
+    localStorage.setItem('accessToken', JSON.stringify(res?.accessToken));
+    localStorage.setItem('userId', JSON.stringify(res?.userId));
   }
 }

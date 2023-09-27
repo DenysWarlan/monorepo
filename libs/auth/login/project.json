@@ -50,6 +50,16 @@
           "watch": true
         }
       }
+    },
+    "deploy": {
+      "executor": "@app/fire:deploy",
+      "options": {
+        "prerender": false,
+        "ssr": false,
+        "browserTarget": "library-web:build:production",
+        "firebaseProject": "monorepo-d81df",
+        "firebaseHostingSite": "monorepo-d81df"
+      }
     }
   }
 }

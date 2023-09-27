@@ -40,3 +40,8 @@ Thumbs.db
 
 .angular
 /apps/library-web/.env
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

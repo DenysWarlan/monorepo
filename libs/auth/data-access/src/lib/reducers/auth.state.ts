@@ -126,11 +126,12 @@ export class AuthState {
 
   @Action(SetToken)
   public setToken({ patchState }: StateContext<Auth>, { data }: SetToken): void  {
+    console.log(data)
     patchState({
-      accessToken: data.accessToken,
+      accessToken: '',
     });
 
-    return this.authService.setToken(data);
+    // return this.authService.setToken(data);
   }
 
   @Action(ClearToken)

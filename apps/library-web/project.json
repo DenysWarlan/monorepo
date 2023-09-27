@@ -130,6 +130,13 @@
           "devServerTarget": "library-web:serve:production"
         }
       }
+    },
+    "deploy": {
+      "executor": "@angular/fire:deploy",
+      "options": {
+        "version": 2,
+        "browserTarget": "library-web:build:production"
+      }
     }
   },
   "tags": [
