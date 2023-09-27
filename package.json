@@ -95,7 +95,6 @@
     "@nestjs/schematics": "10.0.1",
     "@nestjs/testing": "10.0.2",
     "@ngrx/eslint-plugin": "^16.2.0",
-    "@ngxs-labs/testing": "^0.0.3",
     "@nx/cypress": "^16.9.0",
     "@nx/eslint-plugin": "16.9.0",
     "@nx/express": "16.9.0",
