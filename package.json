@@ -9,7 +9,7 @@
     "build-library-web": "nx build library-web",
     "test": "nx test",
     "build:web": "nx build library-web",
-    "build:api": "nx build library-api",
+    "build": "nx build library-api",
     "start-web-dev": "nx serve library-web --proxy-config ./proxy.conf.json",
     "start-api": "nx serve library-api",
     "auth-login:test:ci": "nx run auth-login:test:ci",
