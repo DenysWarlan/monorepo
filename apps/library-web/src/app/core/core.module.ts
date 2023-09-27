@@ -5,7 +5,7 @@ import { ApiInterceptor } from './api.interceptor';
 
 @NgModule({
   providers: [
-    { provide: 'API_URL', useValue: environment.apiUrl },
+    { provide: 'NX_API_URL', useValue: environment.apiUrl },
     { provide: 'BOOK_URL', useValue: environment.bookUrL },
     { provide: 'PRODUCTION', useValue: environment.production },
     {

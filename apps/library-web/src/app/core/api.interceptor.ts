@@ -6,10 +6,9 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import {AuthState} from '../../../../../libs/auth/data-access/src';
+import {Inject, Injectable} from '@angular/core';
+import {Store} from '@ngxs/store';
+import {Observable} from 'rxjs';
 
 type GetHeadersOptions = {
   shouldAddToken: boolean;
@@ -22,7 +21,7 @@ export const API_CONTEXT_TOKEN: HttpContextToken<string> =
 export class ApiInterceptor implements HttpInterceptor {
   constructor(
     @Inject('PRODUCTION') private production: boolean,
-    @Inject('API_URL') private apiUrl: string,
+    @Inject('NX_API_URL') private apiUrl: string,
     @Inject('BOOK_URL') private bookUrl: string,
     public store: Store
   ) {}

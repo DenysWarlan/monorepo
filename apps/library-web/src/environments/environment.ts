@@ -11,7 +11,7 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const environment: any = {
-  production: true,
-  apiUrl: 'https://monorepo-production-053f.up.railway.app',
+  production: false,
+  apiUrl: 'http://localhost:3000',
   bookUrL: 'https://www.googleapis.com/books/v1/volumes',
 };

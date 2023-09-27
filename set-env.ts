@@ -31,7 +31,7 @@ const envConfigFile = `
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const environment: any = {
   production: ${process.env.PRODUCTION || true},
-  apiUrl: '${process.env.API_URL}',
+  apiUrl: '${process.env.NX_API_URL}',
 };
 `;
 
