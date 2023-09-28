@@ -1,7 +1,5 @@
 describe('auth-login', () => {
   beforeEach(() => {
-    const url: string = Cypress.env('NODE_ENV');
-
     cy.visit(`/auth/login`)
   });
 
@@ -17,8 +15,8 @@ describe('auth-login', () => {
     cy.get('.action-password').type('ttt');
     cy.get('mnp-login').click({force: true});
 
-    cy.get('#errorEmail').should('be.visible');
-    cy.get('#passwordMinlength').should('be.visible');
+    cy.get('#EmailErrorForm').should('be.visible');
+    cy.get('#PasswordErrorForm').should('be.visible');
   });
 
   it('should route to register view when click register link', () => {

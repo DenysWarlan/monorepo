@@ -5,11 +5,11 @@ import {BooksService} from './library/services/library.service';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {CommonModule} from '@angular/common';
-import {AuthState} from '@monorepo/auth/data-access';
+import {AuthState, RegisterState} from '@monorepo/auth/data-access';
 import {NgxsStoragePluginModule, StorageOption} from '@ngxs/storage-plugin';
 
 
-export const GLOBAL_STATES: any[] = [AuthState];
+export const GLOBAL_STATES: any[] = [AuthState, RegisterState];
 
 @NgModule({
   declarations: [],
@@ -18,7 +18,7 @@ export const GLOBAL_STATES: any[] = [AuthState];
     BrowserModule,
     HttpClientModule,
     NgxsStoragePluginModule.forRoot({
-      key: '@@STATE',
+      key: 'StorageState',
       storage: StorageOption.LocalStorage,
       deserialize: JSON.parse,
       serialize: JSON.stringify

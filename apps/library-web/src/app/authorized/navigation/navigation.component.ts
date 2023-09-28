@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import {AuthState, Logout} from '../../../../../../libs/auth/data-access/src';
+import {AuthState, Logout} from '@monorepo/auth/data-access';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class NavigationComponent {
   constructor(private router: Router, private store: Store) {}
 
   public login(): void {
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['auth/login']);
   }
 
   public logOut(): void {

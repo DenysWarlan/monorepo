@@ -10,8 +10,6 @@ export class Register {
 
 export class RegisterSuccess {
   public static readonly type: string =  '[Register] Load Registers Success';
-
-  constructor(public data: any) {}
 }
 
 export class RegisterFailure {

@@ -1,0 +1,5 @@
+<ng-container *ngIf="!!errors">
+    <ng-container *ngFor="let error of (errors | errorInfo)">
+        <mat-error [id]="ctrlName + 'ErrorForm'"> {{ctrlName}} {{ error }}</mat-error>
+    </ng-container>
+</ng-container>

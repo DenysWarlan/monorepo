@@ -1,27 +1,59 @@
 <div class="row justify-content-center">
   <div class="col-12">
     <h1 class="white-text text-center">CREATE NEW ACCOUNT</h1>
-    <h5 class="white-text text-center">If no barcode has been assigned for your account, please contact the library.</h5>
   </div>
+  <mat-error *ngIf="(errors$ | async)">
+    <h5 class="mat-error text-center" id="errorMessage">{{(errors$ | async)?.error?.message}}</h5>
+  </mat-error>
   <div class="col-xs-12 col-md-6 col-lg-6">
     <form [formGroup]="form" (submit)="form && form.valid && submitForm()" class="white-text">
       <div class="form-group">
         <mat-form-field class="w-100">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Name and surname" />
+          <monorepo-error-form
+                *ngIf="form.get('name').touched || form.get('name').dirty"
+                [errors]="form.get('name').errors"
+                ctrlName="Name"
+        ></monorepo-error-form>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="w-100">
+          <mat-label>Birth day</mat-label>
+          <input matInput formControlName="birthDate" [matDatepicker]="picker" placeholder="Choose a birth date" readonly>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <monorepo-error-form
+                *ngIf="form.get('name').touched || form.get('name').dirty"
+                [errors]="form.get('name').errors"
+                ctrlName="Name"
+        ></monorepo-error-form>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field class="w-100">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" placeholder="Ex. pat@example.com" />
-          <mat-error *ngIf="form.get('email')?.hasError('email')"> Please enter a valid email address </mat-error>
-          <mat-error *ngIf="form.get('email')?.hasError('required')"> Email is <strong>required</strong> </mat-error>
+          <monorepo-error-form
+                *ngIf="form.get('email').touched || form.get('email').dirty"
+                [errors]="form.get('email').errors"
+                ctrlName="Email"
+        ></monorepo-error-form>
         </mat-form-field>
       </div>
       <div class="form-group">
         <mat-form-field class="w-100">
           <mat-label>Password</mat-label>
-          <input matInput type="password" class="form-control" formControlName="password" />
-          <mat-error *ngIf="form.get('password')?.hasError('required')">Password requaired</mat-error>
-          <mat-error *ngIf="form.get('password')?.hasError('minlength')">Error min length</mat-error>
+          <input matInput type="password" class="form-control" formControlName="password" autocomplete="new-password"/>
+          <monorepo-error-form
+                  *ngIf="form.get('password').touched || form.get('password').dirty"
+                  [errors]="form.get('password').errors"
+                  ctrlName="Password"
+          ></monorepo-error-form>
         </mat-form-field>
       </div>
-      <button [disabled]="form.invalid" class="btn btn-success" type="submit">Register</button>
+      <button [disabled]="form.invalid || (isRegisterLoading$ | async)" class="btn btn-success" type="submit">Register</button>
       or you can
       <span class="text-primary" (click)="login()">login</span>
     </form>

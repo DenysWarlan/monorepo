@@ -1,6 +1,6 @@
 import {Component, DestroyRef, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {distinctUntilChanged, filter, Observable, switchMap} from 'rxjs';
+import {distinctUntilChanged, filter, Observable} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterModule} from '@angular/router';
@@ -9,9 +9,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {Store} from '@ngxs/store';
-import {AuthLogin, AuthState, Credentials, LoginForm, SetToken} from '@monorepo/auth/data-access';
-import {LoggedDto} from '@monorepo/auth/data-access';
+import {AuthLogin, AuthState, Credentials, LoginForm} from '@monorepo/auth/data-access';
 import {isEqual} from 'lodash';
+import {ErrorFormComponent} from '../../../error-form/src/lib/error-form.component';
 
 
 @Component({
@@ -20,25 +20,22 @@ import {isEqual} from 'lodash';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   imports: [
-      CommonModule,
-      ReactiveFormsModule,
-      MatFormFieldModule,
-      MatInputModule,
-      MatCardModule,
-      RouterModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    RouterModule,
+    ErrorFormComponent
   ]
 })
 export class LoginComponent implements OnInit {
 
   private charsCount = 6;
 
-
   public isAuthSuccess$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
 
-  public logged$: Observable<LoggedDto> = this.store.select(AuthState.logged);
-
   public isAuthLoading$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
-
 
   public authErrors: Observable<HttpErrorResponse | null> = this.store.select(AuthState.authErrors);
 
@@ -76,17 +73,9 @@ export class LoginComponent implements OnInit {
     this.isAuthSuccess$
       .pipe(
           filter(Boolean),
-          switchMap(() => this.logged$),
           distinctUntilChanged(isEqual),
           takeUntilDestroyed(this.destroyRef))
-      .subscribe((logged: LoggedDto ) => {
-
-        console.log(logged);
-
-          this.store.dispatch(
-            new SetToken(logged)
-          );
-
+      .subscribe(() => {
           this.router.navigate(['home']);
       });
   }

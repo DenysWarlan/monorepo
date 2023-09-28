@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {Credentials} from '../../dto/credentials.model.dto';
-import {Token} from '../../models/token.model';
 import {LoggedDto} from '../../dto/logged.model.dto';
 import {Observable} from 'rxjs';
 
@@ -17,10 +16,11 @@ export class AuthService {
     return this.http.post<LoggedDto>(url, data);
   }
 
-  public register(data: Credentials): any {
+  public register(data: Credentials): Observable<void> {
     const url = `api/auth/register`;
+    console.log(data);
 
-    return this.http.post(url, data);
+    return this.http.post<void>(url, data);
   }
 
   public setToken(res: LoggedDto): void {

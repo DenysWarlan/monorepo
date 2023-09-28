@@ -21,11 +21,6 @@ export class UsersService {
   }
 
   async addUser(registerDto: RegisterDto): Promise<User> {
-    const newUser: User = new this.userModel({
-      email: registerDto.email,
-      password: registerDto.password,
-    });
-
-    return newUser.save();
+    return new this.userModel(registerDto).save();
   }
 }

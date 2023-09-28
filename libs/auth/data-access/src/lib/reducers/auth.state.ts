@@ -1,27 +1,16 @@
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { catchError, map } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthService } from './services/auth.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import {
-  AuthLogin,
-  LoginFailure,
-  LoginSuccess,
-  Logout,
-} from './actions/login.actions';
-import {
-  Register,
-  RegisterFailure,
-  RegisterSuccess,
-} from './actions/register.actions';
-import { ClearToken, SetToken } from './actions/setToken.actions';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
+import {catchError, map} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {AuthService} from './services/auth.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {AuthLogin, LoginFailure, LoginSuccess, Logout,} from './actions/login.actions';
+import {ClearToken, SetToken} from './actions/setToken.actions';
 import {LoggedDto} from '../dto/logged.model.dto';
 
 export interface Auth {
   isAuth: boolean;
   isAuthLoading: boolean;
-  isRegister: boolean;
   error: HttpErrorResponse | null;
   accessToken: string | null;
   id: string | null;
@@ -32,7 +21,6 @@ export interface Auth {
   defaults: {
     isAuth: false,
     isAuthLoading: false,
-    isRegister: false,
     error: null,
     accessToken: null,
     id: null,
@@ -40,7 +28,9 @@ export interface Auth {
 })
 @Injectable()
 export class AuthState {
-  constructor(private authService: AuthService, private store: Store) {}
+  constructor(
+    private authService: AuthService,
+  ) {}
 
   @Action(Logout)
   public logout({ dispatch, patchState }: StateContext<Auth>): void {
@@ -93,42 +83,6 @@ export class AuthState {
     });
   }
 
-  @Action(Register)
-  public register(
-    { dispatch, patchState }: StateContext<Auth>,
-    { data }: Register
-  ): Observable<void | Observable<void>> {
-    patchState({
-      isRegister: true,
-      error: null,
-    });
-
-    return this.authService.register(data).pipe(
-      map((invitations) => dispatch(new RegisterSuccess(invitations))),
-      catchError((error) => dispatch(new RegisterFailure(error)))
-    );
-  }
-
-  @Action(RegisterSuccess)
-  public registerSuccess({ patchState }: StateContext<Auth>): void {
-    patchState({
-      isRegister: true,
-      isAuth: false,
-    });
-  }
-
-  @Action(RegisterFailure)
-  public registerFailure(
-    { patchState }: StateContext<Auth>,
-    { error }: LoginFailure
-  ): void {
-    patchState({
-      isRegister: false,
-      isAuth: false,
-      error,
-    });
-  }
-
   @Action(SetToken)
   public setToken({ patchState }: StateContext<Auth>, { data }: SetToken): void  {
     patchState({
@@ -146,16 +100,12 @@ export class AuthState {
       id: null,
     });
 
-    // return this.authService.clearToken();
+    return this.authService.clearToken();
   }
 
   @Selector()
   public static isAuthSuccess({ isAuth }: Auth): boolean {
     return isAuth;
-  }
-  @Selector()
-  public static isRegister({ isRegister }: Auth): boolean {
-    return isRegister;
   }
 
   @Selector()

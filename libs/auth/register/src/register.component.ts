@@ -1,12 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Store} from '@ngxs/store';
 import {ActivatedRoute, Router} from '@angular/router';
-import {filter, Observable, tap} from 'rxjs';
+import {Observable} from 'rxjs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CommonModule} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
-import {AuthState, Credentials, LoginForm, Register} from '@monorepo/auth/data-access';
+import {Register, RegisterDto, RegisterForm} from '@monorepo/auth/data-access';
+import {ErrorFormComponent} from '../../../error-form/src/lib/error-form.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {RegisterState} from '../../data-access/src/lib/reducers/register.state';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   standalone: true,
@@ -14,17 +18,21 @@ import {AuthState, Credentials, LoginForm, Register} from '@monorepo/auth/data-a
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   imports: [
-      CommonModule,
-      ReactiveFormsModule,
-      MatFormFieldModule,
-      MatInputModule
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ErrorFormComponent,
+    MatDatepickerModule
   ]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   private charsCount = 6;
 
-  public form: FormGroup<LoginForm> = this.fb.group({
+  public form: FormGroup<RegisterForm> = this.fb.group({
+  name: this.fb.control('',  [Validators.required]),
+  birthDate: this.fb.control(''),
   email: this.fb.control('', [Validators.required, Validators.email]),
   password: this.fb.control('', [
     Validators.required,
@@ -32,34 +40,24 @@ export class RegisterComponent implements OnInit {
   ]),
 });
 
-  private isRegister: Observable<boolean> = this.store.select(
-    AuthState.isRegister
+  public errors$: Observable<HttpErrorResponse> = this.store.select(
+    RegisterState.errors
+  );
+
+  public isRegisterLoading$: Observable<boolean> = this.store.select(
+      RegisterState.isRegisterLoading
   );
 
   public constructor(
     private store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
-  ngOnInit(): void {
-    this.form = this.createForm();
-    this.handleRegister();
-  }
-
-  private createForm(): FormGroup {
-    return this.fb.group({
-      email: this.fb.control('', [Validators.required, Validators.email]),
-      password: this.fb.control('', [
-        Validators.required,
-        Validators.minLength(this.charsCount),
-      ]),
-    });
-  }
-
   public submitForm(): void {
-    const data: Credentials = this.form.value as Credentials;
+    const data: RegisterDto = this.form.value as RegisterDto;
+
     this.store.dispatch(new Register(data));
   }
 
@@ -67,12 +65,5 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/auth/login'], {
       relativeTo: this.route,
     });
-  }
-
-  public handleRegister(): void  {
-    this.isRegister.pipe(
-      filter(Boolean),
-      tap(() => this.login())
-    ).subscribe();
   }
 }

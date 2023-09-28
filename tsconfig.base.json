@@ -27,7 +27,9 @@
       "@monorepo/auth": ["auth/src/index.ts"],
       "@monorepo/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@monorepo/auth/login": ["libs/auth/login/src/index.ts"],
-      "@monorepo/auth/register": ["libs/auth/register/src/index.ts"]
+      "@monorepo/auth/register": ["libs/auth/register/src/index.ts"],
+      "@monorepo/error-form": ["libs/error-form/src/index.ts"],
+      "@monorepo/lib-error-form": ["libs/lib-error-form/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"],

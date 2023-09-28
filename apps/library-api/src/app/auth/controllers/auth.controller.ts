@@ -52,15 +52,21 @@ export class AuthController {
     description: 'Invalid data'
   })
   async register(@Res({passthrough: true}) response: Response, @Body() registerDto: RegisterDto) {
-    const logged: Logged = await this.authService.register(registerDto);
+    const logged: Logged | {message: string} = await this.authService.register(registerDto);
 
-    if (!!logged.id) {
+    if(logged.hasOwnProperty('message')) {
+      response.status(HttpStatus.BAD_REQUEST).send(logged)
+
+      return;
+    }
+
+    if (logged.hasOwnProperty('id')) {
       response.status(HttpStatus.NO_CONTENT).send('');
 
       return;
     }
 
-    response.status(HttpStatus.BAD_REQUEST).send('')
+    response.status(HttpStatus.BAD_REQUEST).send({})
 
     return;
   }
