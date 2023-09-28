@@ -2,7 +2,7 @@ import {LoginComponent} from './login.component';
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {NgxsModule, Store} from '@ngxs/store';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {AuthLogin, AuthState, Login, SetToken} from '@monorepo/auth/data-access';
+import {AuthLogin, AuthState, Credentials, SetToken} from '@monorepo/auth/data-access';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterTestingModule} from '@angular/router/testing';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -83,7 +83,7 @@ describe('LoginComponent', () => {
             password: 'password1232'
         });
 
-        const data: Login = component.form.value as Login;
+        const data: Credentials = component.form.value as Credentials;
 
         component.loginUser();
 
@@ -92,7 +92,10 @@ describe('LoginComponent', () => {
 
     it('should not dispatch action set token navigate if not login', () => {
         const spyMock = jest.spyOn(store, 'dispatch');
-        const action = new SetToken(localStorage.getItem('token'));
+        const action = new SetToken({
+            accessToken: localStorage.getItem('token'),
+            id:'133'
+        });
 
         Object.defineProperty(component, 'isAuthSuccess$', of(true));
 
@@ -103,7 +106,11 @@ describe('LoginComponent', () => {
 
     it('should dispatch action set token if login', () => {
         const spyMock = jest.spyOn(store, 'dispatch');
-        const action = new SetToken(localStorage.getItem('token'));
+        const action = new SetToken({
+            accessToken: localStorage.getItem('token'),
+            id:'133'
+        });
+
         Object.defineProperty(component, 'isAuthSuccess$', of(true));
 
         component.isAuthSuccess$
