@@ -20,13 +20,12 @@ export class UsersService {
     return this.userModel.find();
   }
 
-  async addUser(user: RegisterDto): Promise<number> {
-    const newUser = new this.userModel({
-      email: user.email,
-      password: user.password,
+  async addUser(registerDto: RegisterDto): Promise<User> {
+    const newUser: User = new this.userModel({
+      email: registerDto.email,
+      password: registerDto.password,
     });
-    const result = await newUser.save();
 
-    return result.id as number;
+    return newUser.save();
   }
 }

@@ -1,6 +1,6 @@
 import {Component, DestroyRef, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {filter, Observable} from 'rxjs';
+import {distinctUntilChanged, filter, Observable, switchMap} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterModule} from '@angular/router';
@@ -9,7 +9,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {Store} from '@ngxs/store';
-import {AuthLogin, AuthState, Login, LoginForm, SetToken} from '@monorepo/auth/data-access';
+import {AuthLogin, AuthState, Credentials, LoginForm, SetToken} from '@monorepo/auth/data-access';
+import {LoggedDto} from '@monorepo/auth/data-access';
+import {isEqual} from 'lodash';
 
 
 @Component({
@@ -33,6 +35,7 @@ export class LoginComponent implements OnInit {
 
   public isAuthSuccess$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
 
+  public logged$: Observable<LoggedDto> = this.store.select(AuthState.logged);
 
   public isAuthLoading$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
 
@@ -64,19 +67,24 @@ export class LoginComponent implements OnInit {
         return;
     }
 
-    const data: Login = this.form.value as Login;
+    const data: Credentials = this.form.value as Credentials;
 
     this.store.dispatch(new AuthLogin(data));
   }
 
   private handleIsAuthSuccess(): void {
     this.isAuthSuccess$
-      .pipe(filter(Boolean), takeUntilDestroyed(this.destroyRef))
-      .subscribe(() => {
-          console.log('test');
+      .pipe(
+          filter(Boolean),
+          switchMap(() => this.logged$),
+          distinctUntilChanged(isEqual),
+          takeUntilDestroyed(this.destroyRef))
+      .subscribe((logged: LoggedDto ) => {
+
+        console.log(logged);
 
           this.store.dispatch(
-            new SetToken(localStorage.getItem('token'))
+            new SetToken(logged)
           );
 
           this.router.navigate(['home']);

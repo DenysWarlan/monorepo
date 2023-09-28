@@ -6,7 +6,7 @@ import {filter, Observable, tap} from 'rxjs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {CommonModule} from '@angular/common';
 import {MatInputModule} from '@angular/material/input';
-import {AuthState, Login, LoginForm, Register} from '@monorepo/auth/data-access';
+import {AuthState, Credentials, LoginForm, Register} from '@monorepo/auth/data-access';
 
 @Component({
   standalone: true,
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public submitForm(): void {
-    const data: Login = this.form.value as Login;
+    const data: Credentials = this.form.value as Credentials;
     this.store.dispatch(new Register(data));
   }
 

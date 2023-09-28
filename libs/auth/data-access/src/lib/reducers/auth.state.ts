@@ -16,6 +16,7 @@ import {
   RegisterSuccess,
 } from './actions/register.actions';
 import { ClearToken, SetToken } from './actions/setToken.actions';
+import {LoggedDto} from '../dto/logged.model.dto';
 
 export interface Auth {
   isAuth: boolean;
@@ -23,6 +24,7 @@ export interface Auth {
   isRegister: boolean;
   error: HttpErrorResponse | null;
   accessToken: string | null;
+  id: string | null;
 }
 
 @State<Auth>({
@@ -33,6 +35,7 @@ export interface Auth {
     isRegister: false,
     error: null,
     accessToken: null,
+    id: null,
   },
 })
 @Injectable()
@@ -48,18 +51,19 @@ export class AuthState {
       accessToken: null,
     });
 
-    dispatch(new ClearToken({ data: { token: '', userId: '' } }));
+    dispatch(new ClearToken());
   }
 
   @Action(AuthLogin)
   public login({ dispatch, patchState }: StateContext<Auth>, { data }: AuthLogin): Observable<void | Observable<void>> {
     patchState({
       isAuthLoading: true,
+      error: null,
     });
 
     return this.authService.login(data).pipe(
-      map((data) => dispatch(new LoginSuccess(data))),
-      catchError((error) => dispatch(new LoginFailure(error)))
+      map((data: LoggedDto) => dispatch(new LoginSuccess(data))),
+      catchError((error: HttpErrorResponse) => dispatch(new LoginFailure(error)))
     );
   }
 
@@ -96,6 +100,7 @@ export class AuthState {
   ): Observable<void | Observable<void>> {
     patchState({
       isRegister: true,
+      error: null,
     });
 
     return this.authService.register(data).pipe(
@@ -126,21 +131,22 @@ export class AuthState {
 
   @Action(SetToken)
   public setToken({ patchState }: StateContext<Auth>, { data }: SetToken): void  {
-    console.log(data)
     patchState({
-      accessToken: '',
-    });
-
-    // return this.authService.setToken(data);
-  }
-
-  @Action(ClearToken)
-  public clearToken({ patchState }: StateContext<Auth>, { data }: SetToken): void {
-    patchState({
-      accessToken: data,
+      accessToken: data.accessToken,
+      id: data.id,
     });
 
     return this.authService.setToken(data);
+  }
+
+  @Action(ClearToken)
+  public clearToken({ patchState }: StateContext<Auth>): void {
+    patchState({
+      accessToken: null,
+      id: null,
+    });
+
+    // return this.authService.clearToken();
   }
 
   @Selector()
@@ -163,7 +169,10 @@ export class AuthState {
   }
 
   @Selector()
-  public static token({ accessToken }: Auth): string | null {
-    return accessToken;
+  public static logged({ accessToken, id }: Auth): LoggedDto {
+    return {
+      accessToken,
+      id
+    };
   }
 }

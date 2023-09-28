@@ -4,7 +4,7 @@
       Sing in
     </mat-card-title>
     <mat-error *ngIf="(authErrors | async)">
-      <h5 class="mat-error text-center" id="errorMessage">{{(authErrors | async)?.message}}</h5>
+      <h5 class="mat-error text-center" id="errorMessage">{{(authErrors | async)?.error?.message}}</h5>
     </mat-error>
     <form [formGroup]="form" (submit)="form && form.valid && loginUser()" class="d-flex w-100 flex-column">
       <mat-form-field class="w-100">
