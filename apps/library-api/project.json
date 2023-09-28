@@ -41,6 +41,9 @@
       "configurations": {
         "production": {
           "buildTarget": "library-api:build:production"
+        },
+        "development": {
+          "buildTarget": "library-api:build:development"
         }
       }
     },
