@@ -28,5 +28,5 @@ jobs:
       - run: npm run auth-login:e2e:production
 
 #     Build apps
-      - run: npm run build
+      - run: build:api:production
       - run: npm run build:web:production
