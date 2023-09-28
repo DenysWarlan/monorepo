@@ -1,5 +1,9 @@
 describe('auth-login', () => {
-  beforeEach(() => cy.visit('/auth/login'));
+  beforeEach(() => {
+    const url: string = Cypress.env('NODE_ENV');
+
+    cy.visit(`/auth/login`)
+  });
 
   it('should disable submit button when login form empty', () => {
     cy.get('.action-email').should('have.value', '');
@@ -33,13 +37,13 @@ describe('auth-login', () => {
     cy.get('#errorMessage').should('be.visible');
   });
 
-  // it('should route to home if login success', () => {
-  //   cy.get('.action-email').type('test@test3.test');
-  //   cy.get('.action-password').type('testtestowy');
-  //
-  //   cy.get('.submit').click({force: true});
-  //
-  //
-  //   cy.url().should('include','/home');
-  // });
+  it('should route to home if login success', () => {
+    cy.get('.action-email').type('test@test3.test');
+    cy.get('.action-password').type('testtestowy');
+
+    cy.get('.submit').click({force: true});
+
+
+    cy.url().should('include','/home');
+  });
 });
