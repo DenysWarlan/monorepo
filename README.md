@@ -13,7 +13,7 @@ Create for study new technology like:
 - [Express](https://expressjs.com)
 - [Node](https://nodejs.org)
 
-It's online library u can login on your account. In the future, you can find some book, saw description and add to you book list. Used nestJs and mongoDB to back-end for create users andd aded books to list and open api google to search books and get books details. And use Angular to front-end part application.
+It's online library u can log in on your account. In the future, you can find some book, saw description and add to you book list. Used nestJs and mongoDB to back-end for create users and added books to list and open api google to search books and get books details. And use Angular to front-end part application.
 
 ## Capabilities to your workspace
 
