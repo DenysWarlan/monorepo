@@ -1,98 +1,50 @@
 # Monorepo
 
-This project was generated using [Nx](https://nx.dev).
+This project was generated using [Nx](https://nx.dev). 
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p style="text-align: center;"><img alt="Nx" src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
 
 🔎 **Smart, Fast and Extensible Build System**
 
-## Quick Start & Documentation
-
-[Nx Documentation](https://nx.dev/angular)
-
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
-
-[Interactive Tutorial](https://nx.dev/react-tutorial/01-create-application)
-
-## Adding capabilities to your workspace
-
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
-
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
+Create for study new technology like:
 
 - [Angular](https://angular.io)
-  - `ng add @nx/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
 - [Nest](https://nestjs.com)
-  - `ng add @nx/nest`
 - [Express](https://expressjs.com)
-  - `ng add @nx/express`
 - [Node](https://nodejs.org)
-  - `ng add @nx/node`
 
-There are also many [community plugins](https://nx.dev/community) you could add.
+It's online library u can login on your account find some book, saw description and add to you book list. Used nestJs and mongoDB to back-end for create users andd aded books to list and open api google to search books and get books details. And use Angular to front-end part application.
 
-## Generate an application
+## Capabilities to your workspace
 
-Run `ng g @nx/angular:app my-app` to generate an application.
+This project includes Angular front-end applications and NestJs framework for back-end development applications
 
-> You can use any of the plugins above to generate applications as well.
+Use `npm install` to install all application and dependencies.
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+### And you can start local application, just run:
 
-## Generate a library
+`npm run start:web:dev` - for start Angular application (FE)
 
-Run `ng g @nx/angular:lib my-lib` to generate a library.
+`npm run start:api` - for start NestJs application (BE)
 
-> You can also use any of the plugins above to generate libraries as well.
+### Or you can test deployed applications:
 
-Libraries are shareable across libraries and applications. They can be imported from `@monorepo/mylib`.
+- [Web application](https://monorepo-d81df.web.app/)
+- [Swagger](https://monorepo-production-3fef.up.railway.app/api#)
 
-## Development server
+### Application possible build: 
 
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+`npm run build:web:production` - build Front-end
 
-## Code scaffolding
+`npm run build:api:production` - build Back-end
 
-Run `ng g component my-component --project=my-app` to generate a new component.
+### At the moment ready test for libs login: 
 
-## Build
+`npm run auth-login:test:ci` : unit test login libs
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`npm run auth-login:e2e:production` : e2e test login libs
 
-## Running unit tests
+## Licensing
 
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
-
-Run `nx affected:test` to execute the unit tests affected by a change.
-
-## Running end-to-end tests
-
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
-
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
-
-## Understand your workspace
-
-Run `nx graph` to see a diagram of the dependencies of your projects.
-
-## Further help
-
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-## ☁ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+This project is licensed under an Unlicense license. This license does not require
+you to take the license with you to your project.
