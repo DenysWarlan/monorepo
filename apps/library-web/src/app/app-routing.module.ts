@@ -8,7 +8,7 @@ import {LoginComponent} from '@monorepo/auth/login';
 import {RegisterComponent} from '@monorepo/auth/register';
 import {AuthGuard} from './core/guards/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: 'auth', children: [
       { path: 'login', component: LoginComponent },
