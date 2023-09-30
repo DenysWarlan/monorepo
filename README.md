@@ -6,7 +6,7 @@ This project was generated using [Nx](https://nx.dev).
 
 🔎 **Smart, Fast and Extensible Build System**
 
-Create for study new technology like:
+Create for study technology like:
 
 - [Angular](https://angular.io)
 - [Nest](https://nestjs.com)
