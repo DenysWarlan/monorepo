@@ -24,11 +24,17 @@
     "paths": {
       "@library-api/*": ["apps/library-api/src"],
       "@library-web/*": ["apps/library-web/src"],
-      "@monorepo/auth": ["auth/index.ts"],
       "@monorepo/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@monorepo/auth/login": ["libs/auth/login/src/index.ts"],
       "@monorepo/auth/register": ["libs/auth/register/src/index.ts"],
-      "@monorepo/error-form": ["libs/error-form/src/index.ts"]
+      "@monorepo/books/details": ["libs/books/details/src/index.ts"],
+      "@monorepo/books/list": ["libs/books/list/src/index.ts"],
+      "@monorepo/books/search": ["libs/books/search/src/index.ts"],
+      "@monorepo/error-form": ["libs/error-form/src/index.ts"],
+      "@monorepo/navigation": ["libs/navigation/src/index.ts"],
+      "@monorepo/page-not-found": ["libs/page-not-found/src/index.ts"],
+      "@monorepo/profile/favorite": ["libs/profile/favorite/src/index.ts"],
+      "@monorepo/profile/settings": ["libs/profile/settings/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"],

@@ -4,7 +4,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppStoreModule} from './reducers/app-store.module';
-import {AuthorizedModule} from './authorized/authorized.module';
 import {RouterModule} from '@angular/router';
 import {AppRoutingModule} from './app-routing.module';
 import {AppMaterialModule} from './material.module';
@@ -20,7 +19,6 @@ import {CoreModule} from './core/core.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppStoreModule,
-    AuthorizedModule,
     AppRoutingModule,
     RouterModule,
     CoreModule,

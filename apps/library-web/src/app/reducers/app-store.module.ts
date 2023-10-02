@@ -9,7 +9,10 @@ import {AuthState, RegisterState} from '@monorepo/auth/data-access';
 import {NgxsStoragePluginModule, StorageOption} from '@ngxs/storage-plugin';
 
 
-export const GLOBAL_STATES: any[] = [AuthState, RegisterState];
+export const GLOBAL_STATES: any[] = [
+    AuthState,
+    RegisterState
+];
 
 @NgModule({
   declarations: [],
@@ -18,7 +21,7 @@ export const GLOBAL_STATES: any[] = [AuthState, RegisterState];
     BrowserModule,
     HttpClientModule,
     NgxsStoragePluginModule.forRoot({
-      key: 'StorageState',
+      key: AuthState,
       storage: StorageOption.LocalStorage,
       deserialize: JSON.parse,
       serialize: JSON.stringify
