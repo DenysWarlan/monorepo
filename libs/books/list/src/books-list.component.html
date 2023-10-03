@@ -1,1 +1,13 @@
-<p>books-list works!</p>
+<div class="books">
+    <ng-container *ngFor="let book of (books$ | async)"  class="books">
+        <monorepo-book-item [book]="book">
+        </monorepo-book-item>
+    </ng-container>
+</div>
+<monorepo-pagination
+        [totalBooks]="totalItems$ | async"
+        [pagination]="pagination$ | async"
+        (updatePaginator)="updatePaginator($event)"
+>
+
+</monorepo-pagination>

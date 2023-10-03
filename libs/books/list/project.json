@@ -3,7 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/list/src",
   "prefix": "monorepo",
-  "tags": [],
+  "tags": ["frontend"],
   "projectType": "library",
   "targets": {
     "test": {

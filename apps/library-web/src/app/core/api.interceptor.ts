@@ -45,8 +45,11 @@ export class ApiInterceptor implements HttpInterceptor {
 
   private addBookRequest(request: HttpRequest<unknown>): HttpRequest<unknown> {
     let clone: HttpRequest<unknown> = request;
+
     const envUrl: string = environment.bookUrl;
+
     const key: string = 'AIzaSyB6hiZBAGaa0Kj946BgGl_DFUwFiLWJhCE';
+
     const url: string = request.url.includes('?')
       ? `${request.url}&&key=${key}`
       : `${envUrl + request.url}?key=${key}`;

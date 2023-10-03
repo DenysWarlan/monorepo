@@ -4,22 +4,27 @@ import {BookService} from '../services/book.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {SearchBook, SearchBookFailure, SearchBookSuccess} from '../actions/search.action';
+import {SearchBook, SearchBookFailure, SearchBookSuccess, UpdatePagination} from '../actions/search.action';
+import {Book, Books, Pagination} from '../../index';
 
-export interface Book {
-    search: string;
-    searchLoading: boolean;
-    books: any[];
-    searchError: HttpErrorResponse;
+export interface IBookState {
+    readonly searchLoading: boolean;
+    readonly books: Books;
+    readonly searchError: HttpErrorResponse;
+    readonly pagination: Pagination;
 }
 
-@State<Book>({
+@State<IBookState>({
     name: 'book',
     defaults: {
-        search: '',
+        pagination: {
+            query: '',
+            startIndex: 0,
+            maxResults: 10,
+        },
         searchLoading: false,
         searchError: null,
-        books: []
+        books: null,
     },
 })
 @Injectable()
@@ -31,23 +36,43 @@ export class BookState {
 
 
     @Action(SearchBook)
-    public login({ dispatch, patchState }: StateContext<Book>, { data }: SearchBook): Observable<void | Observable<void>> {
+    public search({ dispatch, patchState, getState }: StateContext<IBookState>, { data }: SearchBook): Observable<void | Observable<void>> {
+        const pagination: Pagination = {
+            query: data.query ?? getState().pagination.query,
+            startIndex: data.startIndex ?? getState().pagination.startIndex,
+            maxResults: data.maxResults ?? getState().pagination.maxResults,
+        }
         patchState({
             searchLoading: true,
             searchError: null,
+            pagination
         });
 
-        console.log(data);
-
-        return this.bookService.getBooks(data).pipe(
-            map((data: any[]) => dispatch(new SearchBookSuccess(data))),
+        return this.bookService.getBooks(pagination).pipe(
+            map((data: Books) => dispatch(new SearchBookSuccess(data))),
             catchError((error: HttpErrorResponse) => dispatch(new SearchBookFailure(error)))
         );
     }
 
+    @Action(UpdatePagination)
+    public updatePagination(
+        { patchState, dispatch, getState }: StateContext<IBookState>,
+        { data }: UpdatePagination
+    ): void {
+        patchState({
+            pagination: {
+                query: data.query ?? getState().pagination.query,
+                startIndex: data.startIndex ?? getState().pagination.startIndex,
+                maxResults: data.maxResults ?? getState().pagination.maxResults,
+            }
+        });
+
+        dispatch(new SearchBook(data))
+    }
+
     @Action(SearchBookSuccess)
-    public loginSuccess(
-        { patchState, dispatch }: StateContext<Book>,
+    public searchSuccess(
+        { patchState }: StateContext<IBookState>,
         { data }: SearchBookSuccess
     ): void {
         patchState({
@@ -57,8 +82,8 @@ export class BookState {
     }
 
     @Action(SearchBookFailure)
-    public loginFailure(
-        { patchState }: StateContext<Book>,
+    public searchFailure(
+        { patchState }: StateContext<IBookState>,
         { error }: SearchBookFailure
     ): void {
         patchState({
@@ -68,7 +93,17 @@ export class BookState {
     }
 
     @Selector()
-    public static books({ books }: Book): any[] {
-        return books;
+    public static books({ books }: IBookState): Book[] {
+        return books.items;
+    }
+
+    @Selector()
+    public static totalItems({ books }: IBookState): number {
+        return books.totalItems;
+    }
+
+    @Selector()
+    public static pagination({ pagination }: IBookState): Pagination {
+        return pagination;
     }
 }

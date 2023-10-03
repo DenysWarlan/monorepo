@@ -1,10 +1,14 @@
-<div class="d-flex align-items-center">
-    <mat-form-field class="example-full-width">
-        <mat-label>Favorite food</mat-label>
-        <input matInput placeholder="Ex. Pizza" value="Sushi" [formControl]="search">
-    </mat-form-field>
+<div class="d-flex align-items-center justify-content-center w-75">
+    <div class="d-flex align-items-center w-50">
+        <mat-form-field class="w-100">
+            <mat-label>Favorite food</mat-label>
+            <input matInput placeholder="Ex. Pizza" value="Sushi" [formControl]="search">
+        </mat-form-field>
+    </div>
     <button
             class="btn btn-success submit"
             (click)="onSearch()"
     >Search</button>
 </div>
+
+<monorepo-books-list *ngIf="!!(totalItems$ | async)"></monorepo-books-list>
