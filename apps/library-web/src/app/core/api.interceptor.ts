@@ -3,6 +3,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {AuthState} from '@monorepo/auth/data-access';
+import {environment} from '../../environments/environment';
 
 type GetHeadersOptions = {
   shouldAddToken: boolean;
@@ -32,9 +33,10 @@ export class ApiInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>
   ): HttpRequest<unknown> {
     let clone: HttpRequest<unknown> = request;
+    const url: string = environment.apiUrl;
 
     clone = request.clone({
-      url: `${request.url}`,
+      url: `${url}/${request.url}`,
       headers: request.headers,
     });
 
@@ -43,10 +45,11 @@ export class ApiInterceptor implements HttpInterceptor {
 
   private addBookRequest(request: HttpRequest<unknown>): HttpRequest<unknown> {
     let clone: HttpRequest<unknown> = request;
+    const envUrl: string = environment.bookUrl;
     const key: string = 'AIzaSyB6hiZBAGaa0Kj946BgGl_DFUwFiLWJhCE';
     const url: string = request.url.includes('?')
       ? `${request.url}&&key=${key}`
-      : `${request.url}?key=${key}`;
+      : `${envUrl + request.url}?key=${key}`;
 
     clone = request.clone({
       url,

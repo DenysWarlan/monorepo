@@ -12,4 +12,6 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const environment: any = {
   production: false,
+  apiUrl: 'http://localhost:3000',
+  bookUrL: 'https://www.googleapis.com/books/v1/volumes',
 };

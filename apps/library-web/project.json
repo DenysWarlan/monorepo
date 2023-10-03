@@ -68,8 +68,7 @@
       "executor": "@nx/angular:webpack-dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "library-web:build:production",
-          "proxyConfig": "./proxy-prod.conf.json"
+          "browserTarget": "library-web:build:production"
         },
         "development": {
           "browserTarget": "library-web:build:development",
