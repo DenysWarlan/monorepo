@@ -1,6 +1,6 @@
 describe('auth-login', () => {
   beforeEach(() => {
-    cy.visit(`/auth/login`)
+    cy.visit(`/login`)
   });
 
   it('should disable submit button when login form empty', () => {
@@ -36,12 +36,12 @@ describe('auth-login', () => {
   });
 
   it('should route to home if login success', () => {
-    cy.get('.action-email').type('test@test3.test');
-    cy.get('.action-password').type('testtestowy');
+    cy.get('.action-email').type('denis.varla95+test@gmail.com');
+    cy.get('.action-password').type('Test123!');
 
     cy.get('.submit').click({force: true});
 
 
-    cy.url().should('include','/home');
+    cy.url().should('include','/search');
   });
 });
