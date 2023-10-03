@@ -3,7 +3,8 @@ import {Inject, Injectable} from '@angular/core';
 import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
 import {AuthState} from '@monorepo/auth/data-access';
-import {environment} from '../../environments/environment';
+import * as env from '../../environments/environment';
+import * as envProd from '../../environments/environment.prod';
 
 type GetHeadersOptions = {
   shouldAddToken: boolean;
@@ -23,7 +24,7 @@ export class ApiInterceptor implements HttpInterceptor {
     const context: boolean = request.url.startsWith('api');
     let clone: HttpRequest<unknown> = request;
 
-    clone = context  ? this.addDefaultRequest(request): this.addBookRequest(request)
+    clone = context  ? this.addDefaultRequest(request) : this.addBookRequest(request);
 
 
     return next.handle(clone);
@@ -33,10 +34,12 @@ export class ApiInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>
   ): HttpRequest<unknown> {
     let clone: HttpRequest<unknown> = request;
-    const url: string = environment.apiUrl;
+
+
+    const envUrl: string = this.production ? envProd.environment.apiUrl : env.environment.apiUrl;
 
     clone = request.clone({
-      url: `${url}/${request.url}`,
+      url: `${envUrl}/${request.url}`,
       headers: request.headers,
     });
 
@@ -45,14 +48,13 @@ export class ApiInterceptor implements HttpInterceptor {
 
   private addBookRequest(request: HttpRequest<unknown>): HttpRequest<unknown> {
     let clone: HttpRequest<unknown> = request;
-
-    const envUrl: string = environment.bookUrl;
-
     const key: string = 'AIzaSyB6hiZBAGaa0Kj946BgGl_DFUwFiLWJhCE';
 
+
+    const envUrl: string = this.production ? envProd.environment.bookUrL : env.environment.bookUrL;
     const url: string = request.url.includes('?')
-      ? `${request.url}&&key=${key}`
-      : `${envUrl + request.url}?key=${key}`;
+        ? `${envUrl}/${request.url}&&key=${key}`
+        : `${envUrl}/${request.url}?key=${key}`;
 
     clone = request.clone({
       url,

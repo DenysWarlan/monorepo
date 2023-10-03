@@ -12,5 +12,5 @@
 export const environment: any = {
   production: true,
   apiUrl: 'https://monorepo-production-3fef.up.railway.app',
-  bookUrL: 'https://www.googleapis.com/books/v1/volumes',
+  bookUrL: 'https://www.googleapis.com',
 };

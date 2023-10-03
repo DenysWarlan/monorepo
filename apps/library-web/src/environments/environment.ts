@@ -13,5 +13,5 @@
 export const environment: any = {
   production: false,
   apiUrl: 'http://localhost:3000',
-  bookUrL: 'https://www.googleapis.com/books/v1/volumes',
+  bookUrL: 'https://www.googleapis.com',
 };
