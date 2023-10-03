@@ -31,7 +31,7 @@ export class AuthController {
     if(!!login) {
       response.status(HttpStatus.OK).send(login);
 
-      return login;
+      return;
     }
 
 

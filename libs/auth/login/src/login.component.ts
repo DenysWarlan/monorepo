@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
           distinctUntilChanged(isEqual),
           takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
-          this.router.navigate(['home']);
+          this.router.navigate(['search']);
       });
   }
 

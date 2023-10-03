@@ -27,6 +27,8 @@
       "@monorepo/auth/data-access": ["libs/auth/data-access/src/index.ts"],
       "@monorepo/auth/login": ["libs/auth/login/src/index.ts"],
       "@monorepo/auth/register": ["libs/auth/register/src/index.ts"],
+      "@monorepo/books/categories": ["libs/books/categories/src/index.ts"],
+      "@monorepo/books/data-access": ["libs/books/data-access/src/index.ts"],
       "@monorepo/books/details": ["libs/books/details/src/index.ts"],
       "@monorepo/books/list": ["libs/books/list/src/index.ts"],
       "@monorepo/books/search": ["libs/books/search/src/index.ts"],

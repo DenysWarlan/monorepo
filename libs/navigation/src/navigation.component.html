@@ -1,1 +1,26 @@
-<p>navigation works!</p>
+<nav>
+    <div class="w-100 d-flex align-items-center justify-content-between">
+        <div (click)="redirect(Route.SEARCH)">
+            Library
+        </div>
+        <div *ngIf="(isAuth$ | async) else singin">
+            <button mat-icon-button color="primary" [matMenuTriggerFor]="profile">
+                <mat-icon>home</mat-icon>
+            </button>
+            <mat-menu #profile="matMenu">
+                <button (click)="redirect(Route.SETTINGS)" mat-menu-item>Settings</button>
+                <button (click)="redirect(Route.FAVORITE)" mat-menu-item>Favorite</button>
+                <mat-divider></mat-divider>
+                <button (click)="logout()" mat-menu-item>Logout</button>
+            </mat-menu>
+        </div>
+    </div>
+</nav>
+
+<ng-template #singin>
+    <button mat-button [matMenuTriggerFor]="auth">Sing in</button>
+    <mat-menu #auth="matMenu">
+        <button (click)="redirect(Route.LOGIN)" mat-menu-item>Login</button>
+        <button (click)="redirect(Route.REGISTER)" mat-menu-item>Register</button>
+    </mat-menu>
+</ng-template>

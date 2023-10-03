@@ -26,6 +26,7 @@
         ],
         "styles": [
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+          "./node_modules/material-icons/iconfont/material-icons.css",
           "apps/library-web/src/styles.scss"
         ],
         "scripts": []
@@ -70,7 +71,8 @@
           "browserTarget": "library-web:build:production"
         },
         "development": {
-          "browserTarget": "library-web:build:development"
+          "browserTarget": "library-web:build:development",
+          "proxyConfig": "./proxy.conf.json"
         }
       },
       "defaultConfiguration": "development"

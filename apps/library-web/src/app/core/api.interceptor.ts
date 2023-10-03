@@ -1,28 +1,17 @@
-import {
-  HttpContextToken,
-  HttpEvent,
-  HttpHandler,
-  HttpHeaders,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest,} from '@angular/common/http';
 import {Inject, Injectable} from '@angular/core';
 import {Store} from '@ngxs/store';
 import {Observable} from 'rxjs';
+import {AuthState} from '@monorepo/auth/data-access';
 
 type GetHeadersOptions = {
   shouldAddToken: boolean;
 };
 
-export const API_CONTEXT_TOKEN: HttpContextToken<string> =
-  new HttpContextToken<string>(() => 'apiUrl');
-
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
   constructor(
     @Inject('PRODUCTION') private production: boolean,
-    @Inject('NX_API_URL') private apiUrl: string,
-    @Inject('BOOK_URL') private bookUrl: string,
     public store: Store
   ) {}
 
@@ -30,17 +19,11 @@ export class ApiInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const context: string = request.context.get(API_CONTEXT_TOKEN);
+    const context: boolean = request.url.startsWith('api');
     let clone: HttpRequest<unknown> = request;
 
-    switch (context) {
-      case 'apiUrl':
-        clone = this.addDefaultRequest(request);
-        break;
-      case 'bookUrl':
-        clone = this.addBookRequest(request);
-        break;
-    }
+    clone = context  ? this.addDefaultRequest(request): this.addBookRequest(request)
+
 
     return next.handle(clone);
   }
@@ -51,8 +34,8 @@ export class ApiInterceptor implements HttpInterceptor {
     let clone: HttpRequest<unknown> = request;
 
     clone = request.clone({
-      url: `${this.apiUrl}/${request.url}`,
-      headers: this.getHeaders(request, { shouldAddToken: true }),
+      url: `${request.url}`,
+      headers: request.headers,
     });
 
     return clone;
@@ -60,10 +43,10 @@ export class ApiInterceptor implements HttpInterceptor {
 
   private addBookRequest(request: HttpRequest<unknown>): HttpRequest<unknown> {
     let clone: HttpRequest<unknown> = request;
-    const key: string = 'AIzaSyBGyulc704srlyU5tSP4zHdSX9tUw379OM';
+    const key: string = 'AIzaSyB6hiZBAGaa0Kj946BgGl_DFUwFiLWJhCE';
     const url: string = request.url.includes('?')
-      ? `${this.bookUrl}${request.url}&&key=${key}`
-      : `${this.bookUrl}${request.url}?key=${key}`;
+      ? `${request.url}&&key=${key}`
+      : `${request.url}?key=${key}`;
 
     clone = request.clone({
       url,
@@ -79,13 +62,13 @@ export class ApiInterceptor implements HttpInterceptor {
   ): HttpHeaders {
     let headers: HttpHeaders = request.headers;
 
-    // if (options.shouldAddToken) {
-    //   const token: string | null = this.store.selectSnapshot(AuthState.token);
-    //
-    //   if (!!token) {
-    //     headers = headers.set('php-auth-digest', token);
-    //   }
-    // }
+    if (options.shouldAddToken) {
+      const token: string | null = this.store.selectSnapshot(AuthState.logged).accessToken;
+
+      if (!!token) {
+        headers = headers.set('php-auth-digest', token);
+      }
+    }
 
     return headers;
   }

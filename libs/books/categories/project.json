@@ -1,19 +1,16 @@
 {
-  "name": "navigation",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/navigation/src",
+  "name": "books-categories",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/books/categories/src",
   "prefix": "monorepo",
-  "tags": [
-    "frontend",
-    "type:auth"
-  ],
+  "tags": [],
   "projectType": "library",
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/navigation/jest.config.ts",
+        "jestConfig": "libs/books/categories/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -28,8 +25,8 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [
-          "libs/navigation/**/*.ts",
-          "libs/navigation/**/*.html"
+          "libs/books/categories/**/*.ts",
+          "libs/books/categories/**/*.html"
         ]
       }
     }

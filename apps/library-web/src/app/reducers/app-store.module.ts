@@ -1,17 +1,19 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
-import {BooksService} from './library/services/library.service';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {CommonModule} from '@angular/common';
 import {AuthState, RegisterState} from '@monorepo/auth/data-access';
 import {NgxsStoragePluginModule, StorageOption} from '@ngxs/storage-plugin';
+import {BookState} from '../../../../../libs/books/data-access/src/reducer/states/book.state';
+import {BookService} from '../../../../../libs/books/data-access/src/reducer/services/book.service';
 
 
 export const GLOBAL_STATES: any[] = [
     AuthState,
-    RegisterState
+    RegisterState,
+    BookState
 ];
 
 @NgModule({
@@ -31,7 +33,7 @@ export const GLOBAL_STATES: any[] = [
       disabled: false
     }),
   ],
-  providers: [BooksService],
+  providers: [BookService],
   bootstrap: [],
 })
 export class AppStoreModule {}

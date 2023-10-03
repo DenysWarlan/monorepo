@@ -5,5 +5,12 @@
     "ws": true,
     "logLevel": "debug",
     "changeOrigin": true
+  },
+  "/books/*": {
+    "target": "https://www.googleapis.com",
+    "secure": false,
+    "ws": true,
+    "logLevel": "debug",
+    "changeOrigin": true
   }
 }

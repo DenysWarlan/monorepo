@@ -4,7 +4,9 @@
   "sourceRoot": "libs/auth/data-access/src",
   "prefix": "monorepo",
   "tags": [
-    "frontend"
+    "frontend",
+    "type:data-access",
+    "type:auth"
   ],
   "projectType": "library",
   "targets": {

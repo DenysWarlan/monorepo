@@ -1,1 +1,10 @@
-<p>book-search works!</p>
+<div class="d-flex align-items-center">
+    <mat-form-field class="example-full-width">
+        <mat-label>Favorite food</mat-label>
+        <input matInput placeholder="Ex. Pizza" value="Sushi" [formControl]="search">
+    </mat-form-field>
+    <button
+            class="btn btn-success submit"
+            (click)="onSearch()"
+    >Search</button>
+</div>

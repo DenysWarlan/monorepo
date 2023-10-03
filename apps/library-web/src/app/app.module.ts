@@ -10,6 +10,7 @@ import {AppMaterialModule} from './material.module';
 import {CommonModule} from '@angular/common';
 import {AuthGuard} from './core/guards/auth.guard';
 import {CoreModule} from './core/core.module';
+import {NavigationComponent} from '../../../../libs/navigation/src/navigation.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import {CoreModule} from './core/core.module';
     RouterModule,
     CoreModule,
     AppMaterialModule,
+    NavigationComponent,
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
