@@ -9,6 +9,7 @@ import {Book, Books, Pagination} from '../../index';
 
 export interface IBookState {
     readonly searchLoading: boolean;
+    readonly searchSuccess: boolean;
     readonly books: Books;
     readonly searchError: HttpErrorResponse;
     readonly pagination: Pagination;
@@ -23,6 +24,7 @@ export interface IBookState {
             maxResults: 10,
         },
         searchLoading: false,
+        searchSuccess: false,
         searchError: null,
         books: null,
     },
@@ -44,6 +46,7 @@ export class BookState {
         }
         patchState({
             searchLoading: true,
+            searchSuccess: false,
             searchError: null,
             pagination
         });
@@ -77,6 +80,7 @@ export class BookState {
     ): void {
         patchState({
             searchLoading: false,
+            searchSuccess: true,
             books: data,
         });
     }
@@ -88,6 +92,7 @@ export class BookState {
     ): void {
         patchState({
             searchLoading: false,
+            searchSuccess: false,
             searchError: error
         });
     }
@@ -100,6 +105,11 @@ export class BookState {
     @Selector()
     public static totalItems({ books }: IBookState): number {
         return books.totalItems;
+    }
+
+    @Selector()
+    public static searchSuccess({ searchSuccess }: IBookState): boolean {
+        return searchSuccess;
     }
 
     @Selector()

@@ -1,14 +1,14 @@
 <div class="search-content">
     <mat-form-field class="w-75">
         <mat-label>Search book</mat-label>
-        <input matInput placeholder="Shakespeare" value="Sushi" [formControl]="search">
-        <button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="search.reset()">
+        <input matInput placeholder="Shakespeare" [formControl]="search" id="searchInput">
+        <button *ngIf="search.value" matSuffix mat-icon-button aria-label="clear" id="reset" (click)="onReset()">
             <mat-icon>close</mat-icon>
         </button>
-        <button *ngIf="search.value" matSuffix mat-icon-button aria-label="Clear" (click)="onSearch()">
+        <button *ngIf="search.value" matSuffix mat-icon-button aria-label="search" id="search" (click)="onSearch()">
             <mat-icon>search</mat-icon>
         </button>
     </mat-form-field>
 </div>
 
-<monorepo-books-list *ngIf="!!(totalItems$ | async)"></monorepo-books-list>
+<monorepo-books-list *ngIf="(searchSuccess$ | async)" [totalBooks]="totalItems$ | async"></monorepo-books-list>

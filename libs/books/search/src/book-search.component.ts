@@ -30,10 +30,16 @@ export class BookSearchComponent {
 
   public totalItems$: Observable<number> = this.store.select(BookState.totalItems);
 
+  public searchSuccess$: Observable<boolean> = this.store.select(BookState.searchSuccess);
+
   public constructor(
       private fb: FormBuilder,
       private store: Store,
   ) {}
+
+  public onReset(): void {
+    this.search.reset('')
+  }
 
   public onSearch(): void {
     this.store.dispatch(new SearchBook({query: this.search.value}))

@@ -17,6 +17,10 @@
         "ci": {
           "ci": true,
           "codeCoverage": true
+        },
+        "watch": {
+          "watch": true,
+          "codeCoverage": true
         }
       }
     },
@@ -28,6 +32,22 @@
           "libs/books/search/**/*.ts",
           "libs/books/search/**/*.html"
         ]
+      }
+    },
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "libs/books/search/cypress.config.ts",
+        "testingType": "e2e",
+        "devServerTarget": "library-web:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "library-web:serve:production"
+        },
+        "watch": {
+          "watch": true
+        }
       }
     }
   }

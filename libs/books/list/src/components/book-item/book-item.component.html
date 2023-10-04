@@ -1,3 +1,14 @@
-<mat-card>
-    <mat-card-title>{{book.volumeInfo.title}}</mat-card-title>
+<mat-card *ngIf="!!book" class="mat-card">
+    <mat-card-header>
+        <mat-card-title class="mat-card__title">{{book.volumeInfo.title}}</mat-card-title>
+        <mat-card-subtitle *ngIf="!!book.volumeInfo.authors" class="mat-card__subtitle">Authors: {{book.volumeInfo.authors | arrayJoin}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="!!book.volumeInfo.categories" class="mat-card__subtitle">Categories: {{book.volumeInfo.categories | arrayJoin}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img *ngIf="!!book.volumeInfo.imageLinks" mat-card-image [src]="book.volumeInfo.imageLinks.thumbnail" [alt]="book.volumeInfo.title" class="mat-card__image">
+    <mat-card-content *ngIf="book?.volumeInfo?.description" class="mat-card__content">
+        {{book.volumeInfo.description}}
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
 </mat-card>
