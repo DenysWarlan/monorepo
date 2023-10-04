@@ -9,7 +9,7 @@ import {MatInputModule} from '@angular/material/input';
 import {Register, RegisterDto, RegisterForm} from '@monorepo/auth/data-access';
 import {ErrorFormComponent} from '../../../error-form/src/lib/error-form.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {RegisterState} from '../../data-access/src/lib/reducers/register.state';
+import {RegisterState} from '@monorepo/auth/data-access';
 import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
@@ -62,7 +62,7 @@ export class RegisterComponent {
   }
 
   public login(): void  {
-    this.router.navigate(['/auth/login'], {
+    this.router.navigate(['/login'], {
       relativeTo: this.route,
     });
   }

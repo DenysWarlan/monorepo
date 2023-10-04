@@ -14,6 +14,8 @@
     "start:api:production": "nx serve library-api:serve:production",
     "auth-login:test:ci": "nx run auth-login:test:ci",
     "auth-login:e2e:production": "nx run auth-login:e2e:production",
+    "auth-register:test:ci": "nx run auth-register:test:ci",
+    "auth-register:e2e:production": "nx run auth-register:e2e:production",
     "reset": "nx reset",
     "husky-check": "lint-staged --relative --allow-empty && npx branch-name-lint barnchnamelint.config.json"
   },

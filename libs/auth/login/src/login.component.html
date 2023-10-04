@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center flex-column mt-5">
-  <mat-card class="bg-light w-25">
+  <mat-card class="bg-light">
     <mat-card-title class="text-center">
       Sing in
     </mat-card-title>
@@ -9,7 +9,7 @@
     <form [formGroup]="form" (submit)="form && form.valid && loginUser()" class="d-flex w-100 flex-column">
       <mat-form-field class="w-100">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" class="form-control action-email" placeholder="Ex. pat@example.com" autocomplete="email">
+        <input matInput formControlName="email" class="form-control" placeholder="Ex. pat@example.com" autocomplete="email">
         <monorepo-error-form
                 *ngIf="form.get('email').touched || form.get('email').dirty"
                 [errors]="form.get('email').errors"
@@ -18,7 +18,7 @@
       </mat-form-field>
       <mat-form-field class="w-100">
         <mat-label>Password</mat-label>
-        <input matInput type="password" class="form-control action-password"  formControlName="password"  autocomplete="current-password">
+        <input matInput type="password" class="form-control"  formControlName="password"  autocomplete="current-password">
         <monorepo-error-form
                 *ngIf="form.get('password').touched || form.get('password').dirty"
                 [errors]="form.get('password').errors"
@@ -30,8 +30,8 @@
         class="btn btn-success submit"
         type="submit"
       >Login</button>
-      <p class="white-text mt-2">Don't have an account?
-        <a routerLink="/auth/register" class="btn-link">Register</a>
+      <p class="white-text mt-2 px-3">Don't have an account?
+        <a routerLink="/register" class="btn-link">Register</a>
       </p>
     </form>
   </mat-card>

@@ -112,7 +112,7 @@ describe('LoginComponent', () => {
     it('should redirect when click login', () => {
         jest.spyOn(component, 'login');
 
-        const expectedPath = '/auth/login';
+        const expectedPath = '/search';
 
         component.login();
 
@@ -122,7 +122,7 @@ describe('LoginComponent', () => {
 
     it('should redirect after success register', () => {
         const action: RegisterSuccess = new RegisterSuccess();
-        const expectedPath = '/auth/login';
+        const expectedPath = '/search';
 
         store.dispatch(action);
 

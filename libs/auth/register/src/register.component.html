@@ -53,9 +53,9 @@
           ></monorepo-error-form>
         </mat-form-field>
       </div>
-      <button [disabled]="form.invalid || (isRegisterLoading$ | async)" class="btn btn-success" type="submit">Register</button>
+      <button [disabled]="form.invalid || (isRegisterLoading$ | async)" class="btn btn-success submit" type="submit">Register</button>
       or you can
-      <span class="text-primary" (click)="login()">login</span>
+      <span class="text-primary btn-link" (click)="login()">login</span>
     </form>
   </div>
 </div>

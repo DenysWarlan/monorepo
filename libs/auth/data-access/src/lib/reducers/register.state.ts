@@ -55,7 +55,7 @@ export class RegisterState {
       isRegisterLoading: false,
     });
 
-    this.router.navigate(['/auth/login'])
+    this.router.navigate(['/login'])
   }
 
   @Action(registerActions.RegisterFailure)

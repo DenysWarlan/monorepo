@@ -7,17 +7,21 @@ import {BookState, SearchBook} from '@monorepo/books/data-access';
 import {Observable} from 'rxjs';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {BooksListComponent} from '@monorepo/books/list';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'monorepo-book-search',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatPaginatorModule,
-    BooksListComponent
-  ],
+    imports: [
+        CommonModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatPaginatorModule,
+        BooksListComponent,
+        MatButtonModule,
+        MatIconModule
+    ],
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.scss'],
 })
