@@ -29,7 +29,7 @@ Use `npm install` to install all application and dependencies.
 
 ### Or you can test deployed applications:
 
-- [Web application](https://monorepo-d81df.web.app/)
+- [Web application](https://monorepo-d81df.firebaseapp.com)
 - [Swagger](https://monorepo-production-3fef.up.railway.app/api#)
 
 ### Application possible build: 
