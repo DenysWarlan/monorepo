@@ -32,7 +32,7 @@ jobs:
       - run: npm run auth-register:e2e:production
 
 #      Books search tests
-      - run: npm run books-search:test:c
+      - run: npm run books-search:test:ci
       - run: npm run books-search:e2e:production
 
 #      Books list tests
