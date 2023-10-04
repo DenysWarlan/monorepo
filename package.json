@@ -16,6 +16,10 @@
     "auth-login:e2e:production": "nx run auth-login:e2e:production",
     "auth-register:test:ci": "nx run auth-register:test:ci",
     "auth-register:e2e:production": "nx run auth-register:e2e:production",
+    "books-list:test:ci": "nx run books-list:test:ci",
+    "books-list:e2e:production": "nx run books-list:e2e:production",
+    "books-search:test:ci": "nx run books-search:test:ci",
+    "books-search:e2e:production": "nx run books-search:e2e:production",
     "reset": "nx reset",
     "husky-check": "lint-staged --relative --allow-empty && npx branch-name-lint barnchnamelint.config.json"
   },
