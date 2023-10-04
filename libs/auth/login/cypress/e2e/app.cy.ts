@@ -36,7 +36,7 @@ describe('auth-login', () => {
   });
 
   it('should route to home if login success', () => {
-    cy.get('[formControlName="email"]').type('denis.varla95+test@gmail.com');
+    cy.get('[formControlName="email"]').type('denis.varla95+test1@gmail.com');
     cy.get('[formControlName="password"]').type('Test123!');
 
     cy.get('.submit').click({force: true});
