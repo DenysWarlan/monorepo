@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {Credentials} from '../../dto/credentials.model.dto';
 import {LoggedDto} from '../../dto/logged.model.dto';
 import {Observable} from 'rxjs';
+import {RegisterDto} from '../../dto/register.model.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +17,8 @@ export class AuthService {
     return this.http.post<LoggedDto>(url, data);
   }
 
-  public register(data: Credentials): Observable<void> {
+  public register(data: RegisterDto): Observable<void> {
     const url = `api/auth/register`;
-    console.log(data);
 
     return this.http.post<void>(url, data);
   }

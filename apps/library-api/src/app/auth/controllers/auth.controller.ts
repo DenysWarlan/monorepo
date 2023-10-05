@@ -1,11 +1,12 @@
 import {AuthService} from '../services/auth.service';
-import {Body, Controller, HttpStatus, Post, Res} from '@nestjs/common';
+import {Body, Controller, HttpStatus, Post, Res, UseGuards} from '@nestjs/common';
 import {RegisterDto} from '../dto/register.dto';
 import {CredentialsDto} from '../dto/credentials.dto';
 import {ApiBadRequestResponse, ApiCreatedResponse, ApiExtraModels, ApiResponse} from '@nestjs/swagger';
 import {LoggedDto} from '../dto/logged.dto';
 import {Logged} from '../models/logged.model';
 import {Response} from 'express';
+import {LocalAuthGuard} from '../guards/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -24,9 +25,9 @@ export class AuthController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid credentials.',
   })
-  async login(@Res({passthrough: true}) response: Response, @Body() loginDto: CredentialsDto): Promise<LoggedDto> {
-
-    const login: LoggedDto = await this.authService.login(loginDto);
+  @UseGuards(LocalAuthGuard)
+  async login(@Res() response: Response, @Body() {email , password}: CredentialsDto): Promise<LoggedDto> {
+    const login: LoggedDto = await this.authService.login({email, password});
 
     if(!!login) {
       response.status(HttpStatus.OK).send(login);

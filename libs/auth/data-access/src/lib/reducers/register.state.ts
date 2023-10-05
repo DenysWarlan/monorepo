@@ -40,8 +40,6 @@ export class RegisterState {
       error: null,
     });
 
-    console.log(data);
-
     return this.authService.register(data).pipe(
       map(() => dispatch(new registerActions.RegisterSuccess())),
       catchError((error) => dispatch(new registerActions.RegisterFailure(error)))

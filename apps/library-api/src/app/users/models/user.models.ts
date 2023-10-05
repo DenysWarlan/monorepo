@@ -5,7 +5,7 @@ export interface User extends mongoose.Document {
   readonly birthDate: Date;
   readonly email: string;
   readonly password: string;
-  readonly links?: string;
+  readonly links?: string[];
 }
 
 export const UserSchema: mongoose.Schema<User> = new mongoose.Schema({

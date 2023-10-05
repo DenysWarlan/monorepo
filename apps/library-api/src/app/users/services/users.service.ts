@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from '../models/user.models';
+import {Injectable} from '@nestjs/common';
+import {InjectModel} from '@nestjs/mongoose';
+import {Model} from 'mongoose';
+import {User} from '../models/user.models';
 import {RegisterDto} from '../../auth/dto/register.dto';
-import {UserDto} from '../dto/user.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -21,6 +21,9 @@ export class UsersService {
   }
 
   async addUser(registerDto: RegisterDto): Promise<User> {
-    return new this.userModel(registerDto).save();
+    const saltRounds = 10;
+    const password = await bcrypt.hash(registerDto.password, saltRounds)
+
+    return new this.userModel({...registerDto, password}).save();
   }
 }

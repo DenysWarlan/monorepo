@@ -74,7 +74,7 @@ export class ApiInterceptor implements HttpInterceptor {
       const token: string | null = this.store.selectSnapshot(AuthState.logged).accessToken;
 
       if (!!token) {
-        headers = headers.set('php-auth-digest', token);
+        headers = headers.set('Authorization', `Bearer ${token}`);
       }
     }
 
