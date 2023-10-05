@@ -24,3 +24,7 @@ export class SearchBookFailure {
     public static readonly type: string = '[Book] Search Failure';
     constructor(public error: HttpErrorResponse) {}
 }
+
+export class ResetBooks {
+    public static readonly type: string = '[Book] Reset Search';
+}

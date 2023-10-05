@@ -11,6 +11,7 @@ import {ErrorFormComponent} from '../../../error-form/src/lib/error-form.compone
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {RegisterState} from '@monorepo/auth/data-access';
 import {HttpErrorResponse} from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   standalone: true,
@@ -23,7 +24,8 @@ import {HttpErrorResponse} from '@angular/common/http';
     MatFormFieldModule,
     MatInputModule,
     ErrorFormComponent,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatProgressSpinnerModule
   ]
 })
 export class RegisterComponent {

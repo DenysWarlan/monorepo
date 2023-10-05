@@ -12,6 +12,7 @@ import {Store} from '@ngxs/store';
 import {AuthLogin, AuthState, Credentials, LoginForm} from '@monorepo/auth/data-access';
 import {isEqual} from 'lodash';
 import {ErrorFormComponent} from '../../../error-form/src/lib/error-form.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @Component({
@@ -26,7 +27,8 @@ import {ErrorFormComponent} from '../../../error-form/src/lib/error-form.compone
     MatInputModule,
     MatCardModule,
     RouterModule,
-    ErrorFormComponent
+    ErrorFormComponent,
+    MatProgressSpinnerModule
   ]
 })
 export class LoginComponent implements OnInit {
@@ -35,7 +37,7 @@ export class LoginComponent implements OnInit {
 
   public isAuthSuccess$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
 
-  public isAuthLoading$: Observable<boolean> = this.store.select(AuthState.isAuthSuccess);
+  public isAuthLoading$: Observable<boolean> = this.store.select(AuthState.isAuthLoading);
 
   public authErrors: Observable<HttpErrorResponse | null> = this.store.select(AuthState.authErrors);
 

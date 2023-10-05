@@ -11,4 +11,14 @@
     </mat-form-field>
 </div>
 
-<monorepo-books-list *ngIf="(searchSuccess$ | async)" [totalBooks]="totalItems$ | async"></monorepo-books-list>
+<ng-container *ngIf="(searchLoading$ | async) === false else loading" >
+    <monorepo-books-list
+            *ngIf="(searchSuccess$ | async)"
+            [totalBooks]="totalItems$ | async"
+    ></monorepo-books-list>
+</ng-container>
+<ng-template #loading>
+    <div class="d-flex align-items-center justify-content-center">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

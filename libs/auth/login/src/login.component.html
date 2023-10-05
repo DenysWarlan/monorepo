@@ -25,11 +25,14 @@
                 ctrlName="Password"
         ></monorepo-error-form>
       </mat-form-field>
-      <button
-        [disabled]="form.invalid || (isAuthLoading$ | async)"
-        class="btn btn-success submit"
-        type="submit"
-      >Login</button>
+        <button
+                [disabled]="form.invalid || (isAuthLoading$ | async)"
+                class="btn btn-success submit d-flex align-items-center justify-content-center"
+                type="submit"
+        >
+          <span *ngIf="(isAuthLoading$ | async) === false"> Login</span>
+          <mat-spinner *ngIf="(isAuthLoading$ | async)" diameter="20"></mat-spinner>
+        </button>
       <p class="white-text mt-2 px-3">Don't have an account?
         <a routerLink="/register" class="btn-link">Register</a>
       </p>

@@ -1,6 +1,6 @@
 <ng-container *ngIf="!!pagination">
     <mat-paginator [length]="totalBooks"
-                   [pageSize]="pagination.maxResults || 10"
+                   [pageSize]="pagination.maxResults || 8"
                    [pageIndex]="pagination.startIndex || 0"
                    [pageSizeOptions]="pageSizeOptions"
                    (page)="onUpdatePaginator($event)"

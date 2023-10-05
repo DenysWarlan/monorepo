@@ -3,12 +3,13 @@ import {CommonModule} from '@angular/common';
 import {FormBuilder, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Store} from '@ngxs/store';
 import {MatInputModule} from '@angular/material/input';
-import {BookState, SearchBook} from '@monorepo/books/data-access';
+import {BookState, ResetBooks, SearchBook} from '@monorepo/books/data-access';
 import {Observable} from 'rxjs';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {BooksListComponent} from '@monorepo/books/list';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'monorepo-book-search',
@@ -20,7 +21,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatPaginatorModule,
         BooksListComponent,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatProgressSpinnerModule
     ],
   templateUrl: './book-search.component.html',
   styleUrls: ['./book-search.component.scss'],
@@ -32,16 +34,19 @@ export class BookSearchComponent {
 
   public searchSuccess$: Observable<boolean> = this.store.select(BookState.searchSuccess);
 
+  public searchLoading$: Observable<boolean> = this.store.select(BookState.searchLoading);
+
   public constructor(
       private fb: FormBuilder,
       private store: Store,
   ) {}
 
   public onReset(): void {
-    this.search.reset('')
+    this.search.reset('');
+      this.store.dispatch(new ResetBooks());
   }
 
   public onSearch(): void {
-    this.store.dispatch(new SearchBook({query: this.search.value}))
+    this.store.dispatch(new SearchBook({query: this.search.value}));
   }
 }

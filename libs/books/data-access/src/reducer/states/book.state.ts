@@ -4,7 +4,7 @@ import {BookService} from '../services/book.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
-import {SearchBook, SearchBookFailure, SearchBookSuccess, UpdatePagination} from '../actions/search.action';
+import {ResetBooks, SearchBook, SearchBookFailure, SearchBookSuccess, UpdatePagination} from '../actions/search.action';
 import {Book, Books, Pagination} from '../../index';
 
 export interface IBookState {
@@ -21,7 +21,7 @@ export interface IBookState {
         pagination: {
             query: '',
             startIndex: 0,
-            maxResults: 10,
+            maxResults: 8,
         },
         searchLoading: false,
         searchSuccess: false,
@@ -97,6 +97,16 @@ export class BookState {
         });
     }
 
+    @Action(ResetBooks)
+    public resetBooks(
+        { patchState }: StateContext<IBookState>,
+    ): void {
+        patchState({
+            books: null,
+            searchSuccess: false
+        });
+    }
+
     @Selector()
     public static books({ books }: IBookState): Book[] {
         return books.items;
@@ -110,6 +120,11 @@ export class BookState {
     @Selector()
     public static searchSuccess({ searchSuccess }: IBookState): boolean {
         return searchSuccess;
+    }
+
+    @Selector()
+    public static searchLoading({ searchLoading }: IBookState): boolean {
+        return searchLoading;
     }
 
     @Selector()

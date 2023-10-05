@@ -47,6 +47,7 @@ export class AuthState {
   @Action(AuthLogin)
   public login({ dispatch, patchState }: StateContext<Auth>, { data }: AuthLogin): Observable<void | Observable<void>> {
     patchState({
+      isAuth: false,
       isAuthLoading: true,
       error: null,
     });

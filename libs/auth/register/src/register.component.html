@@ -53,7 +53,10 @@
           ></monorepo-error-form>
         </mat-form-field>
       </div>
-      <button [disabled]="form.invalid || (isRegisterLoading$ | async)" class="btn btn-success submit" type="submit">Register</button>
+      <button [disabled]="form.invalid || (isRegisterLoading$ | async)" class="btn btn-success submit" type="submit">
+        <span *ngIf="(isRegisterLoading$ | async) === false">Register</span>
+        <mat-spinner *ngIf="(isRegisterLoading$ | async)" diameter="20"></mat-spinner>
+      </button>
       or you can
       <span class="text-primary btn-link" (click)="login()">login</span>
     </form>

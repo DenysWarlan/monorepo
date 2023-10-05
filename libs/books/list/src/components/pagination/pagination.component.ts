@@ -17,7 +17,7 @@ export class PaginationComponent {
 
   @Output() public updatePaginator: EventEmitter<Pagination> = new EventEmitter();
 
-  public readonly pageSizeOptions: number[] = [5, 10, 15, 40];
+  public readonly pageSizeOptions: number[] = [8, 12, 24, 36];
 
   public onUpdatePaginator(event: PageEvent): void {
     const pagination: Pagination = {
