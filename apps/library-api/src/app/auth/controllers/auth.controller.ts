@@ -61,7 +61,7 @@ export class AuthController {
       return;
     }
 
-    if (logged.hasOwnProperty('id')) {
+    if (logged.hasOwnProperty('email')) {
       response.status(HttpStatus.NO_CONTENT).send('');
 
       return;
