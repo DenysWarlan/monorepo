@@ -2,7 +2,6 @@ import {Injectable} from '@nestjs/common';
 import {UsersService} from '../../users/services/users.service';
 import {JwtService} from '@nestjs/jwt';
 import {RegisterDto} from '../dto/register.dto';
-import {CredentialsDto} from '../dto/credentials.dto';
 import {User} from '../../users/models/user.models';
 import {Logged} from '../models/logged.model';
 import * as bcrypt from 'bcrypt';
@@ -34,14 +33,24 @@ export class AuthService {
     return null;
   }
 
-  async login({email, password}: CredentialsDto): Promise<Logged | null> {
+  async login(email: string): Promise<Logged | null> {
+    const user: User = await this.usersService.findByEmail(email);
+
+    const payload = {
+      email,
+      sub: {
+        name: user.name
+      }
+    }
+
     return {
         email,
-        accessToken: this.jwtService.sign({email, password}),
+        accessToken: this.jwtService.sign(payload),
+        refreshToken: this.jwtService.sign(payload, {expiresIn: '7d'})
       };
   }
 
-  async register(registerDto: RegisterDto): Promise<Logged | {message: string}> {
+  async register(registerDto: RegisterDto): Promise<{email: string} | {message: string}> {
     const existedUser = await this.usersService.findByEmail(registerDto.email);
 
     if(existedUser) {
@@ -50,11 +59,24 @@ export class AuthService {
       };
     }
 
-    const {password, email}: User = await this.usersService.addUser(registerDto);
+    const {email}: User = await this.usersService.addUser(registerDto);
 
     return {
-      email,
-      accessToken: this.jwtService.sign({email, password})
+      email
     };
+  }
+
+
+  async refreshToken(email: string): Promise<string> {
+    const user: User = await this.usersService.findByEmail(email);
+
+    const payload = {
+      email,
+      sub: {
+        name: user?.name
+      }
+    }
+
+    return this.jwtService.sign(payload);
   }
 }

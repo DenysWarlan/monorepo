@@ -1,20 +1,22 @@
 import {AuthService} from '../services/auth.service';
-import {Body, Controller, HttpStatus, Post, Res, UseGuards} from '@nestjs/common';
+import {Body, Controller, HttpStatus, Post, Req, Res, UseGuards} from '@nestjs/common';
 import {RegisterDto} from '../dto/register.dto';
 import {CredentialsDto} from '../dto/credentials.dto';
 import {ApiBadRequestResponse, ApiCreatedResponse, ApiExtraModels, ApiResponse} from '@nestjs/swagger';
 import {LoggedDto} from '../dto/logged.dto';
-import {Logged} from '../models/logged.model';
 import {Response} from 'express';
 import {LocalAuthGuard} from '../guards/local-auth.guard';
+import {RefreshJwtAuthGuard} from '../guards/refresh-jwt-auth.guard';
+import {JwtUtilService} from '../../users/services/jwt-util.service';
 
-@Controller('auth')
+@Controller('auth/')
 export class AuthController {
   public constructor(
-      private readonly authService: AuthService
+      private readonly authService: AuthService,
+      private readonly jwtUtil: JwtUtilService
   ) {}
 
-  @Post('/login')
+  @Post('login')
   @ApiExtraModels(LoggedDto)
   @ApiResponse({
     status: HttpStatus.OK,
@@ -26,8 +28,8 @@ export class AuthController {
     description: 'Invalid credentials.',
   })
   @UseGuards(LocalAuthGuard)
-  async login(@Res() response: Response, @Body() {email , password}: CredentialsDto): Promise<LoggedDto> {
-    const login: LoggedDto = await this.authService.login({email, password});
+  async login(@Res() response: Response, @Body() {email}: CredentialsDto): Promise<LoggedDto> {
+    const login: LoggedDto = await this.authService.login(email);
 
     if(!!login) {
       response.status(HttpStatus.OK).send(login);
@@ -43,7 +45,7 @@ export class AuthController {
     return;
   }
 
-  @Post('/register')
+  @Post('register')
   @ApiCreatedResponse({
     status: HttpStatus.NO_CONTENT,
     description: 'No content',
@@ -53,7 +55,7 @@ export class AuthController {
     description: 'Invalid data'
   })
   async register(@Res({passthrough: true}) response: Response, @Body() registerDto: RegisterDto) {
-    const logged: Logged | {message: string} = await this.authService.register(registerDto);
+    const logged: {email: string} | {message: string} = await this.authService.register(registerDto);
 
     if(logged.hasOwnProperty('message')) {
       response.status(HttpStatus.BAD_REQUEST).send(logged)
@@ -70,5 +72,18 @@ export class AuthController {
     response.status(HttpStatus.BAD_REQUEST).send({})
 
     return;
+  }
+
+  @UseGuards(RefreshJwtAuthGuard)
+  @Post('refresh')
+  async refreshToken(@Req() req: Request, @Res() response: Response): Promise<string> {
+    const json = this.jwtUtil.decode(req);
+
+    const refreshedToken: string = await this.authService.refreshToken(json.email);
+
+    response.status(HttpStatus.OK).send({refreshedToken});
+
+    return;
+
   }
 }

@@ -21,7 +21,6 @@ import {NavigationComponent} from '../../../../libs/navigation/src/navigation.co
     BrowserAnimationsModule,
     AppStoreModule,
     AppRoutingModule,
-    RouterModule,
     CoreModule,
     AppMaterialModule,
     NavigationComponent,

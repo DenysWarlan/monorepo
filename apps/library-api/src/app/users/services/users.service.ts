@@ -7,20 +7,13 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('Users') private readonly userModel: Model<User>) {}
-  async findByEmail(email: string): Promise<User> {
+  public constructor(@InjectModel('Users') private readonly userModel: Model<User>) {}
+
+  public async findByEmail(email: string): Promise<User> {
     return await this.userModel.findOne({ email }).exec();
   }
 
-  async findById(id: string): Promise<User> {
-    return await this.userModel.findOne({ id }).exec();
-  }
-
-  async findAll(): Promise<User[]> {
-    return this.userModel.find();
-  }
-
-  async addUser(registerDto: RegisterDto): Promise<User> {
+  public async addUser(registerDto: RegisterDto): Promise<User> {
     const saltRounds = 10;
     const password = await bcrypt.hash(registerDto.password, saltRounds)
 

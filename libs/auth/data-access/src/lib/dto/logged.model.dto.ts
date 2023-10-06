@@ -1,4 +1,5 @@
 export interface LoggedDto {
-    readonly id: string;
+    readonly email?: string;
     readonly accessToken: string;
+    readonly refreshToken: string;
 }

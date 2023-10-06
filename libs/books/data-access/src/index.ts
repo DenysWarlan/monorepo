@@ -3,6 +3,9 @@ export * from './reducer/actions/search.action';
 //State
 export  {BookState} from  './reducer/states/book.state'
 
+//Service
+export  {BookService} from  './reducer/services/book.service'
+
 //Models
 export {AccessInfo} from './model/access-info.model';
 export {AvailableType} from './model/available-type.model';
