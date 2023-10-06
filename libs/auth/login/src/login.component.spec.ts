@@ -93,8 +93,9 @@ describe('LoginComponent', () => {
     it('should not dispatch action set token navigate if not login', () => {
         const spyMock = jest.spyOn(store, 'dispatch');
         const action = new SetToken({
-            accessToken: localStorage.getItem('token'),
-            id:'133'
+            accessToken: localStorage.getItem('accessToken'),
+            refreshToken: localStorage.getItem('refreshToken'),
+            email: 'foo@example.com',
         });
 
         Object.defineProperty(component, 'isAuthSuccess$', of(true));
@@ -107,8 +108,9 @@ describe('LoginComponent', () => {
     it('should dispatch action set token if login', () => {
         const spyMock = jest.spyOn(store, 'dispatch');
         const action = new SetToken({
-            accessToken: localStorage.getItem('token'),
-            id:'133'
+            accessToken: localStorage.getItem('accessToken'),
+            refreshToken: localStorage.getItem('refreshToken'),
+            email: 'foo@example.com',
         });
 
         Object.defineProperty(component, 'isAuthSuccess$', of(true));
