@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {ResetBooks, SearchBook, SearchBookFailure, SearchBookSuccess, UpdatePagination} from '../actions/search.action';
 import {Book, Books, Pagination} from '../../index';
+import {HistorySearch} from "../../model/history-search.model";
+import {isEqual} from "lodash";
 
 export interface IBookState {
     readonly searchLoading: boolean;
@@ -13,6 +15,7 @@ export interface IBookState {
     readonly books: Books;
     readonly searchError: HttpErrorResponse;
     readonly pagination: Pagination;
+    readonly historySearchs: HistorySearch[];
 }
 
 @State<IBookState>({
@@ -27,12 +30,13 @@ export interface IBookState {
         searchSuccess: false,
         searchError: null,
         books: null,
+        historySearchs: []
     },
 })
 @Injectable()
 export class BookState {
     constructor(
-        private bookService: BookService,
+        private bookService: BookService
     ) {}
 
 
@@ -50,6 +54,13 @@ export class BookState {
             searchError: null,
             pagination
         });
+
+        const historySearch: HistorySearch = getState()
+        .historySearchs.find((historySearch: HistorySearch) => isEqual(historySearch.pagination, pagination));
+
+        if(historySearch) {
+            return dispatch(new SearchBookSuccess(historySearch.books));
+        }
 
         return this.bookService.getBooks(pagination).pipe(
             map((data: Books) => dispatch(new SearchBookSuccess(data))),
@@ -75,13 +86,21 @@ export class BookState {
 
     @Action(SearchBookSuccess)
     public searchSuccess(
-        { patchState }: StateContext<IBookState>,
+        { patchState, getState }: StateContext<IBookState>,
         { data }: SearchBookSuccess
     ): void {
+        const newHistorySearch: HistorySearch = {
+            pagination: getState().pagination,
+            books: data
+        };
+
+        const historySearchs: HistorySearch[] = [...getState().historySearchs, newHistorySearch]
+
         patchState({
             searchLoading: false,
             searchSuccess: true,
             books: data,
+            historySearchs
         });
     }
 

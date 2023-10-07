@@ -38,7 +38,7 @@ export class BookSearchComponent {
 
   public constructor(
       private fb: FormBuilder,
-      private store: Store,
+      private store: Store
   ) {}
 
   public onReset(): void {
@@ -49,4 +49,5 @@ export class BookSearchComponent {
   public onSearch(): void {
     this.store.dispatch(new SearchBook({query: this.search.value}));
   }
+
 }
