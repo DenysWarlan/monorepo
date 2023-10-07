@@ -1,9 +1,10 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, Logger} from '@nestjs/common';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
 import {User} from '../models/user.models';
-import {RegisterDto} from '../../auth/dto/register.dto';
 import * as bcrypt from 'bcrypt';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { RegisterDto } from '../../auth/dto/register.dto';
 
 @Injectable()
 export class UsersService {
@@ -13,10 +14,26 @@ export class UsersService {
     return await this.userModel.findOne({ email }).exec();
   }
 
-  public async addUser(registerDto: RegisterDto): Promise<User> {
-    const saltRounds = 10;
-    const password = await bcrypt.hash(registerDto.password, saltRounds)
+  public async updateUser(user: UpdateUserDto): Promise<User> {
+    const oldUser: User = await this.findByEmail(user.email);
 
-    return new this.userModel({...registerDto, password}).save();
+    const saltRounds = 10;
+
+    const password = user.password ? await bcrypt.hash(user.password, saltRounds) : oldUser.password;
+
+    await this.userModel.updateOne({email: user.email}, {
+      name: user.name ?? oldUser.name,
+      birthDate: user.birthDate ?? oldUser.birthDate,
+      password,
+    });
+
+    return this.findByEmail(user.email);
+  }
+
+  public async addUser(user: RegisterDto): Promise<User> {
+    const saltRounds = 10;
+    const password = await bcrypt.hash(user?.password, saltRounds)
+
+    return new this.userModel({...user, password}).save();
   }
 }
