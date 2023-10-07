@@ -39,5 +39,7 @@ export class NavigationComponent {
 
   public logout(): void {
     this.store.dispatch(new Logout())
+
+    this.router.navigate([`/login`]);
   }
 }
