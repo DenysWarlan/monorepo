@@ -33,14 +33,14 @@ export class RegisterComponent {
   private charsCount = 6;
 
   public form: FormGroup<RegisterForm> = this.fb.group({
-  name: this.fb.control('',  [Validators.required]),
-  birthDate: this.fb.control(''),
-  email: this.fb.control('', [Validators.required, Validators.email]),
-  password: this.fb.control('', [
-    Validators.required,
-    Validators.minLength(this.charsCount),
-  ]),
-});
+    name: this.fb.control('',  [Validators.required]),
+    birthDate: this.fb.control(''),
+    email: this.fb.control('', [Validators.required, Validators.email]),
+    password: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(this.charsCount),
+    ]),
+  });
 
   public errors$: Observable<HttpErrorResponse> = this.store.select(
     RegisterState.errors

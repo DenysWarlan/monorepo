@@ -3,9 +3,10 @@ import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
-import {UserDto} from './dto/user.model.dto';
-import {UserService} from './user.service';
-import {UserData, UserDataFailure, UserDataSuccess} from './user.actions';
+import {UpdateUserData, UpdateUserDataFailure, UpdateUserDataSuccess} from "../actions/update-user.actions";
+import {UserData, UserDataFailure, UserDataSuccess} from "../actions/user.actions";
+import {UserDto} from "../dto/user.model.dto";
+import {UserService} from "../services/user.service";
 
 export interface User {
   readonly userLoading: boolean;
@@ -56,10 +57,51 @@ export class UserState {
   }
 
   @Action(UserDataFailure)
-  public loginFailure(
+  public userFailure(
     { patchState }: StateContext<User>,
     { error }: UserDataFailure
   ): void {
+    patchState({
+      userLoading: false,
+      userSuccess: false,
+      error
+    });
+  }
+
+  @Action(UpdateUserData)
+  public updateUser(
+    { dispatch, patchState }: StateContext<User>,
+    {data}: UpdateUserData
+    ): Observable<void | Observable<void>> {
+    patchState({
+      user: null,
+      userLoading: true,
+      userSuccess: false,
+    });
+
+    return this.userService.updateUser(data).pipe(
+      map((data: UserDto) => dispatch(new UpdateUserDataSuccess(data))),
+      catchError((error: HttpErrorResponse) => dispatch(new UpdateUserDataFailure(error)))
+      );
+  }
+
+  @Action(UpdateUserDataSuccess)
+  public updateUserSuccess(
+    { patchState }: StateContext<User>,
+    { data }: UserDataSuccess
+    ): void {
+    patchState({
+      userLoading: false,
+      userSuccess: true,
+      user: data
+    });
+  }
+
+  @Action(UpdateUserDataFailure)
+  public updateUserFailure(
+    { patchState }: StateContext<User>,
+    { error }: UserDataFailure
+    ): void {
     patchState({
       userLoading: false,
       userSuccess: false,
