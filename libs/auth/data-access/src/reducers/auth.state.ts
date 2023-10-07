@@ -8,7 +8,6 @@ import {AuthLogin, LoginFailure, LoginSuccess, Logout,} from './actions/login.ac
 import {ClearToken, SetToken} from './actions/setToken.actions';
 import {LoggedDto} from '../dto/logged.model.dto';
 import {Refresh, RefreshFailure, RefreshSuccess} from './actions/refresh.actions';
-import {UserData} from './actions/user.actions';
 
 export interface Auth {
   isAuth: boolean;

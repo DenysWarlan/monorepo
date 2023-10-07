@@ -4,9 +4,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgxsModule} from '@ngxs/store';
 import {NgxsReduxDevtoolsPluginModule} from '@ngxs/devtools-plugin';
 import {CommonModule} from '@angular/common';
-import {AuthState, RegisterState, UserState} from '@monorepo/auth/data-access';
+import {AuthState, RegisterState} from '@monorepo/auth/data-access';
 import {NgxsStoragePluginModule, StorageOption} from '@ngxs/storage-plugin';
 import {BookState, BookService} from '@monorepo/books/data-access';
+import {UserState} from '@monorepo/profile/data-access';
 
 
 export const GLOBAL_STATES: any[] = [

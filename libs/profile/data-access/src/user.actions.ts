@@ -1,5 +1,5 @@
 import {HttpErrorResponse} from "@angular/common/http";
-import {UserDto} from '../../dto/user.model.dto';
+import {UserDto} from './dto/user.model.dto';
 
 
 export class UserData {

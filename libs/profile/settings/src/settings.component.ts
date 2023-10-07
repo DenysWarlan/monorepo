@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Store} from '@ngxs/store';
-import {UserData} from '@monorepo/auth/data-access';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from "@angular/material/tabs";
 import {EditSettingsComponent} from "./components/edit-settings/edit-settings.component";
 import {DeleteProfileComponent} from "./components/delete-profile/delete-profile.component";
+import {UserData} from '@monorepo/profile/data-access';
 
 @Component({
   selector: 'monorepo-settings',
