@@ -35,6 +35,9 @@
       "@monorepo/error-form": ["libs/error-form/src/index.ts"],
       "@monorepo/navigation": ["libs/navigation/src/index.ts"],
       "@monorepo/page-not-found": ["libs/page-not-found/src/index.ts"],
+      "@monorepo/profile/data-access": [
+        "libs/profile/data-access/src/index.ts"
+      ],
       "@monorepo/profile/favorite": ["libs/profile/favorite/src/index.ts"],
       "@monorepo/profile/settings": ["libs/profile/settings/src/index.ts"]
     }
