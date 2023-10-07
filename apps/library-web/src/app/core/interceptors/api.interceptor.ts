@@ -3,9 +3,9 @@ import {Inject, Injectable} from '@angular/core';
 import {Store} from '@ngxs/store';
 import {catchError, filter, Observable, switchMap, throwError} from 'rxjs';
 import {AuthState, Refresh} from '@monorepo/auth/data-access';
-import * as env from '../../environments/environment';
-import * as envProd from '../../environments/environment.prod';
-import {HttpStatus} from './enums/http-status.enum';
+import * as env from '../../../environments/environment';
+import * as envProd from '../../../environments/environment.prod';
+import {HttpStatus} from '../enums/http-status.enum';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {

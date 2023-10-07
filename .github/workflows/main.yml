@@ -23,15 +23,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm i
 
-#      Auth login tests
+      - name: auth login tests
       - run: npm run auth-login:test:ci
       - run: npm run auth-login:e2e:production
 
-#      Auth register tests
+      - name: Auth register tests
       - run: npm run auth-register:test:ci
       - run: npm run auth-register:e2e:production
 
-#      Books search tests
+      - name: books search tests
       - run: npm run books-search:test:ci
       - run: npm run books-search:e2e:production
 
