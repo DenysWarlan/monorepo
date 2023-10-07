@@ -3,9 +3,9 @@ import {catchError, map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpErrorResponse} from '@angular/common/http';
-import {UserDto} from "../../dto/user.model.dto";
-import {UserService} from "../services/user.service";
-import {UserData, UserDataFailure, UserDataSuccess} from "../actions/user.actions";
+import {UserDto} from '../dto/user.model.dto';
+import {UserService} from './services/user.service';
+import {UserData, UserDataFailure, UserDataSuccess} from './actions/user.actions';
 
 export interface User {
   readonly userLoading: boolean;
