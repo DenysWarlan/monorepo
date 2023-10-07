@@ -8,6 +8,7 @@ import {AuthLogin, LoginFailure, LoginSuccess, Logout,} from './actions/login.ac
 import {ClearToken, SetToken} from './actions/setToken.actions';
 import {LoggedDto} from '../dto/logged.model.dto';
 import {Refresh, RefreshFailure, RefreshSuccess} from './actions/refresh.actions';
+import {UserData} from "@monorepo/profile/data-access";
 
 export interface Auth {
   isAuth: boolean;
@@ -81,7 +82,7 @@ export class AuthState {
     }
 
 
-    dispatch(new UserData())
+    dispatch(new UserData());
   }
   @Action(LoginFailure)
   public loginFailure(
