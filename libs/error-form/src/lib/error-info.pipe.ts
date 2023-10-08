@@ -8,7 +8,7 @@ import {ValidationErrors} from '@angular/forms';
 export class ErrorInfoPipe implements PipeTransform {
   private errors: {[key: string] : string} = {
     'required': 'is required',
-    'minLength': 'error min length',
+    'minlength': 'error min length',
     'email': 'not valid',
   }
 

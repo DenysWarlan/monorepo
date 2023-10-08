@@ -13,6 +13,8 @@ import {AuthLogin, AuthState, Credentials, LoginForm} from '@monorepo/auth/data-
 import {isEqual} from 'lodash';
 import {ErrorFormComponent} from '../../../error-form/src/lib/error-form.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @Component({
@@ -26,9 +28,11 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatButtonModule,
     RouterModule,
     ErrorFormComponent,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ]
 })
 export class LoginComponent implements OnInit {

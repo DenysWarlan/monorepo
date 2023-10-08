@@ -1,11 +1,10 @@
-<div class="row justify-content-center">
+<div class="container w-50">
   <mat-error *ngIf="(error$ | async)">
     <h5 class="mat-error text-center" id="errorMessage">{{(error$ | async)?.error?.message}}</h5>
   </mat-error>
-  <div class="col-xs-12 col-md-6 col-lg-6">
-    <form [formGroup]="form" (submit)="form && form.valid && submitForm()" class="white-text">
+    <form [formGroup]="form" (submit)="form && form.valid && submitForm()" class="white-text mt-3">
       <div class="my-2">Edit profile</div>
-      <div class="mt-2">
+      <div class="mt-2 ml-5">
         <div class="form-group">
           <mat-form-field class="w-100">
             <mat-label>Name</mat-label>
@@ -43,8 +42,8 @@
         </div>
       </div>
 
-      <button [disabled]="form.invalid || (userLoading$ | async)" class="btn btn-success submit mb-2" type="submit">
-        <span>Update</span>
+      <button [disabled]="form.invalid || (userLoading$ | async)" class="btn btn-success submit mb-2 d-flex align-items-center justify-content-center" type="submit">
+        <span>Chnage</span>
         <mat-spinner *ngIf="(userLoading$ | async)" diameter="20"></mat-spinner>
       </button>
       <mat-divider></mat-divider>
@@ -72,11 +71,13 @@
             ></monorepo-error-form>
           </mat-form-field>
         </div>
+        <mat-error *ngIf="!!error">{{error}}</mat-error>
       </div>
-      <button [disabled]="form.invalid || (userLoading$ | async)" class="btn btn-success submit" type="submit">
-        <span>Update</span>
+      <button
+        (click)="updatePassword()"
+        [disabled]="form.invalid || (userLoading$ | async)" class="btn btn-success submit d-flex align-items-center justify-content-center">
+        <span>Chnage</span>
         <mat-spinner *ngIf="(userLoading$ | async)" diameter="20"></mat-spinner>
       </button>
     </form>
-  </div>
 </div>

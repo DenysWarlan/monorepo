@@ -118,6 +118,11 @@ export class UserState {
   public static userLoading({ userLoading }: User): boolean {
     return userLoading;
   }
+
+  @Selector()
+  public static userSuccess({ userSuccess }: User): boolean {
+    return userSuccess;
+  }
   
   @Selector()
   public static error({ error }: User): HttpErrorResponse {

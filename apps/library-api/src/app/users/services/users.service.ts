@@ -20,11 +20,13 @@ export class UsersService {
 
     const saltRounds = 10;
 
-    const password = !!user?.password ? await bcrypt.hash(user.password, saltRounds) : oldUser.password;
+    const password = !!user?.password
+    ? await bcrypt.hash(user.password, saltRounds)
+    : oldUser.password;
 
-    await this.userModel.updateOne({email: user.email}, {
-      name: user.name ?? oldUser.name,
-      birthDate: user.birthDate ?? oldUser.birthDate,
+      await this.userModel.updateOne({email: user.email}, {
+      name: user?.name ?? oldUser.name,
+      birthDate: user?.birthDate ?? oldUser.birthDate,
       password,
     });
 

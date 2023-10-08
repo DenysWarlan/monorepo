@@ -1,11 +1,13 @@
-<div class="row justify-content-center">
-  <div class="col-12">
-    <h1 class="white-text text-center">CREATE NEW ACCOUNT</h1>
-  </div>
-  <mat-error *ngIf="(errors$ | async)">
-    <h5 class="mat-error text-center" id="errorMessage">{{(errors$ | async)?.error?.message}}</h5>
-  </mat-error>
-  <div class="col-xs-12 col-md-6 col-lg-6">
+<div class="container d-flex align-items-center justify-content-center">
+  <mat-card class="bg-light p-3 mt-5 w-50">
+  <mat-card-title>
+    Sing in
+  </mat-card-title>
+  <mat-card-subtitle>
+    <mat-error *ngIf="(errors$ | async)">
+      <h5 class="mat-error text-center" id="errorMessage">{{(errors$ | async)?.error?.message}}</h5>
+    </mat-error>
+  </mat-card-subtitle>
     <form [formGroup]="form" (submit)="form && form.valid && submitForm()" class="white-text">
       <div class="form-group">
         <mat-form-field class="w-100">
@@ -25,9 +27,9 @@
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <monorepo-error-form
-                *ngIf="form.get('name').touched || form.get('name').dirty"
-                [errors]="form.get('name').errors"
-                ctrlName="Name"
+                *ngIf="form.get('birthDate').touched || form.get('birthDate').dirty"
+                [errors]="form.get('birthDate').errors"
+                ctrlName="Birth Date"
         ></monorepo-error-form>
         </mat-form-field>
       </div>
@@ -60,5 +62,6 @@
       or you can
       <span class="text-primary btn-link" (click)="login()">login</span>
     </form>
-  </div>
+
+</mat-card>
 </div>
