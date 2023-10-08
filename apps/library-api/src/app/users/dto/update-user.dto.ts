@@ -2,11 +2,11 @@ import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 
 
 export class UpdateUserDto {
-    @ApiPropertyOptional()
-    name: string;
+    @ApiProperty()
+    email: string;
 
     @ApiPropertyOptional()
-    email: string;
+    name: string;
 
     @ApiPropertyOptional()
     birthDate: Date;

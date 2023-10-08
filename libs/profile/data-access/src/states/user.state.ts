@@ -113,4 +113,14 @@ export class UserState {
   public static user({ user }: User): UserDto {
     return user;
   }
+  
+  @Selector()
+  public static userLoading({ userLoading }: User): boolean {
+    return userLoading;
+  }
+  
+  @Selector()
+  public static error({ error }: User): HttpErrorResponse {
+    return error;
+  }
 }

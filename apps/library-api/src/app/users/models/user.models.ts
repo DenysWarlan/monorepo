@@ -2,16 +2,16 @@ import mongoose from 'mongoose';
 
 export interface User extends mongoose.Document {
   readonly name: string;
-  readonly birthDate: Date;
+  readonly birthDate: string;
   readonly email: string;
   readonly password: string;
-  readonly links?: string[];
+  readonly booksIds?: string[];
 }
 
 export const UserSchema: mongoose.Schema<User> = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   name: { type: String, required: true },
-  birthDate: { type: Date },
+  birthDate: { type: String },
   password: { type: String, required: true },
-  links: [{ type: mongoose.Types.ObjectId, ref: 'link' }],
+  booksIds: [{ type: mongoose.Types.ObjectId, ref: 'book' }],
 });

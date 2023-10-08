@@ -5,6 +5,7 @@ import {User} from '../models/user.models';
 import * as bcrypt from 'bcrypt';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { RegisterDto } from '../../auth/dto/register.dto';
+import { UserDto } from '../dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -14,12 +15,12 @@ export class UsersService {
     return await this.userModel.findOne({ email }).exec();
   }
 
-  public async updateUser(user: UpdateUserDto): Promise<User> {
+  public async updateUser(user: UpdateUserDto): Promise<UserDto> {
     const oldUser: User = await this.findByEmail(user.email);
 
     const saltRounds = 10;
 
-    const password = user.password ? await bcrypt.hash(user.password, saltRounds) : oldUser.password;
+    const password = !!user?.password ? await bcrypt.hash(user.password, saltRounds) : oldUser.password;
 
     await this.userModel.updateOne({email: user.email}, {
       name: user.name ?? oldUser.name,
@@ -27,7 +28,14 @@ export class UsersService {
       password,
     });
 
-    return this.findByEmail(user.email);
+    const { name, email, birthDate, booksIds} = await this.findByEmail(user.email);
+
+    return {
+      name,
+      birthDate,
+      email,
+      booksIds
+    };
   }
 
   public async addUser(user: RegisterDto): Promise<User> {

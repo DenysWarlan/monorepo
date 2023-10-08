@@ -27,10 +27,16 @@ export class UsersController {
   })
   @UseGuards(JwtAuthGuard)
   @Get('/me')
-  async getProfile(@Req() request: Request): Promise<User> {
+  async getProfile(@Req() request: Request): Promise<UserDto> {
     const json:  { email: string, sub: {name: string} }  = this.jwtUtil.decode(request);
+    const { name, email, birthDate, booksIds} = await this.usersService.findByEmail(json.email);
 
-    return this.usersService.findByEmail(json.email);
+    return {
+      name,
+      birthDate,
+      email,
+      booksIds
+    };
   }
 
   @ApiExtraModels(UpdateUserDto)
@@ -46,8 +52,7 @@ export class UsersController {
   })
   @UseGuards(JwtAuthGuard)
   @Post('/me')
-  async updateProfile(@Body() user: UpdateUserDto): Promise<User> {
-
+  async updateProfile(@Body() user: UpdateUserDto): Promise<UserDto> {
     return this.usersService.updateUser(user);
   }
 }

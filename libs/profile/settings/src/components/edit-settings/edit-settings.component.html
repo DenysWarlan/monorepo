@@ -1,58 +1,81 @@
 <div class="row justify-content-center">
-  <!--<mat-error *ngIf="(errors$ | async)">-->
-  <!--  &lt;!&ndash;<h5 class="mat-error text-center" id="errorMessage">{{(errors$ | async)?.error?.message}}</h5>&ndash;&gt;-->
-  <!--</mat-error>-->
+  <mat-error *ngIf="(error$ | async)">
+    <h5 class="mat-error text-center" id="errorMessage">{{(error$ | async)?.error?.message}}</h5>
+  </mat-error>
   <div class="col-xs-12 col-md-6 col-lg-6">
     <form [formGroup]="form" (submit)="form && form.valid && submitForm()" class="white-text">
-      <div class="form-group">
-        <mat-form-field class="w-100">
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name" placeholder="Name and surname" />
-          <monorepo-error-form
-                *ngIf="form.get('name').touched || form.get('name').dirty"
-                [errors]="form.get('name').errors"
-                ctrlName="Name"
-        ></monorepo-error-form>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <mat-form-field class="w-100">
-          <mat-label>Birth day</mat-label>
-          <input matInput formControlName="birthDate" [matDatepicker]="picker" placeholder="Choose a birth date" readonly>
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <monorepo-error-form
-                *ngIf="form.get('name').touched || form.get('name').dirty"
-                [errors]="form.get('name').errors"
-                ctrlName="Name"
-        ></monorepo-error-form>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <mat-form-field class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" placeholder="Ex. pat@example.com" />
-          <monorepo-error-form
-                *ngIf="form.get('email').touched || form.get('email').dirty"
-                [errors]="form.get('email').errors"
-                ctrlName="Email"
-        ></monorepo-error-form>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <mat-form-field class="w-100">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" class="form-control" formControlName="password" autocomplete="new-password"/>
-          <monorepo-error-form
-                  *ngIf="form.get('password').touched || form.get('password').dirty"
-                  [errors]="form.get('password').errors"
-                  ctrlName="Password"
+      <div class="my-2">Edit profile</div>
+      <div class="mt-2">
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Name and surname" />
+            <monorepo-error-form
+                  *ngIf="form.get('name').touched || form.get('name').dirty"
+                  [errors]="form.get('name').errors"
+                  ctrlName="Name"
           ></monorepo-error-form>
-        </mat-form-field>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Birth day</mat-label>
+            <input matInput formControlName="birthDate" [matDatepicker]="picker" placeholder="Choose a birth date" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <monorepo-error-form
+                  *ngIf="form.get('name').touched || form.get('name').dirty"
+                  [errors]="form.get('name').errors"
+                  ctrlName="Name"
+          ></monorepo-error-form>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Ex. pat@example.com" />
+            <monorepo-error-form
+                  *ngIf="form.get('email').touched || form.get('email').dirty"
+                  [errors]="form.get('email').errors"
+                  ctrlName="Email"
+          ></monorepo-error-form>
+          </mat-form-field>
+        </div>
       </div>
-      <button [disabled]="form.invalid" class="btn btn-success submit" type="submit">
+
+      <button [disabled]="form.invalid || (userLoading$ | async)" class="btn btn-success submit mb-2" type="submit">
         <span>Update</span>
-        <!--<mat-spinner *ngIf="(isRegisterLoading$ | async)" diameter="20"></mat-spinner>-->
+        <mat-spinner *ngIf="(userLoading$ | async)" diameter="20"></mat-spinner>
+      </button>
+      <mat-divider></mat-divider>
+      <div class="my-2">Change password</div>
+      <div class="mt-2">
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" class="form-control" formControlName="password" autocomplete="new-password"/>
+            <monorepo-error-form
+                    *ngIf="form.get('password').touched || form.get('password').dirty"
+                    [errors]="form.get('password').errors"
+                    ctrlName="Password"
+            ></monorepo-error-form>
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="w-100">
+            <mat-label>Confirm password</mat-label>
+            <input matInput type="password" class="form-control" formControlName="confirmPassword" autocomplete="confirm-password"/>
+            <monorepo-error-form
+                    *ngIf="form.get('confirmPassword').touched || form.get('confirmPassword').dirty"
+                    [errors]="form.get('confirmPassword').errors"
+                    ctrlName="Password"
+            ></monorepo-error-form>
+          </mat-form-field>
+        </div>
+      </div>
+      <button [disabled]="form.invalid || (userLoading$ | async)" class="btn btn-success submit" type="submit">
+        <span>Update</span>
+        <mat-spinner *ngIf="(userLoading$ | async)" diameter="20"></mat-spinner>
       </button>
     </form>
   </div>
