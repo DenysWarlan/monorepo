@@ -15,6 +15,7 @@ import {JwtUtilService} from '../services/jwt-util.service';
 import {JwtAuthGuard} from '../../auth/guards/jwt-auth.guard';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import {Response} from 'express';
+import {ErrorResponseDto} from '../../auth/dto/error-response.dto';
 
 @Controller('users')
 export class UsersController {
@@ -66,16 +67,16 @@ export class UsersController {
   async updateProfile(
     @Res() response: Response,
     @Body() user: UpdateUserDto
-  ): Promise<UserDto> {
+  ): Promise<UserDto | ErrorResponseDto> {
+
     if (!user.email) {
-      response.status(HttpStatus.BAD_REQUEST).send({message:'Email not found'});
+      response.status(HttpStatus.BAD_REQUEST).send();
 
-      return;
+      return {message:'Email not found'};
     }
-    const updatedUser: UserDto = await this.usersService.updateUser(user)
 
-    response.status(HttpStatus.OK).send(updatedUser);
+    response.status(HttpStatus.OK);
 
-    return;
+    return this.usersService.updateUser(user);
   }
 }

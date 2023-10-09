@@ -8,6 +8,7 @@ import {Response} from 'express';
 import {LocalAuthGuard} from '../guards/local-auth.guard';
 import {RefreshJwtAuthGuard} from '../guards/refresh-jwt-auth.guard';
 import {JwtUtilService} from '../../users/services/jwt-util.service';
+import {ErrorResponseDto} from '../dto/error-response.dto';
 
 @Controller('auth/')
 export class AuthController {
@@ -28,7 +29,7 @@ export class AuthController {
     description: 'Invalid credentials.',
   })
   @UseGuards(LocalAuthGuard)
-  async login(@Res() response: Response, @Body() {email}: CredentialsDto): Promise<LoggedDto> {
+  async login(@Res() response: Response, @Body() {email}: CredentialsDto): Promise<void> {
     const login: LoggedDto = await this.authService.login(email);
 
     if(!!login) {
@@ -37,10 +38,7 @@ export class AuthController {
       return;
     }
 
-
-    response.status(HttpStatus.BAD_REQUEST).send({
-      message: 'Invalid credentials.'
-    });
+    response.status(HttpStatus.BAD_REQUEST).send({message: 'Invalid credentials.'})
 
     return;
   }
@@ -54,7 +52,7 @@ export class AuthController {
     status: HttpStatus.BAD_REQUEST,
     description: 'Invalid data'
   })
-  async register(@Res({passthrough: true}) response: Response, @Body() registerDto: RegisterDto) {
+  async register(@Res({passthrough: true}) response: Response, @Body() registerDto: RegisterDto): Promise<void> {
     const logged: {email: string} | {message: string} = await this.authService.register(registerDto);
 
     if(logged.hasOwnProperty('message')) {
@@ -76,7 +74,7 @@ export class AuthController {
 
   @UseGuards(RefreshJwtAuthGuard)
   @Post('refresh')
-  async refreshToken(@Req() req: Request, @Res() response: Response): Promise<string> {
+  async refreshToken(@Req() req: Request, @Res() response: Response): Promise<void> {
     const json = this.jwtUtil.decode(req);
 
     const refreshedToken: string = await this.authService.refreshToken(json.email);

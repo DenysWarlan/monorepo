@@ -77,13 +77,8 @@ export class EditSettingsComponent implements OnInit {
     ){}
 
   public ngOnInit() {
-    this.getUserData();
     this.handleUser();
     this.handleForm();
-  }
-
-  private getUserData(): void {
-    this.store.dispatch(new UserData());
   }
 
   private handleForm(): void {
