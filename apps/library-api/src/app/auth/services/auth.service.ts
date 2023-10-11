@@ -19,7 +19,7 @@ export class AuthService {
     const user: User = await this.usersService.findByEmail(email);
     
     if (user && await (bcrypt.compare(password, user.password))) {
-      const { name, email, birthDate, booksIds} = user;
+      const { name, email, birthDate, booksIds}: User = user;
 
       return {
         name,
@@ -35,7 +35,7 @@ export class AuthService {
   async login(email: string): Promise<Logged | null> {
     const user: User = await this.usersService.findByEmail(email);
 
-    const payload = {
+    const payload: {email: string; sub: {name: string}} = {
       email,
       sub: {
         name: user.name
@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   async register(registerDto: RegisterDto): Promise<{email: string} | {message: string}> {
-    const existedUser = await this.usersService.findByEmail(registerDto.email);
+    const existedUser: User = await this.usersService.findByEmail(registerDto.email);
 
     if(existedUser) {
       return {
@@ -69,7 +69,7 @@ export class AuthService {
   async refreshToken(email: string): Promise<string> {
     const user: User = await this.usersService.findByEmail(email);
 
-    const payload = {
+    const payload: {email: string; sub: {name: string}} = {
       email,
       sub: {
         name: user?.name

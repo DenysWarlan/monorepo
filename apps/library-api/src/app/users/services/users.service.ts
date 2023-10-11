@@ -18,15 +18,17 @@ export class UsersService {
   ) {}
 
   public async findByEmail(email: string): Promise<User> {
-    return await this.userModel.findOne({ email }).exec();
+    const user: User = await this.userModel.findOne({ email }).exec();
+
+    return user;
   }
 
   public async updateUser(user: UpdateUserDto): Promise<UserDto> {
     const oldUser: User = await this.findByEmail(user.email);
 
-    const saltRounds = 10;
+    const saltRounds: number = 10;
 
-    const password = !!user?.password
+    const password: string = !!user?.password
     ? await bcrypt.hash(user.password, saltRounds)
     : oldUser.password;
 
@@ -36,7 +38,7 @@ export class UsersService {
       password,
     });
 
-    const { name, email, birthDate, booksIds} = await this.findByEmail(user.email);
+    const { name, email, birthDate, booksIds}: User = await this.findByEmail(user.email);
 
     return {
       name,
@@ -47,23 +49,28 @@ export class UsersService {
   }
 
   public async addUser(user: RegisterDto): Promise<User> {
-    const saltRounds = 10;
+    const saltRounds: number = 10;
 
-    const password = await bcrypt.hash(user?.password, saltRounds)
+    const password: string = await bcrypt.hash(user?.password, saltRounds)
 
     return new this.userModel({...user, password}).save();
   }
 
   public async deleteUser(email: string): Promise<DeleteResult> {
-    return this.userModel.deleteOne({email});
+    const deleteResult: DeleteResult = await this.userModel.deleteOne({email});
+
+    return deleteResult;
   }
 
   public async books(email: string): Promise<BookDto[]> {
-    return this.getBooksByUser(email)
+    const books: BookDto[] = await this.getBooksByUser(email);
+
+    return books;
   }
 
 
   public async getBooksByUser(email: string): Promise<BookDto[]> {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const {_id}: User = await this.findByEmail(email);
 
     const books: Book[] = await this.bookModel.find({'userId': _id});

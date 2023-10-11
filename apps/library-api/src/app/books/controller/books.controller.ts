@@ -67,7 +67,7 @@ export class BooksController {
         @Res() response: Response,
         @Req() request: Request,
         @Body() book: BookDto
-    ) {
+    ): Promise<void> {
         if(!book) {
             response.status(HttpStatus.BAD_REQUEST).send({message: 'Book not send'});
 
@@ -86,6 +86,7 @@ export class BooksController {
 
         if(!addedBook) {
             response.status(HttpStatus.BAD_REQUEST).send({message: 'Error adding'})
+
             return;
         }
 
@@ -113,6 +114,8 @@ export class BooksController {
     async remove(
         @Param('id') id: string
     ): Promise<DeleteResult> {
-        return this.bookService.removeById(id);
+        const deleteResponse: DeleteResult = await this.bookService.removeById(id);
+
+        return deleteResponse;
     }
 }

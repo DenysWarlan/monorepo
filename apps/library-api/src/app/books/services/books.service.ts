@@ -16,6 +16,7 @@ export class BooksService {
     ) {}
 
     public async add(book: BookDto, email: string): Promise<Book> {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         const {_id}: User = await this.userService.findByEmail(email);
 
         return new this.bookModel({...book, userId: _id}).save();
@@ -28,7 +29,9 @@ export class BooksService {
     }
 
     public async removeById(id: string): Promise<DeleteResult> {
-        return this.bookModel.deleteOne({_id: id});
+        const deleteResult: DeleteResult = await this.bookModel.deleteOne({_id: id});
+
+        return deleteResult;
     }
 
     private mapBookToDto({_id, title, authors, publisher, description, categories, thumbnail}: Book): BookDto {

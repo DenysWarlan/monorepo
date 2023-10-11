@@ -81,7 +81,7 @@ export class UsersController {
   async updateProfile(
     @Res() response: Response,
     @Body() user: UpdateUserDto
-  ): Promise<UserDto | ErrorResponseDto> {
+  ): Promise<void> {
 
     if (!user.email) {
       response.status(HttpStatus.BAD_REQUEST).send({message:'Email not found'});
@@ -89,7 +89,9 @@ export class UsersController {
       return;
     }
 
-    response.status(HttpStatus.OK).send(this.usersService.updateUser(user));
+    const updatedUser: UserDto = await this.usersService.updateUser(user);
+
+    response.status(HttpStatus.OK).send(updatedUser);
 
     return;
   }
@@ -112,10 +114,14 @@ export class UsersController {
   async deleteProfile(
       @Req() request: Request,
       @Res() response: Response
-  ): Promise<DeleteResult> {
+  ): Promise<void> {
     const json: { email: string; sub: { name: string } } = this.jwtUtil.decode(request);
 
-    return this.usersService.deleteUser(json.email);
+    const deleteResult: DeleteResult = await this.usersService.deleteUser(json.email);
+
+    response.status(HttpStatus.OK).send(deleteResult);
+
+    return;
   }
 
   @ApiExtraModels(UpdateUserDto)

@@ -7,7 +7,7 @@ export class JwtUtilService {
     public constructor(private readonly jwtService: JwtService) {}
 
     public decode(request: Request): { email: string, sub: {name: string} } {
-        const jwt = this.extractTokenFromHeader(request);
+        const jwt: string = this.extractTokenFromHeader(request);
 
         return this.jwtService.decode(jwt, { json: true }) as { email: string, sub: {name: string} };
     }

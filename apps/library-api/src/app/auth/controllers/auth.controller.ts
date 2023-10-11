@@ -77,7 +77,7 @@ export class AuthController {
   @UseGuards(RefreshJwtAuthGuard)
   @Post('refresh')
   async refreshToken(@Req() req: Request, @Res() response: Response): Promise<void> {
-    const json = this.jwtUtil.decode(req);
+    const json: {email: string} = this.jwtUtil.decode(req);
 
     const refreshedToken: string = await this.authService.refreshToken(json.email);
 
