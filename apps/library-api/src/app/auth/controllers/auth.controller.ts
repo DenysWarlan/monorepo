@@ -2,7 +2,7 @@ import {AuthService} from '../services/auth.service';
 import {Body, Controller, HttpStatus, Post, Req, Res, UseGuards} from '@nestjs/common';
 import {RegisterDto} from '../dto/register.dto';
 import {CredentialsDto} from '../dto/credentials.dto';
-import {ApiBadRequestResponse, ApiCreatedResponse, ApiExtraModels, ApiResponse} from '@nestjs/swagger';
+import {ApiBadRequestResponse, ApiCreatedResponse, ApiExtraModels, ApiResponse, ApiTags} from '@nestjs/swagger';
 import {LoggedDto} from '../dto/logged.dto';
 import {Response} from 'express';
 import {LocalAuthGuard} from '../guards/local-auth.guard';
@@ -10,6 +10,7 @@ import {RefreshJwtAuthGuard} from '../guards/refresh-jwt-auth.guard';
 import {JwtUtilService} from '../../users/services/jwt-util.service';
 import {ErrorResponseDto} from '../dto/error-response.dto';
 
+@ApiTags('Auth')
 @Controller('auth/')
 export class AuthController {
   public constructor(
@@ -50,7 +51,8 @@ export class AuthController {
   })
   @ApiBadRequestResponse({
     status: HttpStatus.BAD_REQUEST,
-    description: 'Invalid data'
+    description: 'Invalid data',
+    type: ErrorResponseDto
   })
   async register(@Res({passthrough: true}) response: Response, @Body() registerDto: RegisterDto): Promise<void> {
     const logged: {email: string} | {message: string} = await this.authService.register(registerDto);

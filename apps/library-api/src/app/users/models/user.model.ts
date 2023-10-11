@@ -13,5 +13,5 @@ export const UserSchema: mongoose.Schema<User> = new mongoose.Schema({
   name: { type: String, required: true },
   birthDate: { type: String },
   password: { type: String, required: true },
-  booksIds: [{ type: mongoose.Types.ObjectId, ref: 'book' }],
+  booksIds: [{ type: mongoose.Types.ObjectId, ref: 'book ' }],
 });
