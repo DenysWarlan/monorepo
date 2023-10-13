@@ -1,10 +1,52 @@
 .book {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 
-  &__details {
-    margin-left: 2rem;
+    &__header {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-around;
+
+      &__main-info {
+        &__title {
+          font-size: 24px;
+        }
+
+        &__author {
+          font-size: 18px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        justify-content: space-between;
+        flex-direction: row;
+      }
+    }
+
+  &__content {
+
+    &__publisher {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &__publisher > * {
+      flex: 1 0 48%;
+    }
+
+    &__description {
+      margin-top: 1rem;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+
+    @media (max-width: 768px) {
+      justify-content: space-around;
+    }
   }
 }

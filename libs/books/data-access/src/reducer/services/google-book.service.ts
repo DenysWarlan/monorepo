@@ -61,7 +61,7 @@ export class GoogleBookService {
       publisher: book.volumeInfo?.publisher ?? '',
       pageCount: book.volumeInfo?.pageCount ?? 0,
       publisherDate: book.volumeInfo?.publishedDate ?? '',
-      link: book.volumeInfo?.infoLink ?? '',
+      link: book.volumeInfo?.previewLink ?? '',
       language: book.volumeInfo?.language ?? ''
     }
   }

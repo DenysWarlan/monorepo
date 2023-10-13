@@ -1,8 +1,8 @@
 <mat-card *ngIf="!!book" class="mat-card d-flex justify-content-between w-100">
-    <ng-container
+    <mat-card-header
             (click)="goToBook(book.bookId)"
-            (keyup.enter)="goToBook(book.bookId)">
-    <mat-card-header>
+            (keyup.enter)="goToBook(book.bookId)"
+    >
         <mat-card-title class="mat-card__title">{{book.title}}</mat-card-title>
         <mat-card-subtitle *ngIf="!!book.authors" class="mat-card__subtitle">
             <strong>Authors</strong>: {{book.authors | arrayJoin}}
@@ -12,13 +12,23 @@
         </mat-card-subtitle>
     </mat-card-header>
 
-    <img *ngIf="!!book.thumbnail" mat-card-image [src]="book.thumbnail" [alt]="book.title" class="mat-card__image">
-    <mat-card-content *ngIf="book?.description" class="mat-card__content">
+    <img
+            *ngIf="!!book.thumbnail"
+            mat-card-image [src]="book.thumbnail"
+            [alt]="book.title"
+            class="mat-card__image"
+            (click)="goToBook(book.bookId)"
+            (keyup.enter)="goToBook(book.bookId)"
+    >
+    <mat-card-content
+            *ngIf="book?.description"
+            class="mat-card__content"
+            (click)="goToBook(book.bookId)"
+            (keyup.enter)="goToBook(book.bookId)"
+    >
         {{book.description}}
     </mat-card-content>
 
-
-    </ng-container>
     <mat-card-actions class="mat-card__actions">
         <button
                 mat-raised-button

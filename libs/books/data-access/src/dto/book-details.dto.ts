@@ -12,4 +12,5 @@ export interface BookDetailsDto extends BookDto{
     readonly publisherDate: string;
     readonly link: string;
     readonly language: string;
+    readonly isFavorite?: boolean;
 }

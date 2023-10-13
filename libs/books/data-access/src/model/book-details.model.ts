@@ -25,7 +25,7 @@ export interface VolumeInfo {
     contentVersion: string
     imageLinks: ImageLinks
     language: string
-    infoLink: string
+    previewLink: string
     canonicalVolumeLink: string
 }
 

@@ -8,13 +8,60 @@
 
     <ng-container *ngIf="bookDetails$ | async as book">
         <div class="book">
-            <div>
-                <img [src]="book.thumbnail" [alt]="book.title">
+            <div class="book__header">
+                <div class="book__header__image">
+                    <img [src]="book.thumbnail" [alt]="book.title">
+                </div>
+                <div class="book__header__main-info">
+                    <div class="book__header__main-info__title">{{book.title}}</div>
+                    <div class="book__header__main-info__author">{{book.authors.join(',')}}</div>
+                    <div class="book__header__main-info__categories">{{book.categories}}</div>
+                </div>
             </div>
-            <div class="book__details">
-                <div class="book__title">Title: {{book.title}}</div>
-                <div *ngIf="book.description" class="book__description">Description: <span [innerHTML]="book.description"></span></div>
+            <div class="book__content">
+                <div class="book__content__publisher">
+                    <div class="book__details__volume-info__volume-item">Publisher date: {{book.publisherDate}}</div>
+                    <div class="book__details__volume-info__volume-item">Publisher: {{book.publisher}}</div>
+                    <div class="book__details__volume-info__volume-item">Page count: {{book.pageCount}}</div>
+                    <div class="book__details__volume-info__volume-item">Language: {{book.language}}</div>
+                </div>
+                <div class="book__content__description">
+                    Description: <span [innerHTML]="book.description"></span>
+                </div>
+            </div>
+            <div class="book__actions">
+                <a [href]="book.link">Show in google</a>
+                <button
+                        *ngIf="(isFavoriteBook$ | async) === false"
+                        mat-icon-button
+                        (click)="addBookToFavorite(book)"
+                        (keyup.enter)="addBookToFavorite(book)"
+                >
+                    <mat-icon>star_border</mat-icon>
+                </button>
+                <button
+                        *ngIf="(isFavoriteBook$ | async)"
+                        mat-icon-button
+                        (click)="removeBookFromFavorite(book.bookId)"
+                        (keyup.enter)="removeBookFromFavorite(book.bookId)"
+                >
+                    <mat-icon>star</mat-icon>
+                </button>
             </div>
         </div>
     </ng-container>
 </div>
+<!--<ng-container *ngIf="bookDetails$ | async as book">-->
+<!--    <div class="book">-->
+<!--        <div class="book__details">-->
+<!--            <div class="book__details__volume-info">-->
+<!--                <div class="book__details__volume-info__volume-item">Link: <a [href]="book.link">{{book.link}}</a></div>-->
+<!--                <div class="book__details__volume-info__volume-item"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="book__image">-->
+<!--            <img [src]="book.thumbnail" [alt]="book.title">-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</ng-container>-->
