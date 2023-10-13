@@ -32,6 +32,7 @@
       "@monorepo/books/details": ["libs/books/details/src/index.ts"],
       "@monorepo/books/list": ["libs/books/list/src/index.ts"],
       "@monorepo/books/search": ["libs/books/search/src/index.ts"],
+      "@monorepo/confirm-dialog": ["libs/dialogs/confirm-dialog/src/index.ts"],
       "@monorepo/error-form": ["libs/error-form/src/index.ts"],
       "@monorepo/navigation": ["libs/navigation/src/index.ts"],
       "@monorepo/page-not-found": ["libs/page-not-found/src/index.ts"],
