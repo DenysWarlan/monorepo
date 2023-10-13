@@ -1,1 +1,10 @@
-<p>favorite-books works!</p>
+<div class="container">
+    <div class="d-flex align-items-center justify-content-center">
+        <h4>List favorite books</h4>
+    </div>
+    <monorepo-books-list
+            [books]="(favoriteBooks$ | async)"
+            [totalBooks]="totalItemFavoriteBooks$ | async"
+            [pagination]="pagination$ | async"
+    ></monorepo-books-list>
+</div>

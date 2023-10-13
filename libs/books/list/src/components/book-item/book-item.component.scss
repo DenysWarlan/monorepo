@@ -1,7 +1,20 @@
 :host {
   display: flex;
-  align-items: stretch;
-  flex: 1 0 21%;
+  flex: 0 0 21%;
+
+  @media (max-width: 992px) {
+    flex: 0 0 48%;
+  }
+
+  @media (max-width: 468px) {
+    flex: 0 0 100%;
+  }
+}
+
+.mat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mat-card {
@@ -22,7 +35,18 @@
     @extend .text-ellipsis;
     -webkit-line-clamp: 5;
     line-clamp: 5;
+  }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    & > button {
+      &:focus, &:hover, &:active {
+        border: .1rem solid var(--bs-blue);
+      }
+    }
   }
 }
 

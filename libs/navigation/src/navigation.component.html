@@ -1,11 +1,16 @@
-<nav>
-    <div class="w-100 d-flex align-items-center justify-content-between">
-        <div (click)="redirect(Route.SEARCH)">
+<nav class="navbar bg-dark-subtle">
+        <a
+                aria-describedby="Redirect to main page"
+                class="border-on-focus navbar-brand"
+                tabindex="0"
+                (click)="redirect(Route.SEARCH)"
+                (keyup.enter)="redirect(Route.SEARCH)"
+        >
             Library
-        </div>
-        <div *ngIf="(isAuth$ | async) else singin">
-            <button mat-icon-button color="primary" [matMenuTriggerFor]="profile">
-                <mat-icon>home</mat-icon>
+        </a>
+        <ng-container *ngIf="(isAuth$ | async) else singin">
+            <button mat-icon-button [matMenuTriggerFor]="profile">
+                <mat-icon>settings icon</mat-icon>
             </button>
             <mat-menu #profile="matMenu">
                 <button (click)="redirect(Route.SETTINGS)" mat-menu-item>Settings</button>
@@ -13,12 +18,13 @@
                 <mat-divider></mat-divider>
                 <button (click)="logout()" mat-menu-item>Logout</button>
             </mat-menu>
-        </div>
-    </div>
+        </ng-container>
 </nav>
 
 <ng-template #singin>
-    <button mat-button [matMenuTriggerFor]="auth">Sing in</button>
+    <button  mat-icon-button [matMenuTriggerFor]="auth">
+        <mat-icon>person icon</mat-icon>
+    </button>
     <mat-menu #auth="matMenu">
         <button (click)="redirect(Route.LOGIN)" mat-menu-item>Login</button>
         <button (click)="redirect(Route.REGISTER)" mat-menu-item>Register</button>

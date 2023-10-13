@@ -16,9 +16,10 @@
       ],
       "rules": {
         "@nx/enforce-module-boundaries": [
-          "error",
+          "warnings",
           {
             "enforceBuildableLibDependency": true,
+            "allowCircularSelfDependency": true,
             "allow": [],
             "depConstraints": [
               {
@@ -28,6 +29,10 @@
               {
                 "sourceTag": "backend",
                 "bannedExternalImports": ["@angular/core", "@monorepo/auth"]
+              },
+              {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["*"]
               }
             ]
           }

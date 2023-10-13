@@ -1,14 +1,17 @@
-<ng-container *ngIf="!!totalBooks && (searchSuccess$ | async) else emptyList">
+<ng-container *ngIf="!!totalBooks else emptyList">
     <div class="books">
-        <ng-container *ngFor="let book of (books$ | async)"  class="books">
-            <monorepo-book-item [book]="book">
+        <ng-container *ngFor="let book of books">
+            <monorepo-book-item
+                    [book]="book"
+                    [isAuth]="isAuth$ | async"
+            >
             </monorepo-book-item>
         </ng-container>
     </div>
     <monorepo-pagination
             [totalBooks]="totalBooks"
-            [pagination]="pagination$ | async"
-            (updatePaginator)="updatePaginator($event)"
+            [pagination]="pagination"
+            (updatePaginator)="onUpdatePaginator($event)"
     >
 
     </monorepo-pagination>

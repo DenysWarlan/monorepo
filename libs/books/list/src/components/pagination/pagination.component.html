@@ -1,7 +1,7 @@
 <ng-container *ngIf="!!pagination">
     <mat-paginator [length]="totalBooks"
                    [pageSize]="pagination.maxResults || 8"
-                   [pageIndex]="pagination.startIndex || 0"
+                   [pageIndex]="pagination.pageIndex || 0"
                    [pageSizeOptions]="pageSizeOptions"
                    (page)="onUpdatePaginator($event)"
                    aria-label="Select page">

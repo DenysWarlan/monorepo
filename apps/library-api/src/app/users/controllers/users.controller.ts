@@ -51,13 +51,12 @@ export class UsersController {
       return;
     }
 
-    const { name, email, birthDate, booksIds }: User = user;
+    const { name, email, birthDate }: User = user;
 
     response.status(HttpStatus.OK).send({
       name,
       birthDate,
-      email,
-      booksIds,
+      email
     })
 
     return;
@@ -148,7 +147,7 @@ export class UsersController {
     const books: BookDto[] = await this.usersService.books(json.email);
 
     if(!books) {
-      response.status(HttpStatus.BAD_REQUEST).send({message: 'Somthing error'});
+      response.status(HttpStatus.BAD_REQUEST).send({message: 'Something error'});
 
       return ;
     }

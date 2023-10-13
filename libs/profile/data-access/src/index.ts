@@ -9,3 +9,4 @@ export * from './models/update-value.model';
 
 export * from './actions/user.actions';
 export * from './actions/update-user.actions';
+export * from './actions/delete-user.actions';

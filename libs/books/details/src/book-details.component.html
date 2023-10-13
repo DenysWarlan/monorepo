@@ -1,1 +1,20 @@
-<p>book-details works!</p>
+<div class="container">
+    <button mat-icon-button
+            (click)="backToSearch()"
+            (keyup.enter)="backToSearch()"
+    >
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+
+    <ng-container *ngIf="bookDetails$ | async as book">
+        <div class="book">
+            <div>
+                <img [src]="book.thumbnail" [alt]="book.title">
+            </div>
+            <div class="book__details">
+                <div class="book__title">Title: {{book.title}}</div>
+                <div *ngIf="book.description" class="book__description">Description: <span [innerHTML]="book.description"></span></div>
+            </div>
+        </div>
+    </ng-container>
+</div>

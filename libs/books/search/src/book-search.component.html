@@ -1,7 +1,7 @@
 <div class="search-content">
     <mat-form-field class="w-75">
         <mat-label>Search book</mat-label>
-        <input matInput placeholder="Shakespeare" [formControl]="search" id="searchInput">
+        <input matInput aria-label="Search book by key" placeholder="Shakespeare" [formControl]="search" id="searchInput">
         <button *ngIf="search.value" matSuffix mat-icon-button aria-label="clear" id="reset" (click)="onReset()">
             <mat-icon>close</mat-icon>
         </button>
@@ -13,8 +13,11 @@
 
 <ng-container *ngIf="(searchLoading$ | async) === false else loading" >
     <monorepo-books-list
-            *ngIf="(searchSuccess$ | async)"
+            *ngIf="searchSuccess$ | async"
             [totalBooks]="totalItems$ | async"
+            [books]="books$ | async"
+            [pagination]="pagination$ | async"
+            (updatePaginator)="onUpdatePaginator($event)"
     ></monorepo-books-list>
 </ng-container>
 <ng-template #loading>

@@ -2,7 +2,7 @@ import {ApiProperty, ApiPropertyOptional} from '@nestjs/swagger';
 
 export class BookDto {
     @ApiProperty()
-    readonly id: string;
+    readonly bookId: string;
 
     @ApiProperty()
     readonly title: string;

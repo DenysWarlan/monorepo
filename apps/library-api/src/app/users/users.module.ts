@@ -8,7 +8,7 @@ import {JwtUtilService} from './services/jwt-util.service';
 import {BookSchema} from '../books/models/books.model';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Users', schema: UserSchema }, { name: 'Books', schema: BookSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Books', schema: BookSchema }, { name: 'Users', schema: UserSchema }]) ],
   controllers: [UsersController],
   providers: [
     UsersService,

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 export interface Book extends mongoose.Document {
+    readonly bookId: string;
     readonly userId: string;
     readonly title: string;
     readonly authors: string[];
@@ -11,6 +12,7 @@ export interface Book extends mongoose.Document {
 }
 
 export const BookSchema: mongoose.Schema<Book> = new mongoose.Schema({
+    bookId: { type: String, required: true },
     userId: { type: String, required: true },
     title: { type: String, required: true },
     authors: [{ type: String }],

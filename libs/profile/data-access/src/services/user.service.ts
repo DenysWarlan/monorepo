@@ -22,6 +22,12 @@ export class UserService {
 
     return this.http.post<UserDto>(url, data);
   }
+
+  public deleteUser(): Observable<any> {
+    const url = `${this.authUrl}/me`;
+
+    return this.http.delete<any>(url);
+  }
   
   
 }

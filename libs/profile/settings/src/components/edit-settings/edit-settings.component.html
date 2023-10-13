@@ -1,4 +1,4 @@
-<div class="container w-50">
+<div class="container max-w-50">
   <mat-error *ngIf="(error$ | async)">
     <h5 class="mat-error text-center" id="errorMessage">{{(error$ | async)?.error?.message}}</h5>
   </mat-error>

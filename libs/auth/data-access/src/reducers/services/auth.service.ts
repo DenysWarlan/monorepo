@@ -38,7 +38,6 @@ export class AuthService {
   }
 
   public clearToken(): void {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    localStorage.clear();
   }
 }

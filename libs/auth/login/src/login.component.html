@@ -11,10 +11,10 @@
       </mat-error>
       <form [formGroup]="form" (submit)="form && form.valid && loginUser()" class="d-flex w-100 flex-column">
         <mat-form-field class="w-100">
-          <button mat-icon-button matPrefix>
+          <button tabindex="-1" mat-icon-button matPrefix>
             <mat-icon>email</mat-icon>
           </button>
-          <input matInput formControlName="email" class="form-control" placeholder="Ex. pat@example.com" autocomplete="email">
+          <input matInput formControlName="email" aria-label="Input email" class="form-control" placeholder="Ex. pat@example.com" autocomplete="email">
           <monorepo-error-form
                   *ngIf="form.get('email').touched || form.get('email').dirty"
                   [errors]="form.get('email').errors"
@@ -22,10 +22,10 @@
           ></monorepo-error-form>
         </mat-form-field>
         <mat-form-field class="w-100">
-          <button mat-icon-button matPrefix>
+          <button tabindex="-1"  mat-icon-button matPrefix>
             <mat-icon>password</mat-icon>
           </button>
-          <input matInput type="password" class="form-control"  formControlName="password"  autocomplete="current-password">
+          <input matInput type="password" aria-label="Input password" class="form-control"  formControlName="password" placeholder="Password" autocomplete="current-password">
           <monorepo-error-form
                   *ngIf="form.get('password').touched || form.get('password').dirty"
                   [errors]="form.get('password').errors"

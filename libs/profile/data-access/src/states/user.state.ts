@@ -7,6 +7,8 @@ import {UpdateUserData, UpdateUserDataFailure, UpdateUserDataSuccess} from "../a
 import {UserData, UserDataFailure, UserDataSuccess} from "../actions/user.actions";
 import {UserDto} from "../dto/user.model.dto";
 import {UserService} from "../services/user.service";
+import {DeleteUserData, DeleteUserDataFailure, DeleteUserDataSuccess} from '../actions/delete-user.actions';
+import {Logout} from '@monorepo/auth/data-access';
 
 export interface User {
   readonly userLoading: boolean;
@@ -21,7 +23,7 @@ export interface User {
     user: null,
     userLoading: false,
     userSuccess: false,
-    error: null
+    error: null,
   },
 })
 @Injectable()
@@ -99,6 +101,45 @@ export class UserState {
 
   @Action(UpdateUserDataFailure)
   public updateUserFailure(
+    { patchState }: StateContext<User>,
+    { error }: UserDataFailure
+    ): void {
+    patchState({
+      userLoading: false,
+      userSuccess: false,
+      error
+    });
+  }
+
+
+  @Action(DeleteUserData)
+  public deleteUser(
+    { dispatch, patchState }: StateContext<User>,
+    ): Observable<void | Observable<void>> {
+    patchState({
+      user: null,
+      userLoading: true,
+      userSuccess: false,
+    });
+
+    return this.userService.deleteUser().pipe(
+      map(() => dispatch(new Logout())),
+      catchError((error: HttpErrorResponse) => dispatch(new DeleteUserDataFailure(error)))
+      );
+  }
+
+  @Action(DeleteUserDataSuccess)
+  public deleteUserSuccess(
+    { patchState }: StateContext<User>,
+    ): void {
+    patchState({
+      userLoading: false,
+      userSuccess: true,
+    });
+  }
+
+  @Action(DeleteUserDataFailure)
+  public deleteUserFailure(
     { patchState }: StateContext<User>,
     { error }: UserDataFailure
     ): void {

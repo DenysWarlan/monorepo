@@ -20,8 +20,11 @@ export class PaginationComponent {
   public readonly pageSizeOptions: number[] = [8, 12, 24, 36];
 
   public onUpdatePaginator(event: PageEvent): void {
+    const startIndex = event.pageSize * event.pageIndex + 1;
+
     const pagination: Pagination = {
-      startIndex: event.pageIndex,
+      startIndex,
+      pageIndex: event.pageIndex,
       maxResults: event.pageSize
     }
 

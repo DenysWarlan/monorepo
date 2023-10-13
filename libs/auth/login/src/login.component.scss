@@ -1,1 +1,15 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+mat-card-subtitle {
+  --mat-card-subtitle-text-color: rgba(0, 0, 0);
+}
+
+.btn-success {
+  --bs-btn-disabled-bg: rgba(239, 239, 239, 0.3), rgba(19, 1, 1, 0.3);
+  --bs-btn-active-border-color: rgba(239, 239, 239, 0.3);
+  --bs-btn-disabled-color: rgba(0, 0, 0);;
+}
+
+.btn-link {
+  background-color: rgba(255, 255, 255);
+}

@@ -12,7 +12,7 @@
       <div class="form-group">
         <mat-form-field class="w-100">
           <mat-label>Name</mat-label>
-          <input matInput formControlName="name" placeholder="Name and surname" />
+          <input matInput formControlName="name" aria-label="Input name" placeholder="Name and surname" />
           <monorepo-error-form
                 *ngIf="form.get('name').touched || form.get('name').dirty"
                 [errors]="form.get('name').errors"
@@ -23,7 +23,7 @@
       <div class="form-group">
         <mat-form-field class="w-100">
           <mat-label>Birth day</mat-label>
-          <input matInput formControlName="birthDate" [matDatepicker]="picker" placeholder="Choose a birth date" readonly>
+          <input matInput formControlName="birthDate"  aria-label="Input birth date" [matDatepicker]="picker" placeholder="Choose a birth date" readonly>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
           <monorepo-error-form
@@ -36,7 +36,7 @@
       <div class="form-group">
         <mat-form-field class="w-100">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" placeholder="Ex. pat@example.com" />
+          <input matInput formControlName="email"  aria-label="Input email" placeholder="Ex. pat@example.com" />
           <monorepo-error-form
                 *ngIf="form.get('email').touched || form.get('email').dirty"
                 [errors]="form.get('email').errors"
@@ -47,7 +47,7 @@
       <div class="form-group">
         <mat-form-field class="w-100">
           <mat-label>Password</mat-label>
-          <input matInput type="password" class="form-control" formControlName="password" autocomplete="new-password"/>
+          <input matInput type="password" class="form-control" aria-label="Input password" formControlName="password" autocomplete="new-password"/>
           <monorepo-error-form
                   *ngIf="form.get('password').touched || form.get('password').dirty"
                   [errors]="form.get('password').errors"

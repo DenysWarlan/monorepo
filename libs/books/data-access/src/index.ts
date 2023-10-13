@@ -1,10 +1,19 @@
 export * from './reducer/actions/search.action';
+export * from './reducer/actions/book-details.action';
+export * from './reducer/actions/add-book-favorite.action';
+export * from './reducer/actions/remove-book-favorite.action';
+
+export * from './dto/book-list.dto'
+export * from './dto/book.dto'
+export * from './dto/book-details.dto'
 
 //State
 export  {BookState} from  './reducer/states/book.state'
+export  {FavoriteBookState} from  './reducer/states/favorite-books.state'
 
 //Service
-export  {BookService} from  './reducer/services/book.service'
+export  {GoogleBookService} from './reducer/services/google-book.service'
+export  {BookService} from './reducer/services/book.service'
 
 //Models
 export {AccessInfo} from './model/access-info.model';

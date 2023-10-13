@@ -9,6 +9,10 @@ import {ClearToken, SetToken} from './actions/setToken.actions';
 import {LoggedDto} from '../dto/logged.model.dto';
 import {Refresh, RefreshFailure, RefreshSuccess} from './actions/refresh.actions';
 import {UserData} from "@monorepo/profile/data-access";
+import {Router} from '@angular/router';
+import {Route} from '../../../../navigation/src/route.enum';
+import {ResetBooks} from '@monorepo/books/data-access';
+import {GetFavoriteBooks} from '../../../../books/data-access/src/reducer/actions/favorite-books.action';
 
 export interface Auth {
   isAuth: boolean;
@@ -34,6 +38,7 @@ export interface Auth {
 export class AuthState {
   constructor(
     private authService: AuthService,
+    private router: Router
   ) {}
 
   @Action(Logout)
@@ -47,7 +52,9 @@ export class AuthState {
       email: ''
     });
 
-    dispatch(new ClearToken());
+    this.router.navigate([`/${Route.LOGIN}`]);
+
+    dispatch([new ClearToken(), new ResetBooks()]);
   }
 
   @Action(AuthLogin)
@@ -82,7 +89,7 @@ export class AuthState {
     }
 
 
-    dispatch(new UserData());
+    dispatch([new UserData(), new GetFavoriteBooks()]);
   }
   @Action(LoginFailure)
   public loginFailure(

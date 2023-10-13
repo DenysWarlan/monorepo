@@ -9,12 +9,13 @@ import {UserDto} from '../dto/user.dto';
 import {DeleteResult} from 'mongodb';
 import {BookDto} from '../../books/dto/book.dto';
 import {Book} from '../../books/models/books.model';
+import {Pagination} from '@monorepo/books/data-access';
 
 @Injectable()
 export class UsersService {
   public constructor(
       @InjectModel('Users') private readonly userModel: Model<User>,
-      @InjectModel('Books') private readonly bookModel: Model<Book>,
+      @InjectModel('Books') private readonly bookModel: Model<Book>
   ) {}
 
   public async findByEmail(email: string): Promise<User> {
@@ -38,13 +39,12 @@ export class UsersService {
       password,
     });
 
-    const { name, email, birthDate, booksIds}: User = await this.findByEmail(user.email);
+    const { name, email, birthDate}: User = await this.findByEmail(user.email);
 
     return {
       name,
       birthDate,
-      email,
-      booksIds
+      email
     };
   }
 
@@ -68,19 +68,18 @@ export class UsersService {
     return books;
   }
 
-
   public async getBooksByUser(email: string): Promise<BookDto[]> {
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    const {_id}: User = await this.findByEmail(email);
+    const {_id}: User = await this.userModel.findOne({email});
 
     const books: Book[] = await this.bookModel.find({'userId': _id});
 
     return books?.length ? books.map(this.mapBookToDto) : [];
   }
 
-  private mapBookToDto({_id, title, authors, publisher, description, categories, thumbnail}: Book): BookDto {
+  private mapBookToDto({bookId, title, authors, publisher, description, categories, thumbnail}: Book): BookDto {
     return {
-      id: _id,
+      bookId,
       title,
       description,
       authors,
@@ -88,5 +87,14 @@ export class UsersService {
       publisher,
       thumbnail
     }
+  }
+
+
+  private paginateBooks(books: BookDto[], pagination: Pagination): BookDto[]{
+    const start: number = pagination.startIndex * pagination.maxResults;
+
+    const end: number = pagination.startIndex * pagination.maxResults + pagination.maxResults;
+
+    return books.slice(start, end);
   }
 }

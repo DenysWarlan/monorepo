@@ -10,7 +10,4 @@ export class UserDto {
 
     @ApiPropertyOptional()
     birthDate: string;
-
-    @ApiPropertyOptional()
-    booksIds: string[];
 }

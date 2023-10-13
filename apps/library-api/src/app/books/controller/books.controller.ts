@@ -2,12 +2,10 @@ import {Body, Controller, Delete, Get, HttpStatus, Param, Post, Req, Res, UseGua
 import {JwtAuthGuard} from '../../auth/guards/jwt-auth.guard';
 import {BooksService} from '../services/books.service';
 import {JwtUtilService} from '../../users/services/jwt-util.service';
-import {DeleteResult} from 'mongodb';
 import {ApiHeader, ApiResponse, ApiTags, getSchemaPath} from '@nestjs/swagger';
 import {BookDto} from '../dto/book.dto';
 import {ErrorResponseDto} from '../../auth/dto/error-response.dto';
 import {Response} from 'express';
-import {Book} from '../models/books.model';
 
 @ApiTags('Books')
 @Controller('books')
@@ -82,7 +80,7 @@ export class BooksController {
             return;
         }
 
-        const addedBook: Book = await this.bookService.add(book, email);
+        const addedBook: BookDto[] = await this.bookService.add(book, email);
 
         if(!addedBook) {
             response.status(HttpStatus.BAD_REQUEST).send({message: 'Error adding'})
@@ -90,7 +88,7 @@ export class BooksController {
             return;
         }
 
-        response.status(HttpStatus.NO_CONTENT).send()
+        response.status(HttpStatus.OK).send(addedBook)
 
         return;
     }
@@ -112,10 +110,13 @@ export class BooksController {
     @UseGuards(JwtAuthGuard)
     @Delete(':id')
     async remove(
+        @Req() request: Request,
         @Param('id') id: string
-    ): Promise<DeleteResult> {
-        const deleteResponse: DeleteResult = await this.bookService.removeById(id);
+    ): Promise<BookDto[]> {
+        const json: { email: string; sub: { name: string } } = this.jwtUtil.decode(request);
 
-        return deleteResponse;
+        const updateBooks: BookDto[] = await this.bookService.removeById(id, json.email);
+
+        return updateBooks;
     }
 }

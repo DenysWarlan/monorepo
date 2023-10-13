@@ -5,7 +5,6 @@ export interface User extends mongoose.Document {
   readonly birthDate: string;
   readonly email: string;
   readonly password: string;
-  readonly booksIds?: string[];
 }
 
 export const UserSchema: mongoose.Schema<User> = new mongoose.Schema({
@@ -13,5 +12,4 @@ export const UserSchema: mongoose.Schema<User> = new mongoose.Schema({
   name: { type: String, required: true },
   birthDate: { type: String },
   password: { type: String, required: true },
-  booksIds: [{ type: mongoose.Types.ObjectId, ref: 'book ' }],
 });

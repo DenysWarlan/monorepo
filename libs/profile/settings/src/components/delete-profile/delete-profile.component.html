@@ -1,1 +1,29 @@
-<p>delete-profile works!</p>
+<div class="container">
+    <div class="d-flex align-items-start flex-column my-2 px-2">
+        Log out
+        <button
+                mat-raised-button
+                class="btn bg-dark-subtle"
+                type="button"
+                (click)="logOut()"
+                (keyup.enter)="logOut()"
+        >
+            Log out
+        </button>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="d-flex align-items-start flex-column my-2 px-2">
+        Remove account
+        <button
+                mat-raised-button
+                class="btn bg-dark-subtle"
+                data-message="log out"
+                type="button"
+                (click)="delete()"
+                (keyup.enter)="delete()"
+        >
+            Remove my account
+        </button>
+    </div>
+</div>
