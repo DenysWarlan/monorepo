@@ -13,7 +13,11 @@ Create for study technology like:
 - [Express](https://expressjs.com)
 - [Node](https://nodejs.org)
 
-It's online library u can log in on your account. In the future, you can find some book, saw description and add to you book list. Used nestJs and mongoDB to back-end for create users and added books to list and open api google to search books and get books details. And use Angular to front-end part application.
+It's online library u can log in on your account, can find some book, saw description and add to you favorite book list.
+
+Used nestJs and mongoDB to back-end for create users and added books to list and open api google to search books and get books details. 
+
+And use Angular to front-end part application.
 
 ## Capabilities to your workspace
 
@@ -40,9 +44,21 @@ Use `npm install` to install all application and dependencies.
 
 ### At the moment ready test for libs login: 
 
-`npm run auth-login:test:ci` : unit test login libs
+`npm run auth-login:test:ci`: unit test login libs
 
-`npm run auth-login:e2e:production` : e2e test login libs
+`npm run auth-login:e2e:production`: e2e test login libs
+
+`npm run auth-register:test:ci`:  auth register unit test
+
+`npm run auth-register:e2e:production`: e2e test login libs
+
+`npm run auth-login:e2e:production`: auth register e2e test
+
+`npm run books-search:test:ci`: book search unit test
+
+`npm run books-search:e2e:production`: book search e2e test
+
+`npm run books-list:test:ci`: book list unit test
 
 ## Licensing
 
