@@ -43,7 +43,6 @@
                 *ngIf="isAuth && (isFavoriteBook$ | async) === false"
                 mat-icon-button
                 (click)="addBookToFavorite()"
-                (keyup.enter)="addBookToFavorite()"
         >
             <mat-icon>star_border</mat-icon>
         </button>
@@ -51,7 +50,6 @@
                 *ngIf="isAuth && (isFavoriteBook$ | async)"
                 mat-icon-button
                 (click)="removeBookFromFavorite()"
-                (keyup.enter)="removeBookFromFavorite()"
         >
             <mat-icon>star</mat-icon>
         </button>

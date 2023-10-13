@@ -35,7 +35,6 @@
                         *ngIf="(isFavoriteBook$ | async) === false"
                         mat-icon-button
                         (click)="addBookToFavorite(book)"
-                        (keyup.enter)="addBookToFavorite(book)"
                 >
                     <mat-icon>star_border</mat-icon>
                 </button>
@@ -43,7 +42,6 @@
                         *ngIf="(isFavoriteBook$ | async)"
                         mat-icon-button
                         (click)="removeBookFromFavorite(book.bookId)"
-                        (keyup.enter)="removeBookFromFavorite(book.bookId)"
                 >
                     <mat-icon>star</mat-icon>
                 </button>
@@ -51,17 +49,3 @@
         </div>
     </ng-container>
 </div>
-<!--<ng-container *ngIf="bookDetails$ | async as book">-->
-<!--    <div class="book">-->
-<!--        <div class="book__details">-->
-<!--            <div class="book__details__volume-info">-->
-<!--                <div class="book__details__volume-info__volume-item">Link: <a [href]="book.link">{{book.link}}</a></div>-->
-<!--                <div class="book__details__volume-info__volume-item"></div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-<!--        <div class="book__image">-->
-<!--            <img [src]="book.thumbnail" [alt]="book.title">-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</ng-container>-->
