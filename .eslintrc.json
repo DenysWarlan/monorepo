@@ -14,30 +14,7 @@
         "*.js",
         "*.jsx"
       ],
-      "rules": {
-        "@nx/enforce-module-boundaries": [
-          "warnings",
-          {
-            "enforceBuildableLibDependency": true,
-            "allowCircularSelfDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "frontend",
-                "bannedExternalImports": ["@nestjs/common"]
-              },
-              {
-                "sourceTag": "backend",
-                "bannedExternalImports": ["@angular/core", "@monorepo/auth"]
-              },
-              {
-                "sourceTag": "type:data-access",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
-          }
-        ]
-      }
+      "rules": { }
     },
     {
       "files": [

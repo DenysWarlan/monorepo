@@ -28,7 +28,7 @@ export class GoogleBookService {
         .pipe(
             map((books: Books) => ({
               ...books,
-              items: books.items.map((item: Book) => this.mapBookToBookDto(item))
+              items: books.items?.map((item: Book) => this.mapBookToBookDto(item)) ?? []
             }))
         );
   }
