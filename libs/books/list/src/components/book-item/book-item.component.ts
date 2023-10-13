@@ -31,7 +31,7 @@ export class BookItemComponent implements OnInit {
   ){}
 
   public ngOnInit (): void {
-    this.isFavoriteBook$ = this.store.select(FavoriteBookState.isFavoriteBook(this.book.bookId));
+    this.isFavoriteBook$ = this.store.select(FavoriteBookState.isFavoriteBook(this.book?.bookId));
   }
 
   public goToBook(id: string): void {

@@ -31,7 +31,8 @@ describe('PaginationComponent', () => {
     };
 
     const paginator: Pagination = {
-      startIndex: event.pageIndex,
+      startIndex: event.pageIndex * event.pageSize + 1,
+      pageIndex: event.pageIndex,
       maxResults: event.pageSize
     }
 

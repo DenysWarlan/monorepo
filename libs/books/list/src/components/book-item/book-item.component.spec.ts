@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookItemComponent } from './book-item.component';
+import {NgxsModule} from '@ngxs/store';
+import {BookState} from '@monorepo/books/data-access';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('BookItemComponent', () => {
   let component: BookItemComponent;
@@ -9,6 +12,8 @@ describe('BookItemComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BookItemComponent,
+        HttpClientModule,
+        NgxsModule.forRoot([BookState])
       ],
     }).compileComponents();
 
