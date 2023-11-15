@@ -31,12 +31,7 @@ Use `npm install` to install all application and dependencies.
 
 `npm run start:api` - for start NestJs application (BE)
 
-### Or you can test deployed applications:
-
-- [Web application](https://monorepo-d81df.firebaseapp.com)
-- [Swagger](https://monorepo-production-3fef.up.railway.app/api#)
-
-### Application possible build: 
+## Build: 
 
 `npm run build:web:production` - build Front-end
 
